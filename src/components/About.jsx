@@ -11,7 +11,7 @@ const About = () => {
   const imagePaths = Array.from({length: 6}, (_, i) => `/static/image${i + 1}.jpg`);
   
   // ✅ FIXED: Added leading slashes to additional images
-  const additionalImages = ['/static/image19.jpg', '/static/image20.jpg'];
+  const additionalImages = ['public/static/image19.jpg', '/static/image20.jpg'];
 
   useEffect(() => {
     setIsVisible(true);

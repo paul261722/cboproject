@@ -7,11 +7,11 @@ const About = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Use images 1-6 for main content
-  const imagePaths = Array.from({length: 6}, (_, i) => `/static/image${i + 1}.jpg`);
+  // Use images 1-6 for main content - FIXED: Removed leading slashes
+  const imagePaths = Array.from({length: 6}, (_, i) => `static/image${i + 1}.jpg`);
   
-  // Add images 19 and 20 specifically for the gallery
-  const additionalImages = ['/static/image19.jpg', '/static/image20.jpg'];
+  // Add images 19 and 20 specifically for the gallery - FIXED: Removed leading slashes
+  const additionalImages = ['static/image19.jpg', 'static/image20.jpg'];
 
   useEffect(() => {
     setIsVisible(true);
@@ -51,7 +51,8 @@ const About = () => {
 
   const styles = {
     aboutHero: {
-      background: 'linear-gradient(135deg, rgba(44, 62, 80, 0.85) 0%, rgba(26, 37, 47, 0.85) 100%), url("/static/image1.jpg")',
+      // FIXED: Removed leading slash from background URL
+      background: 'linear-gradient(135deg, rgba(44, 62, 80, 0.85) 0%, rgba(26, 37, 47, 0.85) 100%), url("static/image1.jpg")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -247,14 +248,14 @@ const About = () => {
     }
   };
 
-  // Only use first 6 images for core values
+  // Only use first 6 images for core values - FIXED: Removed leading slashes
   const coreValues = [
-    { title: 'Transparency', description: 'Openness in all our operations and decision-making processes', icon: '/static/image1.jpg', color: '#3498db' },
-    { title: 'Accountability', description: 'Responsible stewardship of resources and commitments', icon: '/static/image2.jpg', color: '#2ecc71' },
-    { title: 'Impact', description: 'Measurable positive change in communities', icon: '/static/image3.jpg', color: '#e74c3c' },
-    { title: 'Solidarity', description: 'Unity in purpose and collective action', icon: '/static/image4.jpg', color: '#9b59b6' },
-    { title: 'Inclusivity', description: 'Ensuring everyone has a voice and opportunity', icon: '/static/image5.jpg', color: '#1abc9c' },
-    { title: 'Excellence', description: 'Striving for the highest standards in all endeavors', icon: '/static/image6.jpg', color: '#f39c12' }
+    { title: 'Transparency', description: 'Openness in all our operations and decision-making processes', icon: 'static/image1.jpg', color: '#3498db' },
+    { title: 'Accountability', description: 'Responsible stewardship of resources and commitments', icon: 'static/image2.jpg', color: '#2ecc71' },
+    { title: 'Impact', description: 'Measurable positive change in communities', icon: 'static/image3.jpg', color: '#e74c3c' },
+    { title: 'Solidarity', description: 'Unity in purpose and collective action', icon: 'static/image4.jpg', color: '#9b59b6' },
+    { title: 'Inclusivity', description: 'Ensuring everyone has a voice and opportunity', icon: 'static/image5.jpg', color: '#1abc9c' },
+    { title: 'Excellence', description: 'Striving for the highest standards in all endeavors', icon: 'static/image6.jpg', color: '#f39c12' }
   ];
 
   const timelineData = [
@@ -264,19 +265,19 @@ const About = () => {
     { year: '2025', title: 'National Recognition', description: 'Awarded National Youth Empowerment Excellence Award by Ministry of Youth' }
   ];
 
-  // Programs using only images 2-5 (4 images total from the first 6)
+  // Programs using only images 2-5 (4 images total from the first 6) - FIXED: Removed leading slashes
   const programs = [
-    { title: 'Digital Literacy Program', description: 'Training youth in essential digital skills for the 21st century', image: '/static/image2.jpg' },
-    { title: 'Entrepreneurship Bootcamp', description: 'Developing young entrepreneurs through mentorship and seed funding', image: '/static/image3.jpg' },
-    { title: 'Environmental Conservation', description: 'Youth-led environmental initiatives and climate action projects', image: '/static/image4.jpg' },
-    { title: 'Leadership Development', description: 'Cultivating next-generation leaders through workshops and mentorship', image: '/static/image5.jpg' }
+    { title: 'Digital Literacy Program', description: 'Training youth in essential digital skills for the 21st century', image: 'static/image2.jpg' },
+    { title: 'Entrepreneurship Bootcamp', description: 'Developing young entrepreneurs through mentorship and seed funding', image: 'static/image3.jpg' },
+    { title: 'Environmental Conservation', description: 'Youth-led environmental initiatives and climate action projects', image: 'static/image4.jpg' },
+    { title: 'Leadership Development', description: 'Cultivating next-generation leaders through workshops and mentorship', image: 'static/image5.jpg' }
   ];
 
   const impactStories = [
-    { title: 'Community Impact', description: 'Transformed 45+ communities through sustainable development projects', image: '/static/image1.jpg' },
-    { title: 'Youth Empowerment', description: 'Empowered 2,500+ youth with skills, education, and opportunities', image: '/static/image2.jpg' },
-    { title: 'Partnership Growth', description: 'Built 28+ strategic partnerships for greater community impact', image: '/static/image3.jpg' },
-    { title: 'Program Success', description: 'Achieved 97% success rate across all our youth programs', image: '/static/image4.jpg' }
+    { title: 'Community Impact', description: 'Transformed 45+ communities through sustainable development projects', image: 'static/image1.jpg' },
+    { title: 'Youth Empowerment', description: 'Empowered 2,500+ youth with skills, education, and opportunities', image: 'static/image2.jpg' },
+    { title: 'Partnership Growth', description: 'Built 28+ strategic partnerships for greater community impact', image: 'static/image3.jpg' },
+    { title: 'Program Success', description: 'Achieved 97% success rate across all our youth programs', image: 'static/image4.jpg' }
   ];
 
   // Gallery includes first 6 images + images 19 and 20
@@ -410,8 +411,9 @@ const About = () => {
                 </p>
               </div>
               
+              {/* FIXED: Removed leading slash from image path */}
               <img 
-                src="/static/image2.jpg" 
+                src="static/image2.jpg" 
                 alt="Youth Empowerment Workshop"
                 style={styles.storyImage}
                 className="animate-on-scroll"
@@ -498,6 +500,7 @@ const About = () => {
                 key={index}
                 style={{
                   ...styles.programCard,
+                  // FIXED: Removed leading slash from image URL
                   background: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("${program.image}")`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
@@ -564,6 +567,7 @@ const About = () => {
                 <div 
                   style={{
                     ...styles.valueIcon,
+                    // FIXED: Removed leading slash from image URL
                     background: `url("${value.icon}") center/cover`,
                   }}
                 >
@@ -637,6 +641,7 @@ const About = () => {
                   style={{
                     width: '80px',
                     height: '80px',
+                    // FIXED: Removed leading slash from image URL
                     background: `url("${impact.image}") center/cover`,
                     borderRadius: '50%',
                     margin: '0 auto 25px',

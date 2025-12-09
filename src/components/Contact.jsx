@@ -36,9 +36,9 @@ const Contact = () => {
   };
 
   const styles = {
-    // Modern Hero Section
+    // Modern Hero Section - FIXED: Removed leading slash from background URL
     contactHero: {
-      background: `linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.95) 100%), url('/static/image5.jpg')`,
+      background: `linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.95) 100%), url('static/image5.jpg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -1047,7 +1047,7 @@ const Contact = () => {
           margin: 0 auto;
           padding: 0 20px;
           position: relative;
-          z-index: 2;
+          zIndex: 2;
         }
         
         /* Modern Animations */

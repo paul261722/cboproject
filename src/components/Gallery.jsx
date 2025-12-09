@@ -35,10 +35,11 @@ const Gallery = () => {
   // Image categories
   const categories = ['All', 'Events', 'Community', 'Training', 'Environment', 'Innovation'];
 
+  // FIXED: Removed leading slash from image paths
   const galleryImages = [
     { 
       id: 1, 
-      src: '/static/image1.jpg', 
+      src: 'static/image1.jpg', 
       title: 'Youth Leadership Conference', 
       category: 'Events',
       description: 'Annual youth leadership gathering with 300+ participants discussing governance and innovation',
@@ -46,7 +47,7 @@ const Gallery = () => {
     },
     { 
       id: 2, 
-      src: '/static/image2.jpg', 
+      src: 'static/image2.jpg', 
       title: 'Community Empowerment Workshop', 
       category: 'Community',
       description: 'Interactive workshops with local communities to build capacity and foster sustainable development',
@@ -54,7 +55,7 @@ const Gallery = () => {
     },
     { 
       id: 3, 
-      src: '/static/image3.jpg', 
+      src: 'static/image3.jpg', 
       title: 'Tree Planting Initiative 2023', 
       category: 'Environment',
       description: 'Green initiative planting 5,000+ trees across 10 communities for environmental conservation',
@@ -62,7 +63,7 @@ const Gallery = () => {
     },
     { 
       id: 4, 
-      src: '/static/image4.jpg', 
+      src: 'static/image4.jpg', 
       title: 'Women Empowerment Program Launch', 
       category: 'Training',
       description: 'Launch of our flagship program empowering women through skills training and mentorship',
@@ -70,7 +71,7 @@ const Gallery = () => {
     },
     { 
       id: 5, 
-      src: '/static/image5.jpg', 
+      src: 'static/image5.jpg', 
       title: 'Digital Skills Training Session', 
       category: 'Training',
       description: 'Digital literacy training for youth preparing them for the future workforce',
@@ -78,7 +79,7 @@ const Gallery = () => {
     },
     { 
       id: 6, 
-      src: '/static/image6.jpg', 
+      src: 'static/image6.jpg', 
       title: 'Youth Mentorship Program', 
       category: 'Training',
       description: 'One-on-one mentorship sessions connecting experienced professionals with youth',
@@ -86,7 +87,7 @@ const Gallery = () => {
     },
     { 
       id: 7, 
-      src: '/static/image7.jpg', 
+      src: 'static/image7.jpg', 
       title: 'Team Building Activity Day', 
       category: 'Events',
       description: 'Team-building exercises to foster collaboration and teamwork among youth',
@@ -94,7 +95,7 @@ const Gallery = () => {
     },
     { 
       id: 8, 
-      src: '/static/image8.jpg', 
+      src: 'static/image8.jpg', 
       title: 'Community Health Outreach', 
       category: 'Community',
       description: 'Health awareness campaign reaching 500+ community members in rural areas',
@@ -102,7 +103,7 @@ const Gallery = () => {
     },
     { 
       id: 9, 
-      src: '/static/image9.jpg', 
+      src: 'static/image9.jpg', 
       title: 'Entrepreneurship Training', 
       category: 'Training',
       description: 'Business skills workshop for aspiring young entrepreneurs',
@@ -110,7 +111,7 @@ const Gallery = () => {
     },
     { 
       id: 10, 
-      src: '/static/image10.jpg', 
+      src: 'static/image10.jpg', 
       title: 'Clean Water Project', 
       category: 'Community',
       description: 'Initiative providing clean water access to underserved communities',
@@ -118,7 +119,7 @@ const Gallery = () => {
     },
     { 
       id: 11, 
-      src: '/static/image11.jpg', 
+      src: 'static/image11.jpg', 
       title: 'Youth Sports Tournament', 
       category: 'Events',
       description: 'Annual sports tournament promoting physical health and team spirit',
@@ -126,7 +127,7 @@ const Gallery = () => {
     },
     { 
       id: 12, 
-      src: '/static/image12.jpg', 
+      src: 'static/image12.jpg', 
       title: 'Art and Culture Festival', 
       category: 'Innovation',
       description: 'Celebrating youth creativity through art, music, and cultural performances',
@@ -134,7 +135,7 @@ const Gallery = () => {
     },
     { 
       id: 13, 
-      src: '/static/image13.jpg', 
+      src: 'static/image13.jpg', 
       title: 'Computer Literacy Class', 
       category: 'Training',
       description: 'Basic computer skills training for first-time technology users',
@@ -142,7 +143,7 @@ const Gallery = () => {
     },
     { 
       id: 14, 
-      src: '/static/image14.jpg', 
+      src: 'static/image14.jpg', 
       title: 'Agricultural Training Program', 
       category: 'Training',
       description: 'Modern agricultural techniques training for sustainable farming',
@@ -150,7 +151,7 @@ const Gallery = () => {
     },
     { 
       id: 15, 
-      src: '/static/image15.jpg', 
+      src: 'static/image15.jpg', 
       title: 'Youth Parliament Session', 
       category: 'Events',
       description: 'Simulated parliamentary sessions to educate youth on governance',
@@ -158,7 +159,7 @@ const Gallery = () => {
     },
     { 
       id: 16, 
-      src: '/static/image16.jpg', 
+      src: 'static/image16.jpg', 
       title: 'Disaster Response Training', 
       category: 'Training',
       description: 'Emergency response training for community resilience',
@@ -166,7 +167,7 @@ const Gallery = () => {
     },
     { 
       id: 17, 
-      src: '/static/image17.jpg', 
+      src: 'static/image17.jpg', 
       title: 'Music and Talent Show', 
       category: 'Innovation',
       description: 'Platform for youth to showcase their musical and artistic talents',
@@ -174,7 +175,7 @@ const Gallery = () => {
     },
     { 
       id: 18, 
-      src: '/static/image18.jpg', 
+      src: 'static/image18.jpg', 
       title: 'Annual Youth Summit 2024', 
       category: 'Events',
       description: 'Flagship event gathering 1,000+ youth for networking and learning',
@@ -216,9 +217,9 @@ const Gallery = () => {
   };
 
   const styles = {
-    // Modern Hero Section
+    // Modern Hero Section - FIXED: Removed leading slash from background URL
     hero: {
-      background: `linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.95) 100%), url('/static/image5.jpg')`,
+      background: `linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.95) 100%), url('static/image5.jpg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -1061,7 +1062,7 @@ const Gallery = () => {
           margin: 0 auto;
           padding: 0 20px;
           position: relative;
-          z-index: 2;
+          zIndex: 2;
         }
         
         /* Modern Animations */

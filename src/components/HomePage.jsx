@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   const styles = {
-    // Hero Section with Local Image - FIXED PATH with .jpg extension
+    // Hero Section with Local Image - FIXED: Removed leading slash
     hero: {
       background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                   url('/static/image4.jpg')`,
+                   url('static/image4.jpg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',

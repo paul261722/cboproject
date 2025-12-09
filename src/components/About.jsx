@@ -11,7 +11,7 @@ const About = () => {
   const imagePaths = Array.from({length: 6}, (_, i) => `/Static/image${i + 1}.jpg`);
   
   // ✅ FIXED: Added leading slashes to additional images
-  const additionalImages = ['/Static/image19.jpg', 'Static/image20.jpg'];
+  const additionalImages = ['/Static/image19.jpg', '/Static/image20.jpg'];
 
   useEffect(() => {
     setIsVisible(true);
@@ -250,12 +250,12 @@ const About = () => {
 
   // ✅ FIXED: Added leading slashes to all icon paths
   const coreValues = [
-    { title: 'Transparency', description: 'Openness in all our operations and decision-making processes', icon: '/static/image1.jpg', color: '#3498db' },
-    { title: 'Accountability', description: 'Responsible stewardship of resources and commitments', icon: '/static/image2.jpg', color: '#2ecc71' },
-    { title: 'Impact', description: 'Measurable positive change in communities', icon: '/static/image3.jpg', color: '#e74c3c' },
-    { title: 'Solidarity', description: 'Unity in purpose and collective action', icon: '/static/image4.jpg', color: '#9b59b6' },
-    { title: 'Inclusivity', description: 'Ensuring everyone has a voice and opportunity', icon: '/static/image5.jpg', color: '#1abc9c' },
-    { title: 'Excellence', description: 'Striving for the highest standards in all endeavors', icon: '/static/image6.jpg', color: '#f39c12' }
+    { title: 'Transparency', description: 'Openness in all our operations and decision-making processes', icon: '/Static/image1.jpg', color: '#3498db' },
+    { title: 'Accountability', description: 'Responsible stewardship of resources and commitments', icon: '/Static/image2.jpg', color: '#2ecc71' },
+    { title: 'Impact', description: 'Measurable positive change in communities', icon: '/Static/image3.jpg', color: '#e74c3c' },
+    { title: 'Solidarity', description: 'Unity in purpose and collective action', icon: '/Static/image4.jpg', color: '#9b59b6' },
+    { title: 'Inclusivity', description: 'Ensuring everyone has a voice and opportunity', icon: '/Static/image5.jpg', color: '#1abc9c' },
+    { title: 'Excellence', description: 'Striving for the highest standards in all endeavors', icon: '/Static/image6.jpg', color: '#f39c12' }
   ];
 
   const timelineData = [
@@ -267,17 +267,17 @@ const About = () => {
 
   // ✅ FIXED: Added leading slashes to all program image paths
   const programs = [
-    { title: 'Digital Literacy Program', description: 'Training youth in essential digital skills for the 21st century', image: '/static/image2.jpg' },
-    { title: 'Entrepreneurship Bootcamp', description: 'Developing young entrepreneurs through mentorship and seed funding', image: '/static/image3.jpg' },
-    { title: 'Environmental Conservation', description: 'Youth-led environmental initiatives and climate action projects', image: '/static/image4.jpg' },
-    { title: 'Leadership Development', description: 'Cultivating next-generation leaders through workshops and mentorship', image: '/static/image5.jpg' }
+    { title: 'Digital Literacy Program', description: 'Training youth in essential digital skills for the 21st century', image: '/Static/image2.jpg' },
+    { title: 'Entrepreneurship Bootcamp', description: 'Developing young entrepreneurs through mentorship and seed funding', image: '/Static/image3.jpg' },
+    { title: 'Environmental Conservation', description: 'Youth-led environmental initiatives and climate action projects', image: '/Static/image4.jpg' },
+    { title: 'Leadership Development', description: 'Cultivating next-generation leaders through workshops and mentorship', image: '/Static/image5.jpg' }
   ];
 
   const impactStories = [
-    { title: 'Community Impact', description: 'Transformed 45+ communities through sustainable development projects', image: '/static/image1.jpg' },
-    { title: 'Youth Empowerment', description: 'Empowered 2,500+ youth with skills, education, and opportunities', image: '/static/image2.jpg' },
-    { title: 'Partnership Growth', description: 'Built 28+ strategic partnerships for greater community impact', image: '/static/image3.jpg' },
-    { title: 'Program Success', description: 'Achieved 97% success rate across all our youth programs', image: '/static/image4.jpg' }
+    { title: 'Community Impact', description: 'Transformed 45+ communities through sustainable development projects', image: '/Static/image1.jpg' },
+    { title: 'Youth Empowerment', description: 'Empowered 2,500+ youth with skills, education, and opportunities', image: '/Static/image2.jpg' },
+    { title: 'Partnership Growth', description: 'Built 28+ strategic partnerships for greater community impact', image: '/Static/image3.jpg' },
+    { title: 'Program Success', description: 'Achieved 97% success rate across all our youth programs', image: '/Static/image4.jpg' }
   ];
 
   // Gallery includes first 6 images + images 19 and 20
@@ -413,7 +413,7 @@ const About = () => {
               
               {/* ✅ FIXED: Added leading slash to image path */}
               <img 
-                src="/static/image2.jpg" 
+                src="/Static/image2.jpg" 
                 alt="Youth Empowerment Workshop"
                 style={styles.storyImage}
                 className="animate-on-scroll"

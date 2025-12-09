@@ -13,17 +13,20 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
   const [activeField, setActiveField] = useState(null);
-  const [scrollY, setScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Check mobile viewport
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Modern color palette matching other pages
+  // Modern color palette
   const colors = {
     primary: '#667EEA',
     secondary: '#764BA2',
@@ -35,19 +38,20 @@ const Contact = () => {
     info: '#06D6A0'
   };
 
+  // Responsive styles
   const styles = {
-    // Modern Hero Section - FIXED: Removed leading slash from background URL
+    // Hero Section - Mobile Optimized
     contactHero: {
-      background: `linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.95) 100%), url('static/image5.jpg')`,
+      background: `linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.98) 100%), url('static/image5.jpg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
       color: 'white',
       textAlign: 'center',
-      padding: '180px 0 120px',
+      padding: isMobile ? '100px 0 60px' : '140px 0 80px',
       position: 'relative',
       overflow: 'hidden',
-      minHeight: '100vh',
+      minHeight: isMobile ? 'auto' : '100vh',
       display: 'flex',
       alignItems: 'center'
     },
@@ -55,209 +59,212 @@ const Contact = () => {
     heroContent: {
       position: 'relative',
       zIndex: 10,
-      maxWidth: '1000px',
+      maxWidth: '1200px',
       margin: '0 auto',
-      padding: '0 20px'
+      padding: isMobile ? '0 16px' : '0 24px'
     },
 
     heroTitle: {
-      fontSize: 'clamp(3.5rem, 8vw, 6.5rem)',
-      marginBottom: '30px',
-      fontWeight: '900',
-      letterSpacing: '-2px',
-      lineHeight: '1',
+      fontSize: isMobile ? '2.5rem' : 'clamp(3rem, 6vw, 5rem)',
+      marginBottom: isMobile ? '20px' : '30px',
+      fontWeight: '800',
+      letterSpacing: isMobile ? '-1px' : '-2px',
+      lineHeight: '1.1',
       background: 'linear-gradient(45deg, #FFFFFF, #667EEA, #FF6B6B)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
-      backgroundSize: '200% auto',
-      animation: 'gradientShift 3s ease infinite'
+      backgroundSize: '200% auto'
     },
 
     heroSubtitle: {
-      fontSize: 'clamp(1.3rem, 2.5vw, 1.8rem)',
-      maxWidth: '800px',
-      margin: '0 auto 50px',
+      fontSize: isMobile ? '1.1rem' : 'clamp(1.2rem, 2vw, 1.6rem)',
+      maxWidth: isMobile ? '100%' : '800px',
+      margin: `0 auto ${isMobile ? '30px' : '40px'}`,
       opacity: 0.9,
       lineHeight: '1.6',
       fontWeight: '300',
-      color: 'rgba(255, 255, 255, 0.95)'
+      color: 'rgba(255, 255, 255, 0.95)',
+      padding: isMobile ? '0 10px' : '0'
     },
 
-    // Floating elements
-    floatingShape: {
-      position: 'absolute',
-      width: '500px',
-      height: '500px',
-      border: '2px solid rgba(255, 255, 255, 0.08)',
-      borderRadius: '50%',
-      top: '-250px',
-      right: '-250px',
-      animation: 'float 20s infinite ease-in-out'
-    },
-
-    floatingShape2: {
-      position: 'absolute',
-      width: '400px',
-      height: '400px',
-      border: '2px solid rgba(255, 255, 255, 0.05)',
-      borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
-      bottom: '-200px',
-      left: '-200px',
-      animation: 'float 25s infinite ease-in-out reverse'
-    },
-
-    // Contact Grid
+    // Contact Grid - Mobile Responsive
     contactGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))',
-      gap: '60px',
+      gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(350px, 1fr))',
+      gap: isMobile ? '30px' : '40px',
       maxWidth: '1200px',
       margin: '0 auto',
       perspective: '1000px'
     },
 
-    // Contact Items
+    // Contact Items - Mobile Optimized
     contactItem: {
       display: 'flex',
       alignItems: 'center',
-      padding: '35px 30px',
+      flexDirection: isMobile ? 'column' : 'row',
+      padding: isMobile ? '24px 20px' : '32px 28px',
       background: 'white',
-      borderRadius: '25px',
+      borderRadius: isMobile ? '20px' : '25px',
       textDecoration: 'none',
       color: 'inherit',
-      transition: 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
       border: '1px solid rgba(102, 126, 234, 0.1)',
-      boxShadow: '0 20px 60px rgba(0,0,0,0.05)',
+      boxShadow: '0 15px 40px rgba(0,0,0,0.05)',
       position: 'relative',
       overflow: 'hidden',
-      marginBottom: '20px',
-      transformStyle: 'preserve-3d'
+      marginBottom: isMobile ? '16px' : '20px',
+      textAlign: isMobile ? 'center' : 'left'
     },
 
     contactIconWrapper: {
-      width: '70px',
-      height: '70px',
+      width: isMobile ? '60px' : '70px',
+      height: isMobile ? '60px' : '70px',
       background: 'linear-gradient(135deg, #667EEA, #764BA2)',
       color: 'white',
-      borderRadius: '20px',
+      borderRadius: isMobile ? '16px' : '20px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       flexShrink: 0,
-      marginRight: '25px',
+      marginRight: isMobile ? 0 : '25px',
+      marginBottom: isMobile ? '16px' : 0,
       transform: 'rotate(45deg)',
-      transition: 'all 0.5s ease',
-      fontSize: '1.8rem',
-      boxShadow: '0 15px 30px rgba(102, 126, 234, 0.3)'
+      transition: 'all 0.4s ease',
+      fontSize: isMobile ? '1.5rem' : '1.8rem',
+      boxShadow: '0 10px 25px rgba(102, 126, 234, 0.25)'
     },
 
-    contactIcon: {
-      transform: 'rotate(-45deg)',
-      display: 'block'
-    },
-
-    // Quick Action Buttons
+    // Quick Action Buttons - Mobile Stack
     quickActions: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '20px',
-      marginTop: '35px'
+      gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(200px, 1fr))',
+      gap: isMobile ? '12px' : '20px',
+      marginTop: isMobile ? '25px' : '35px'
     },
 
     actionButton: {
-      padding: '20px 30px',
+      padding: isMobile ? '18px 24px' : '20px 30px',
       background: 'white',
       color: colors.primary,
       border: '2px solid rgba(102, 126, 234, 0.2)',
-      borderRadius: '15px',
+      borderRadius: isMobile ? '12px' : '15px',
       textDecoration: 'none',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: '15px',
-      fontWeight: '700',
-      transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-      fontSize: '1.1rem',
+      gap: isMobile ? '10px' : '15px',
+      fontWeight: '600',
+      transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      fontSize: isMobile ? '1rem' : '1.1rem',
       cursor: 'pointer',
-      boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+      boxShadow: '0 8px 25px rgba(0,0,0,0.05)',
       position: 'relative',
       overflow: 'hidden'
     },
 
-    // Contact Form
+    // Contact Form - Mobile Optimized
     contactForm: {
       background: 'white',
-      padding: '45px 40px',
-      borderRadius: '30px',
-      boxShadow: '0 30px 80px rgba(0,0,0,0.08)',
+      padding: isMobile ? '32px 24px' : '40px 36px',
+      borderRadius: isMobile ? '24px' : '30px',
+      boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
       border: '1px solid rgba(102, 126, 234, 0.1)',
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      marginTop: isMobile ? '20px' : '0'
     },
 
     formGroup: {
-      marginBottom: '30px',
+      marginBottom: isMobile ? '24px' : '30px',
       position: 'relative'
     },
 
-    // Section styling
+    // Section styling - Mobile Adjusted
     section: {
-      padding: '120px 0',
+      padding: isMobile ? '60px 0' : '80px 0',
       position: 'relative'
     },
 
     sectionTitle: {
-      fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+      fontSize: isMobile ? '2rem' : 'clamp(2rem, 4vw, 3.5rem)',
       textAlign: 'center',
-      marginBottom: '20px',
-      fontWeight: '800',
+      marginBottom: isMobile ? '16px' : '24px',
+      fontWeight: '700',
       color: colors.dark,
       position: 'relative',
-      display: 'inline-block'
+      display: 'inline-block',
+      lineHeight: '1.2'
     },
 
     sectionSubtitle: {
-      fontSize: '1.3rem',
+      fontSize: isMobile ? '1rem' : '1.2rem',
       textAlign: 'center',
       color: '#666',
-      maxWidth: '700px',
-      margin: '0 auto 60px',
-      lineHeight: '1.7'
+      maxWidth: isMobile ? '100%' : '700px',
+      margin: `0 auto ${isMobile ? '40px' : '60px'}`,
+      lineHeight: '1.6',
+      padding: isMobile ? '0 16px' : '0'
     },
 
-    // Social Links
+    // Social Links - Mobile Optimized
     socialLinks: {
       display: 'flex',
-      gap: '15px',
-      marginTop: '30px',
-      justifyContent: 'center'
+      gap: isMobile ? '12px' : '15px',
+      marginTop: isMobile ? '24px' : '30px',
+      justifyContent: 'center',
+      flexWrap: 'wrap'
     },
 
     socialLink: {
-      width: '55px',
-      height: '55px',
-      borderRadius: '15px',
+      width: isMobile ? '50px' : '55px',
+      height: isMobile ? '50px' : '55px',
+      borderRadius: isMobile ? '12px' : '15px',
       background: 'white',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       color: colors.primary,
       textDecoration: 'none',
-      transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-      boxShadow: '0 10px 30px rgba(0,0,0,0.08)',
+      transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      boxShadow: '0 8px 25px rgba(0,0,0,0.08)',
       position: 'relative',
       overflow: 'hidden'
     },
 
-    // Info Box
+    // Info Box - Mobile Adjusted
     infoBox: {
       background: 'rgba(248, 250, 252, 0.8)',
-      padding: '35px',
-      borderRadius: '25px',
-      marginTop: '40px',
+      padding: isMobile ? '24px' : '32px',
+      borderRadius: isMobile ? '20px' : '25px',
+      marginTop: isMobile ? '32px' : '40px',
       border: '2px solid rgba(102, 126, 234, 0.1)',
       position: 'relative',
       overflow: 'hidden'
+    },
+
+    // Floating Shapes - Hidden on Mobile
+    floatingShape: {
+      position: 'absolute',
+      width: isMobile ? '300px' : '500px',
+      height: isMobile ? '300px' : '500px',
+      border: '2px solid rgba(255, 255, 255, 0.08)',
+      borderRadius: '50%',
+      top: isMobile ? '-150px' : '-250px',
+      right: isMobile ? '-150px' : '-250px',
+      animation: 'float 20s infinite ease-in-out',
+      display: isMobile ? 'none' : 'block'
+    },
+
+    floatingShape2: {
+      position: 'absolute',
+      width: isMobile ? '200px' : '400px',
+      height: isMobile ? '200px' : '400px',
+      border: '2px solid rgba(255, 255, 255, 0.05)',
+      borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+      bottom: isMobile ? '-100px' : '-200px',
+      left: isMobile ? '-100px' : '-200px',
+      animation: 'float 25s infinite ease-in-out reverse',
+      display: isMobile ? 'none' : 'block'
     }
   };
 
@@ -272,7 +279,6 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitMessage('✨ Your message has been sent successfully! We will get back to you within 24 hours.');
@@ -332,11 +338,9 @@ const Contact = () => {
     <div className="contact-page">
       {/* Hero Section */}
       <section style={styles.contactHero}>
-        {/* Floating Shapes */}
         <div style={styles.floatingShape}></div>
         <div style={styles.floatingShape2}></div>
         
-        {/* Gradient Overlay */}
         <div style={{
           position: 'absolute',
           top: 0,
@@ -348,7 +352,6 @@ const Contact = () => {
         }}></div>
         
         <div style={styles.heroContent}>
-          {/* Animated Badge */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -356,17 +359,17 @@ const Contact = () => {
             style={{
               display: 'inline-block',
               background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(20px)',
-              padding: '14px 32px',
+              backdropFilter: 'blur(10px)',
+              padding: isMobile ? '10px 20px' : '12px 28px',
               borderRadius: '50px',
-              marginBottom: '40px',
+              marginBottom: isMobile ? '24px' : '32px',
               border: '1px solid rgba(255, 255, 255, 0.2)'
             }}
           >
             <span style={{ 
-              fontSize: '0.9rem', 
+              fontSize: isMobile ? '0.8rem' : '0.9rem', 
               fontWeight: '600', 
-              letterSpacing: '3px',
+              letterSpacing: '2px',
               color: 'white'
             }}>
               GET IN TOUCH
@@ -374,20 +377,20 @@ const Contact = () => {
           </motion.div>
           
           <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             style={styles.heroTitle}
           >
             Let's Create
             <br />
-            <span style={{ fontSize: '0.85em', display: 'block', marginTop: '15px' }}>
+            <span style={{ fontSize: isMobile ? '0.8em' : '0.85em', display: 'block', marginTop: '8px' }}>
               Impact Together
             </span>
           </motion.h1>
           
           <motion.p 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             style={styles.heroSubtitle}
@@ -395,123 +398,27 @@ const Contact = () => {
             Reach out to collaborate, inquire, or join our mission to empower youth 
             and drive sustainable change across communities
           </motion.p>
-          
-          {/* Animated Stats */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: '40px',
-              maxWidth: '900px',
-              margin: '60px auto 0',
-              position: 'relative',
-              zIndex: 2
-            }}
-          >
-            {[
-              { value: '24', label: 'Hour Response', suffix: 'hr', color: '#667EEA' },
-              { value: '100', label: 'Partners Connected', suffix: '+', color: '#FF6B6B' },
-              { value: '1000', label: 'Messages Sent', suffix: '+', color: '#4ECDC4' },
-              { value: '95', label: 'Satisfaction Rate', suffix: '%', color: '#FFD166' }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                style={{
-                  textAlign: 'center',
-                  padding: '30px',
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  borderRadius: '25px',
-                  backdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  transition: 'all 0.4s ease'
-                }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  background: 'rgba(255, 255, 255, 0.12)',
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
-                }}
-              >
-                <div style={{
-                  fontSize: '3.5rem',
-                  fontWeight: '900',
-                  marginBottom: '12px',
-                  background: `linear-gradient(45deg, ${stat.color}, ${stat.color}dd)`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  lineHeight: '1'
-                }}>
-                  {stat.value}<span style={{ fontSize: '0.7em' }}>{stat.suffix}</span>
-                </div>
-                <div style={{ 
-                  fontSize: '1rem', 
-                  color: 'rgba(255, 255, 255, 0.95)',
-                  fontWeight: '500',
-                  letterSpacing: '0.5px'
-                }}>
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
-        
-        {/* Scroll Indicator */}
-        <motion.div 
-          style={{
-            position: 'absolute',
-            bottom: '50px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '20px',
-            zIndex: 10
-          }}
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div style={{ 
-            fontSize: '0.9rem', 
-            color: 'rgba(255, 255, 255, 0.7)',
-            letterSpacing: '3px',
-            fontWeight: '500'
-          }}>
-            CONNECT WITH US
-          </div>
-          <div style={{
-            width: '2px',
-            height: '40px',
-            background: 'linear-gradient(to bottom, transparent, white, transparent)',
-            borderRadius: '1px'
-          }}></div>
-        </motion.div>
       </section>
 
       {/* Contact Section */}
       <section style={{ ...styles.section, background: 'linear-gradient(135deg, #F8FAFC 0%, #E8EEF5 100%)' }}>
         <div className="container">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            style={{ textAlign: 'center', marginBottom: '80px' }}
+            style={{ textAlign: 'center', marginBottom: isMobile ? '40px' : '60px' }}
           >
             <h2 style={styles.sectionTitle}>
               <span style={{ position: 'relative', display: 'inline-block' }}>
                 Connect With Us
                 <span style={{
                   position: 'absolute',
-                  bottom: '-10px',
+                  bottom: '-8px',
                   left: '0',
                   right: '0',
-                  height: '4px',
+                  height: '3px',
                   background: `linear-gradient(90deg, ${colors.primary}, ${colors.secondary})`,
                   borderRadius: '2px'
                 }}></span>
@@ -527,25 +434,25 @@ const Contact = () => {
             {/* Contact Information */}
             <div>
               <motion.div 
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                style={{ marginBottom: '40px' }}
+                style={{ marginBottom: isMobile ? '24px' : '32px' }}
               >
                 <h3 style={{ 
                   color: colors.dark, 
-                  marginBottom: '25px', 
-                  fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
-                  fontWeight: '800',
+                  marginBottom: isMobile ? '16px' : '20px', 
+                  fontSize: isMobile ? '1.5rem' : 'clamp(1.6rem, 2.5vw, 2.2rem)',
+                  fontWeight: '700',
                   lineHeight: '1.3'
                 }}>
                   Contact Information
                 </h3>
                 <p style={{ 
                   color: '#666', 
-                  fontSize: '1.1rem', 
-                  lineHeight: '1.7',
-                  marginBottom: '30px'
+                  fontSize: isMobile ? '0.95rem' : '1.05rem', 
+                  lineHeight: '1.6',
+                  marginBottom: isMobile ? '20px' : '24px'
                 }}>
                   Reach out through any channel that works best for you. Our team is 
                   ready to assist with partnerships, inquiries, and collaborations.
@@ -553,7 +460,7 @@ const Contact = () => {
               </motion.div>
               
               {/* Contact Cards */}
-              <div style={{ marginBottom: '40px' }}>
+              <div style={{ marginBottom: isMobile ? '24px' : '32px' }}>
                 {contactInfo.map((info, index) => (
                   <motion.a
                     key={index}
@@ -562,51 +469,39 @@ const Contact = () => {
                     target={info.title === 'LinkedIn' ? '_blank' : '_self'}
                     rel={info.title === 'LinkedIn' ? 'noopener noreferrer' : ''}
                     className="contact-card"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     whileHover={{ 
-                      y: -10,
-                      boxShadow: '0 40px 80px rgba(0,0,0,0.15)'
+                      y: isMobile ? -5 : -8,
+                      boxShadow: '0 25px 50px rgba(0,0,0,0.12)'
                     }}
                   >
-                    {/* Background gradient */}
-                    <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      background: info.gradient,
-                      opacity: 0,
-                      transition: 'opacity 0.3s ease'
-                    }}></div>
-                    
                     <div style={{ ...styles.contactIconWrapper, background: info.gradient }}>
-                      <span style={styles.contactIcon}>{info.icon}</span>
+                      <span style={{ transform: 'rotate(-45deg)', display: 'block' }}>{info.icon}</span>
                     </div>
                     <div style={{ position: 'relative', zIndex: 2 }}>
                       <h4 style={{ 
                         color: colors.dark, 
-                        marginBottom: '8px', 
-                        fontSize: '1.3rem',
-                        fontWeight: '700',
+                        marginBottom: '6px', 
+                        fontSize: isMobile ? '1.1rem' : '1.2rem',
+                        fontWeight: '600',
                         transition: 'color 0.3s ease'
                       }}>
                         {info.title}
                       </h4>
                       <p style={{ 
                         color: colors.primary, 
-                        fontSize: '1.1rem',
+                        fontSize: isMobile ? '1rem' : '1.05rem',
                         fontWeight: '600',
-                        marginBottom: '5px',
+                        marginBottom: '4px',
                         transition: 'color 0.3s ease'
                       }}>
                         {info.value}
                       </p>
                       <p style={{ 
                         color: '#666', 
-                        fontSize: '0.95rem',
+                        fontSize: isMobile ? '0.85rem' : '0.9rem',
                         margin: 0,
                         transition: 'color 0.3s ease'
                       }}>
@@ -619,30 +514,30 @@ const Contact = () => {
 
               {/* Quick Actions */}
               <motion.div 
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 style={styles.infoBox}
               >
                 <h3 style={{ 
                   color: colors.dark, 
-                  marginBottom: '20px', 
-                  fontSize: '1.5rem',
-                  fontWeight: '700',
+                  marginBottom: isMobile ? '16px' : '20px', 
+                  fontSize: isMobile ? '1.2rem' : '1.3rem',
+                  fontWeight: '600',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '12px'
+                  gap: '10px'
                 }}>
                   <span style={{ 
-                    width: '40px', 
-                    height: '40px', 
+                    width: isMobile ? '36px' : '40px', 
+                    height: isMobile ? '36px' : '40px', 
                     background: colors.primary, 
                     color: 'white',
-                    borderRadius: '12px',
+                    borderRadius: '10px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '1.2rem'
+                    fontSize: isMobile ? '1rem' : '1.1rem'
                   }}>
                     ⚡
                   </span>
@@ -650,8 +545,8 @@ const Contact = () => {
                 </h3>
                 <p style={{ 
                   color: '#666', 
-                  marginBottom: '25px', 
-                  fontSize: '1.05rem',
+                  marginBottom: isMobile ? '20px' : '24px', 
+                  fontSize: isMobile ? '0.95rem' : '1rem',
                   lineHeight: '1.6'
                 }}>
                   For immediate assistance, reach out directly through these channels
@@ -665,18 +560,18 @@ const Contact = () => {
                       background: 'linear-gradient(135deg, #25D366, #128C7E)',
                       color: 'white',
                       border: 'none',
-                      boxShadow: '0 15px 35px rgba(37, 211, 102, 0.3)'
+                      boxShadow: '0 10px 30px rgba(37, 211, 102, 0.25)'
                     }}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ 
-                      scale: 1.05,
-                      boxShadow: '0 20px 40px rgba(37, 211, 102, 0.4)',
-                      y: -5
+                      scale: isMobile ? 1.02 : 1.05,
+                      boxShadow: '0 15px 35px rgba(37, 211, 102, 0.35)',
+                      y: -3
                     }}
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <span style={{ fontSize: '1.4rem' }}>💬</span>
+                    <span style={{ fontSize: isMobile ? '1.2rem' : '1.3rem' }}>💬</span>
                     WhatsApp Chat
                   </motion.a>
                   
@@ -687,16 +582,16 @@ const Contact = () => {
                       background: 'linear-gradient(135deg, #667EEA, #764BA2)',
                       color: 'white',
                       border: 'none',
-                      boxShadow: '0 15px 35px rgba(102, 126, 234, 0.3)'
+                      boxShadow: '0 10px 30px rgba(102, 126, 234, 0.25)'
                     }}
                     whileHover={{ 
-                      scale: 1.05,
-                      boxShadow: '0 20px 40px rgba(102, 126, 234, 0.4)',
-                      y: -5
+                      scale: isMobile ? 1.02 : 1.05,
+                      boxShadow: '0 15px 35px rgba(102, 126, 234, 0.35)',
+                      y: -3
                     }}
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <span style={{ fontSize: '1.4rem' }}>📞</span>
+                    <span style={{ fontSize: isMobile ? '1.2rem' : '1.3rem' }}>📞</span>
                     Direct Call
                   </motion.a>
                 </div>
@@ -704,25 +599,25 @@ const Contact = () => {
 
               {/* Social Media */}
               <motion.div 
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
                 style={{ 
-                  marginTop: '40px',
+                  marginTop: isMobile ? '24px' : '32px',
                   textAlign: 'center'
                 }}
               >
                 <h4 style={{ 
                   color: colors.dark, 
-                  marginBottom: '20px', 
-                  fontSize: '1.2rem',
+                  marginBottom: isMobile ? '16px' : '20px', 
+                  fontSize: isMobile ? '1.1rem' : '1.15rem',
                   fontWeight: '600',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '10px'
+                  gap: '8px'
                 }}>
-                  <span>Follow Our Journey</span>
+                  Follow Our Journey
                 </h4>
                 <div style={styles.socialLinks}>
                   {socialMedia.map((social, index) => (
@@ -738,15 +633,15 @@ const Contact = () => {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3, delay: 0.7 + index * 0.1 }}
                       whileHover={{ 
-                        scale: 1.2,
-                        y: -5,
+                        scale: isMobile ? 1.1 : 1.15,
+                        y: -3,
                         background: social.color,
                         color: 'white',
-                        boxShadow: `0 15px 30px ${social.color}40`
+                        boxShadow: `0 12px 25px ${social.color}40`
                       }}
-                      whileTap={{ scale: 0.9 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <span style={{ fontSize: '1.4rem' }}>{social.icon}</span>
+                      <span style={{ fontSize: isMobile ? '1.2rem' : '1.3rem' }}>{social.icon}</span>
                     </motion.a>
                   ))}
                 </div>
@@ -755,25 +650,25 @@ const Contact = () => {
 
             {/* Contact Form */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div style={{ marginBottom: '40px' }}>
+              <div style={{ marginBottom: isMobile ? '24px' : '32px' }}>
                 <h3 style={{ 
                   color: colors.dark, 
-                  marginBottom: '25px', 
-                  fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
-                  fontWeight: '800',
+                  marginBottom: isMobile ? '16px' : '20px', 
+                  fontSize: isMobile ? '1.5rem' : 'clamp(1.6rem, 2.5vw, 2.2rem)',
+                  fontWeight: '700',
                   lineHeight: '1.3'
                 }}>
                   Send a Message
                 </h3>
                 <p style={{ 
                   color: '#666', 
-                  fontSize: '1.1rem', 
-                  lineHeight: '1.7',
-                  marginBottom: '30px'
+                  fontSize: isMobile ? '0.95rem' : '1.05rem', 
+                  lineHeight: '1.6',
+                  marginBottom: isMobile ? '20px' : '24px'
                 }}>
                   Have questions or want to collaborate? Fill out the form below and 
                   we'll get back to you within 24 hours.
@@ -781,17 +676,6 @@ const Contact = () => {
               </div>
 
               <form onSubmit={handleSubmit} style={styles.contactForm}>
-                {/* Form Background */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  background: 'linear-gradient(45deg, rgba(102, 126, 234, 0.02), rgba(118, 75, 162, 0.02))',
-                  pointerEvents: 'none'
-                }}></div>
-                
                 <div style={styles.formGroup}>
                   <input
                     type="text"
@@ -804,15 +688,15 @@ const Contact = () => {
                     required
                     style={{ 
                       width: '100%', 
-                      padding: '18px 25px', 
+                      padding: isMobile ? '16px 20px' : '18px 24px', 
                       border: `2px solid ${activeField === 'name' ? colors.primary : 'rgba(102, 126, 234, 0.1)'}`, 
-                      borderRadius: '15px', 
-                      fontSize: '1.1rem',
+                      borderRadius: '12px', 
+                      fontSize: isMobile ? '1rem' : '1.05rem',
                       fontFamily: 'inherit',
-                      transition: 'all 0.4s ease',
+                      transition: 'all 0.3s ease',
                       background: 'white',
                       color: colors.dark,
-                      boxShadow: activeField === 'name' ? '0 0 0 4px rgba(102, 126, 234, 0.1)' : 'none'
+                      boxShadow: activeField === 'name' ? '0 0 0 3px rgba(102, 126, 234, 0.1)' : 'none'
                     }}
                   />
                 </div>
@@ -829,15 +713,15 @@ const Contact = () => {
                     required
                     style={{ 
                       width: '100%', 
-                      padding: '18px 25px', 
+                      padding: isMobile ? '16px 20px' : '18px 24px', 
                       border: `2px solid ${activeField === 'email' ? colors.primary : 'rgba(102, 126, 234, 0.1)'}`, 
-                      borderRadius: '15px', 
-                      fontSize: '1.1rem',
+                      borderRadius: '12px', 
+                      fontSize: isMobile ? '1rem' : '1.05rem',
                       fontFamily: 'inherit',
-                      transition: 'all 0.4s ease',
+                      transition: 'all 0.3s ease',
                       background: 'white',
                       color: colors.dark,
-                      boxShadow: activeField === 'email' ? '0 0 0 4px rgba(102, 126, 234, 0.1)' : 'none'
+                      boxShadow: activeField === 'email' ? '0 0 0 3px rgba(102, 126, 234, 0.1)' : 'none'
                     }}
                   />
                 </div>
@@ -854,15 +738,15 @@ const Contact = () => {
                     required
                     style={{ 
                       width: '100%', 
-                      padding: '18px 25px', 
+                      padding: isMobile ? '16px 20px' : '18px 24px', 
                       border: `2px solid ${activeField === 'subject' ? colors.primary : 'rgba(102, 126, 234, 0.1)'}`, 
-                      borderRadius: '15px', 
-                      fontSize: '1.1rem',
+                      borderRadius: '12px', 
+                      fontSize: isMobile ? '1rem' : '1.05rem',
                       fontFamily: 'inherit',
-                      transition: 'all 0.4s ease',
+                      transition: 'all 0.3s ease',
                       background: 'white',
                       color: colors.dark,
-                      boxShadow: activeField === 'subject' ? '0 0 0 4px rgba(102, 126, 234, 0.1)' : 'none'
+                      boxShadow: activeField === 'subject' ? '0 0 0 3px rgba(102, 126, 234, 0.1)' : 'none'
                     }}
                   />
                 </div>
@@ -875,20 +759,21 @@ const Contact = () => {
                     onFocus={() => setActiveField('message')}
                     onBlur={() => setActiveField(null)}
                     placeholder="Your message here... Tell us about your project, idea, or how we can collaborate"
-                    rows="6"
+                    rows="5"
                     required
                     style={{ 
                       width: '100%', 
-                      padding: '18px 25px', 
+                      padding: isMobile ? '16px 20px' : '18px 24px', 
                       border: `2px solid ${activeField === 'message' ? colors.primary : 'rgba(102, 126, 234, 0.1)'}`, 
-                      borderRadius: '15px', 
-                      fontSize: '1.1rem', 
+                      borderRadius: '12px', 
+                      fontSize: isMobile ? '1rem' : '1.05rem',
                       fontFamily: 'inherit',
                       resize: 'vertical',
-                      transition: 'all 0.4s ease',
+                      transition: 'all 0.3s ease',
                       background: 'white',
                       color: colors.dark,
-                      boxShadow: activeField === 'message' ? '0 0 0 4px rgba(102, 126, 234, 0.1)' : 'none'
+                      minHeight: '120px',
+                      boxShadow: activeField === 'message' ? '0 0 0 3px rgba(102, 126, 234, 0.1)' : 'none'
                     }}
                   ></textarea>
                 </div>
@@ -898,25 +783,25 @@ const Contact = () => {
                   disabled={isSubmitting}
                   style={{ 
                     width: '100%', 
-                    padding: '22px',
-                    fontSize: '1.2rem',
-                    fontWeight: '700',
+                    padding: isMobile ? '18px' : '20px',
+                    fontSize: isMobile ? '1.05rem' : '1.1rem',
+                    fontWeight: '600',
                     background: 'linear-gradient(45deg, #667EEA, #764BA2)',
                     color: 'white',
                     border: 'none',
-                    borderRadius: '15px',
+                    borderRadius: '12px',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
-                    boxShadow: '0 15px 35px rgba(102, 126, 234, 0.3)',
+                    boxShadow: '0 10px 30px rgba(102, 126, 234, 0.25)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '12px'
+                    gap: '10px'
                   }}
                   whileHover={{ 
                     scale: 1.02,
-                    boxShadow: '0 20px 40px rgba(102, 126, 234, 0.4)',
-                    y: -3
+                    boxShadow: '0 15px 35px rgba(102, 126, 234, 0.35)',
+                    y: -2
                   }}
                   whileTap={{ scale: 0.98 }}
                   disabledStyle={{ opacity: 0.6 }}
@@ -926,16 +811,16 @@ const Contact = () => {
                       <motion.span
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        style={{ fontSize: '1.2rem' }}
+                        style={{ fontSize: isMobile ? '1.1rem' : '1.2rem' }}
                       >
                         ⏳
                       </motion.span>
-                      Sending Message...
+                      Sending...
                     </>
                   ) : (
                     <>
                       Send Message
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                       </svg>
                     </>
@@ -944,88 +829,24 @@ const Contact = () => {
                 
                 {submitMessage && (
                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     style={{ 
                       background: 'linear-gradient(45deg, rgba(78, 205, 196, 0.1), rgba(6, 214, 160, 0.1))', 
                       color: '#155724', 
-                      padding: '25px', 
-                      marginTop: '25px', 
-                      borderRadius: '15px', 
+                      padding: isMobile ? '16px' : '20px', 
+                      marginTop: isMobile ? '16px' : '20px', 
+                      borderRadius: '12px', 
                       textAlign: 'center', 
-                      fontWeight: '600', 
-                      border: '2px solid rgba(6, 214, 160, 0.2)',
-                      fontSize: '1.1rem',
-                      position: 'relative',
-                      overflow: 'hidden'
+                      fontWeight: '500', 
+                      border: '1px solid rgba(6, 214, 160, 0.2)',
+                      fontSize: isMobile ? '0.95rem' : '1rem'
                     }}
                   >
-                    <div style={{
-                      position: 'absolute',
-                      top: '-50%',
-                      right: '-50%',
-                      width: '200%',
-                      height: '200%',
-                      background: 'radial-gradient(circle, rgba(6, 214, 160, 0.05) 0%, transparent 70%)',
-                      transform: 'rotate(45deg)'
-                    }}></div>
-                    <div style={{ position: 'relative', zIndex: 2 }}>
-                      ✨ {submitMessage}
-                    </div>
+                    ✨ {submitMessage}
                   </motion.div>
                 )}
               </form>
-
-              {/* Response Time */}
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                style={{ 
-                  marginTop: '30px',
-                  padding: '25px',
-                  background: 'rgba(248, 250, 252, 0.8)',
-                  borderRadius: '15px',
-                  border: '2px solid rgba(102, 126, 234, 0.1)',
-                  textAlign: 'center',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '15px'
-                }}
-              >
-                <span style={{ 
-                  fontSize: '1.5rem',
-                  background: colors.primary,
-                  color: 'white',
-                  width: '50px',
-                  height: '50px',
-                  borderRadius: '12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
-                }}>
-                  ⏱️
-                </span>
-                <div style={{ textAlign: 'left' }}>
-                  <div style={{ 
-                    color: colors.dark, 
-                    fontSize: '1rem',
-                    fontWeight: '700',
-                    marginBottom: '4px'
-                  }}>
-                    Quick Response Time
-                  </div>
-                  <p style={{ 
-                    color: '#666', 
-                    fontSize: '0.95rem',
-                    margin: 0
-                  }}>
-                    We typically respond within <strong>24-48 hours</strong> on business days
-                  </p>
-                </div>
-              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -1033,7 +854,7 @@ const Contact = () => {
 
       {/* CSS Styles */}
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
         .contact-page {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
@@ -1045,9 +866,9 @@ const Contact = () => {
         .container {
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 16px;
           position: relative;
-          zIndex: 2;
+          z-index: 2;
         }
         
         /* Modern Animations */
@@ -1056,10 +877,10 @@ const Contact = () => {
             transform: translateY(0) rotate(0deg);
           }
           33% {
-            transform: translateY(-30px) rotate(5deg);
+            transform: translateY(-20px) rotate(3deg);
           }
           66% {
-            transform: translateY(30px) rotate(-5deg);
+            transform: translateY(20px) rotate(-3deg);
           }
         }
         
@@ -1072,35 +893,20 @@ const Contact = () => {
           }
         }
         
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-        
         /* Custom scrollbar */
         ::-webkit-scrollbar {
-          width: 12px;
-          height: 12px;
+          width: 8px;
+          height: 8px;
         }
         
         ::-webkit-scrollbar-track {
           background: rgba(248, 250, 252, 0.8);
-          backdrop-filter: blur(10px);
-          border-radius: 10px;
+          border-radius: 4px;
         }
         
         ::-webkit-scrollbar-thumb {
           background: linear-gradient(45deg, #667EEA, #764BA2);
-          border-radius: 10px;
-          border: 3px solid rgba(255, 255, 255, 0.8);
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(45deg, #5a6fd8, #6a3f9e);
+          border-radius: 4px;
         }
         
         /* Selection styles */
@@ -1109,32 +915,9 @@ const Contact = () => {
           color: #1A1A2E;
         }
         
-        /* Smooth transitions */
-        * {
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
         /* Hover effects for contact cards */
-        .contact-card:hover {
-          transform: translateY(-10px) !important;
-          box-shadow: 0 40px 80px rgba(0,0,0,0.15) !important;
-        }
-        
         .contact-card:hover .contact-icon-wrapper {
           transform: rotate(0deg) scale(1.1) !important;
-        }
-        
-        .contact-card:hover h4,
-        .contact-card:hover p:nth-of-type(1) {
-          color: white !important;
-        }
-        
-        .contact-card:hover p:nth-of-type(2) {
-          color: rgba(255,255,255,0.9) !important;
-        }
-        
-        .contact-card:hover::before {
-          opacity: 1 !important;
         }
         
         /* Focus styles */
@@ -1144,117 +927,16 @@ const Contact = () => {
         }
         
         /* Responsive Design */
-        @media (max-width: 1200px) {
-          .contact-grid {
-            grid-template-columns: 1fr !important;
-            gap: 50px !important;
-          }
-          
-          .hero-title {
-            font-size: 4.5rem !important;
-          }
-          
-          .quick-actions {
-            grid-template-columns: repeat(2, 1fr) !important;
+        @media (min-width: 768px) {
+          .container {
+            padding: 0 24px;
           }
         }
         
-        @media (max-width: 992px) {
-          .contact-hero {
-            padding: 140px 0 80px !important;
-            min-height: 90vh !important;
+        @media (min-width: 1024px) {
+          .container {
+            padding: 0 32px;
           }
-          
-          .hero-title {
-            font-size: 3.5rem !important;
-          }
-          
-          .hero-subtitle {
-            font-size: 1.2rem !important;
-          }
-          
-          .contact-form {
-            padding: 35px 30px !important;
-          }
-          
-          .contact-item {
-            padding: 25px 20px !important;
-          }
-          
-          .contact-icon-wrapper {
-            width: 60px !important;
-            height: 60px !important;
-            margin-right: 20px !important;
-          }
-        }
-        
-        @media (max-width: 768px) {
-          .hero-title {
-            font-size: 3rem !important;
-          }
-          
-          .section {
-            padding: 80px 0 !important;
-          }
-          
-          .quick-actions {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .social-links {
-            flex-wrap: wrap !important;
-            justify-content: center !important;
-          }
-          
-          .contact-form {
-            padding: 30px 25px !important;
-          }
-          
-          input, textarea {
-            padding: 16px 20px !important;
-            font-size: 1rem !important;
-          }
-          
-          button[type="submit"] {
-            padding: 20px !important;
-            font-size: 1.1rem !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          .hero-title {
-            font-size: 2.5rem !important;
-          }
-          
-          .hero-subtitle {
-            font-size: 1.1rem !important;
-          }
-          
-          .section-title {
-            font-size: 2rem !important;
-          }
-          
-          .contact-item {
-            flex-direction: column !important;
-            text-align: center !important;
-            padding: 25px 20px !important;
-          }
-          
-          .contact-icon-wrapper {
-            margin-right: 0 !important;
-            margin-bottom: 20px !important;
-          }
-          
-          .social-link {
-            width: 50px !important;
-            height: 50px !important;
-          }
-        }
-        
-        /* Loading animations */
-        .contact-item {
-          animation: fadeInUp 0.6s ease-out;
-          animation-fill-mode: both;
         }
         
         /* Print styles */
@@ -1263,7 +945,7 @@ const Contact = () => {
             background: #1A1A2E !important;
             color: white !important;
             min-height: auto !important;
-            padding: 50px 0 !important;
+            padding: 40px 0 !important;
           }
           
           .contact-form {
@@ -1274,11 +956,11 @@ const Contact = () => {
           button {
             display: none !important;
           }
-        }
-        
-        /* Performance optimization */
-        .will-change {
-          will-change: transform, opacity;
+          
+          a {
+            text-decoration: underline !important;
+            color: #667EEA !important;
+          }
         }
       `}</style>
     </div>

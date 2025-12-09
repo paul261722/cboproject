@@ -4,14 +4,17 @@ import { motion } from 'framer-motion';
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [scrollY, setScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Check mobile viewport
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   // Modern color palette
@@ -26,165 +29,146 @@ const Projects = () => {
     info: '#06D6A0'
   };
 
+  // Responsive styles
   const styles = {
-    // Modern Hero Section with Image5
+    // Modern Hero Section - Mobile Optimized
     projectsHero: {
-      background: `linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(22, 33, 62, 0.9) 100%), url('/image5.jpg')`,
+      background: `linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.98) 100%), url('/image5.jpg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      backgroundAttachment: 'fixed',
+      backgroundAttachment: isMobile ? 'scroll' : 'fixed',
       color: 'white',
       textAlign: 'center',
-      padding: '180px 0 120px',
+      padding: isMobile ? '100px 0 60px' : '140px 0 80px',
       position: 'relative',
       overflow: 'hidden',
-      minHeight: '100vh',
+      minHeight: isMobile ? 'auto' : '100vh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'
     },
-    
+
     heroContent: {
       position: 'relative',
       zIndex: 10,
-      maxWidth: '1000px',
+      maxWidth: '1200px',
       margin: '0 auto',
-      padding: '0 20px'
+      padding: isMobile ? '0 16px' : '0 24px'
     },
 
     heroTitle: {
-      fontSize: 'clamp(3.5rem, 7vw, 6rem)',
-      marginBottom: '30px',
-      fontWeight: '900',
-      letterSpacing: '-1.5px',
+      fontSize: isMobile ? '2.5rem' : 'clamp(3rem, 6vw, 5rem)',
+      marginBottom: isMobile ? '20px' : '30px',
+      fontWeight: '800',
+      letterSpacing: isMobile ? '-1px' : '-1.5px',
       lineHeight: '1.1',
       background: 'linear-gradient(45deg, #FFFFFF, #667EEA, #FF6B6B)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
-      backgroundSize: '200% auto',
-      animation: 'gradientShift 3s ease infinite'
+      backgroundSize: '200% auto'
     },
 
     heroSubtitle: {
-      fontSize: 'clamp(1.3rem, 2.5vw, 1.8rem)',
-      maxWidth: '800px',
-      margin: '0 auto 50px',
+      fontSize: isMobile ? '1.1rem' : 'clamp(1.2rem, 2vw, 1.6rem)',
+      maxWidth: isMobile ? '100%' : '800px',
+      margin: `0 auto ${isMobile ? '30px' : '50px'}`,
       opacity: 0.9,
       lineHeight: '1.6',
       fontWeight: '300',
-      color: 'rgba(255, 255, 255, 0.9)'
+      color: 'rgba(255, 255, 255, 0.95)',
+      padding: isMobile ? '0 10px' : '0'
     },
 
-    // Geometric background elements
-    heroGeometric: {
-      position: 'absolute',
-      width: '400px',
-      height: '400px',
-      border: '2px solid rgba(255, 255, 255, 0.1)',
-      transform: 'rotate(45deg)',
-      top: '15%',
-      right: '10%',
-      animation: 'float 20s infinite ease-in-out'
-    },
-
-    heroGeometric2: {
-      position: 'absolute',
-      width: '300px',
-      height: '300px',
-      border: '2px solid rgba(255, 255, 255, 0.08)',
-      transform: 'rotate(30deg)',
-      bottom: '20%',
-      left: '5%',
-      animation: 'float 25s infinite ease-in-out reverse'
-    },
-
-    // Section styling
+    // Section styling - Mobile Adjusted
     section: {
-      padding: '120px 0',
+      padding: isMobile ? '60px 0' : '80px 0',
       position: 'relative'
     },
 
     sectionTitle: {
-      fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+      fontSize: isMobile ? '2rem' : 'clamp(2rem, 4vw, 3.5rem)',
       textAlign: 'center',
-      marginBottom: '20px',
-      fontWeight: '800',
+      marginBottom: isMobile ? '16px' : '24px',
+      fontWeight: '700',
       color: colors.dark,
       position: 'relative',
-      display: 'inline-block'
+      display: 'inline-block',
+      lineHeight: '1.2'
     },
 
     sectionSubtitle: {
-      fontSize: '1.3rem',
+      fontSize: isMobile ? '1rem' : '1.2rem',
       textAlign: 'center',
       color: '#666',
-      maxWidth: '700px',
-      margin: '0 auto 60px',
-      lineHeight: '1.7'
+      maxWidth: isMobile ? '100%' : '700px',
+      margin: `0 auto ${isMobile ? '40px' : '60px'}`,
+      lineHeight: '1.6',
+      padding: isMobile ? '0 16px' : '0'
     },
 
-    // Modern filter buttons
+    // Modern filter buttons - Mobile Stack
     filterContainer: {
       display: 'flex',
       justifyContent: 'center',
-      gap: '15px',
-      marginBottom: '60px',
+      gap: isMobile ? '10px' : '15px',
+      marginBottom: isMobile ? '40px' : '60px',
       flexWrap: 'wrap',
-      padding: '25px',
+      padding: isMobile ? '20px' : '25px',
       background: 'rgba(248, 250, 252, 0.7)',
-      borderRadius: '30px',
+      borderRadius: isMobile ? '20px' : '30px',
       backdropFilter: 'blur(10px)',
       border: '1px solid rgba(102, 126, 234, 0.1)',
       maxWidth: 'fit-content',
       margin: '0 auto',
-      boxShadow: '0 20px 60px rgba(0,0,0,0.05)'
+      boxShadow: '0 15px 40px rgba(0,0,0,0.05)',
+      width: isMobile ? '100%' : 'auto'
     },
 
     filterButton: {
-      padding: '16px 36px',
+      padding: isMobile ? '14px 24px' : '16px 36px',
       background: 'transparent',
       border: '2px solid transparent',
       borderRadius: '50px',
       color: colors.dark,
-      fontWeight: '700',
+      fontWeight: '600',
       cursor: 'pointer',
-      transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-      fontSize: '1rem',
+      transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      fontSize: isMobile ? '0.9rem' : '1rem',
       position: 'relative',
       overflow: 'hidden',
-      letterSpacing: '0.5px'
+      letterSpacing: '0.5px',
+      whiteSpace: 'nowrap'
     },
 
-    // Enhanced projects grid
+    // Enhanced projects grid - Mobile Responsive
     projectsGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))',
-      gap: '50px',
-      maxWidth: '1400px',
+      gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(350px, 1fr))',
+      gap: isMobile ? '30px' : '40px',
+      maxWidth: '1200px',
       margin: '0 auto',
       perspective: '1000px'
     },
 
     projectCard: {
       background: 'white',
-      borderRadius: '25px',
+      borderRadius: isMobile ? '20px' : '25px',
       overflow: 'hidden',
-      boxShadow: '0 25px 80px rgba(0,0,0,0.08)',
-      transition: 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      boxShadow: '0 20px 50px rgba(0,0,0,0.08)',
+      transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
       border: '1px solid rgba(102, 126, 234, 0.1)',
       position: 'relative',
       height: '100%',
       display: 'flex',
-      flexDirection: 'column',
-      transformStyle: 'preserve-3d'
+      flexDirection: 'column'
     },
 
     projectHeader: {
-      padding: '35px',
+      padding: isMobile ? '24px' : '32px',
       color: 'white',
       position: 'relative',
       overflow: 'hidden',
-      minHeight: '140px',
+      minHeight: isMobile ? '120px' : '140px',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -192,7 +176,7 @@ const Projects = () => {
     },
 
     projectContent: {
-      padding: '45px 35px 35px',
+      padding: isMobile ? '32px 24px 24px' : '40px 32px 32px',
       flex: '1',
       display: 'flex',
       flexDirection: 'column',
@@ -203,65 +187,65 @@ const Projects = () => {
 
     // Modern progress bar
     progressBar: {
-      height: '8px',
+      height: '6px',
       background: 'rgba(0,0,0,0.05)',
-      borderRadius: '10px',
+      borderRadius: '8px',
       overflow: 'hidden',
-      marginTop: '20px',
+      marginTop: isMobile ? '16px' : '20px',
       position: 'relative'
     },
 
     progressFill: {
       height: '100%',
-      borderRadius: '10px',
+      borderRadius: '8px',
       background: 'linear-gradient(90deg, #667EEA, #764BA2)',
       transition: 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)',
       position: 'relative'
     },
 
-    // Category and status tags
+    // Category and status tags - Mobile Adjusted
     categoryTag: {
       background: 'rgba(255,255,255,0.95)',
-      padding: '12px 28px',
+      padding: isMobile ? '10px 20px' : '12px 24px',
       borderRadius: '50px',
-      fontSize: '0.9rem',
-      fontWeight: '700',
+      fontSize: isMobile ? '0.85rem' : '0.9rem',
+      fontWeight: '600',
       backdropFilter: 'blur(10px)',
       border: '2px solid rgba(255,255,255,0.3)',
       color: colors.dark,
       display: 'inline-flex',
       alignItems: 'center',
-      gap: '10px',
+      gap: '8px',
       letterSpacing: '0.5px'
     },
 
     statusTag: {
       background: 'rgba(255,255,255,0.95)',
-      padding: '12px 28px',
+      padding: isMobile ? '10px 20px' : '12px 24px',
       borderRadius: '50px',
-      fontSize: '0.9rem',
-      fontWeight: '700',
+      fontSize: isMobile ? '0.85rem' : '0.9rem',
+      fontWeight: '600',
       backdropFilter: 'blur(10px)',
       border: '2px solid rgba(255,255,255,0.3)',
       color: colors.dark,
       position: 'absolute',
-      right: '30px',
-      top: '30px'
+      right: isMobile ? '20px' : '30px',
+      top: isMobile ? '20px' : '30px'
     },
 
-    // Impact section
+    // Impact section - Mobile Optimized
     impactSection: {
       background: `linear-gradient(135deg, ${colors.dark} 0%, #16213E 100%)`,
       color: 'white',
-      padding: '150px 0',
+      padding: isMobile ? '80px 0' : '120px 0',
       position: 'relative',
       overflow: 'hidden'
     },
 
     impactStats: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '60px',
+      gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(250px, 1fr))',
+      gap: isMobile ? '30px' : '50px',
       maxWidth: '1200px',
       margin: '0 auto',
       position: 'relative',
@@ -271,22 +255,46 @@ const Projects = () => {
     impactStat: {
       textAlign: 'center',
       position: 'relative',
-      padding: '50px 30px',
+      padding: isMobile ? '32px 24px' : '48px 32px',
       background: 'rgba(255,255,255,0.05)',
-      borderRadius: '25px',
+      borderRadius: isMobile ? '20px' : '25px',
       backdropFilter: 'blur(10px)',
       border: '1px solid rgba(255,255,255,0.1)',
-      transition: 'all 0.4s ease'
+      transition: 'all 0.3s ease'
     },
 
-    // Floating particles
-    particle: {
+    // Pillars Grid - Mobile Responsive
+    pillarsGrid: {
+      display: 'grid',
+      gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(280px, 1fr))',
+      gap: isMobile ? '24px' : '40px',
+      maxWidth: '1200px',
+      margin: '0 auto'
+    },
+
+    // Floating shapes - Hidden on Mobile
+    heroGeometric: {
       position: 'absolute',
-      width: '4px',
-      height: '4px',
-      background: 'rgba(255,255,255,0.3)',
-      borderRadius: '50%',
-      animation: 'particleFloat 20s infinite linear'
+      width: isMobile ? '200px' : '400px',
+      height: isMobile ? '200px' : '400px',
+      border: '2px solid rgba(255, 255, 255, 0.1)',
+      transform: 'rotate(45deg)',
+      top: '15%',
+      right: isMobile ? '-100px' : '10%',
+      animation: 'float 20s infinite ease-in-out',
+      display: isMobile ? 'none' : 'block'
+    },
+
+    heroGeometric2: {
+      position: 'absolute',
+      width: isMobile ? '150px' : '300px',
+      height: isMobile ? '150px' : '300px',
+      border: '2px solid rgba(255, 255, 255, 0.08)',
+      transform: 'rotate(30deg)',
+      bottom: '20%',
+      left: isMobile ? '-75px' : '5%',
+      animation: 'float 25s infinite ease-in-out reverse',
+      display: isMobile ? 'none' : 'block'
     }
   };
 
@@ -412,223 +420,83 @@ const Projects = () => {
 
   const categories = ['All', ...new Set(projects.map(p => p.category))];
 
-  // Generate floating particles
-  const particles = Array.from({ length: 20 }).map((_, i) => ({
-    id: i,
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    animationDelay: `${Math.random() * 20}s`,
-    size: `${2 + Math.random() * 4}px`
-  }));
-
   return (
     <div className="projects-page">
-      {/* Animated Background Elements */}
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        pointerEvents: 'none',
-        zIndex: 1,
-        opacity: 0.3
-      }}>
-        {particles.map(p => (
-          <div
-            key={p.id}
-            style={{
-              ...styles.particle,
-              left: p.left,
-              top: p.top,
-              width: p.size,
-              height: p.size,
-              animationDelay: p.animationDelay
-            }}
-          />
-        ))}
-      </div>
-
       {/* Hero Section */}
       <section style={styles.projectsHero}>
-        {/* Geometric Elements */}
         <div style={styles.heroGeometric}></div>
         <div style={styles.heroGeometric2}></div>
         
-        {/* Animated Gradient Overlay */}
         <div style={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))',
-          animation: 'gradientShift 8s ease infinite'
+          background: 'linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))'
         }}></div>
         
         <div style={styles.heroContent}>
-          {/* Animated Badge */}
-          <div style={{
-            display: 'inline-block',
-            background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(10px)',
-            padding: '14px 32px',
-            borderRadius: '50px',
-            marginBottom: '40px',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            animation: 'fadeInUp 0.8s ease-out'
-          }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            style={{
+              display: 'inline-block',
+              background: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(10px)',
+              padding: isMobile ? '10px 20px' : '12px 28px',
+              borderRadius: '50px',
+              marginBottom: isMobile ? '24px' : '32px',
+              border: '1px solid rgba(255, 255, 255, 0.2)'
+            }}
+          >
             <span style={{ 
-              fontSize: '0.9rem', 
+              fontSize: isMobile ? '0.8rem' : '0.9rem', 
               fontWeight: '600', 
               letterSpacing: '2px',
               color: 'white'
             }}>
               IMPACT PORTFOLIO
             </span>
-          </div>
+          </motion.div>
           
-          <h1 style={styles.heroTitle}>
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            style={styles.heroTitle}
+          >
             Transforming
             <br />
             <span style={{ 
-              fontSize: '0.85em',
-              display: 'inline-block',
-              marginTop: '10px'
+              fontSize: isMobile ? '0.8em' : '0.85em',
+              display: 'block',
+              marginTop: isMobile ? '5px' : '10px'
             }}>
               Communities Through Innovation
             </span>
-          </h1>
+          </motion.h1>
           
-          <p style={styles.heroSubtitle}>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            style={styles.heroSubtitle}
+          >
             Discover our portfolio of strategic initiatives that are empowering youth 
             and driving sustainable change across Kenya through innovative solutions 
             and impactful partnerships.
-          </p>
-          
-          {/* Animated Stats */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '40px',
-            maxWidth: '900px',
-            margin: '60px auto 0',
-            animation: 'fadeInUp 1s ease-out 0.3s both'
-          }}>
-            {[
-              { value: '6', label: 'Core Projects', suffix: '+', color: '#667EEA' },
-              { value: '31', label: 'Active Initiatives', suffix: '+', color: '#FF6B6B' },
-              { value: '1000', label: 'Youth Impacted', suffix: '+', color: '#4ECDC4' },
-              { value: '12', label: 'Counties Reached', suffix: '', color: '#FFD166' }
-            ].map((stat, index) => (
-              <div 
-                key={index}
-                style={{
-                  textAlign: 'center',
-                  padding: '30px',
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  borderRadius: '25px',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  transition: 'all 0.4s ease',
-                  animationDelay: `${0.4 + index * 0.1}s`,
-                  animation: 'fadeInUp 0.8s ease-out both'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-10px)';
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-                }}
-              >
-                <div style={{
-                  fontSize: '3.5rem',
-                  fontWeight: '900',
-                  marginBottom: '10px',
-                  background: `linear-gradient(45deg, ${stat.color}, ${stat.color}cc)`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  lineHeight: '1'
-                }}>
-                  {stat.value}<span style={{ fontSize: '0.7em' }}>{stat.suffix}</span>
-                </div>
-                <div style={{ 
-                  fontSize: '1rem', 
-                  color: 'rgba(255, 255, 255, 0.9)',
-                  fontWeight: '500',
-                  letterSpacing: '0.5px'
-                }}>
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        
-        {/* Scroll Indicator */}
-        <div style={{
-          position: 'absolute',
-          bottom: '40px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '20px',
-          zIndex: 10,
-          animation: 'bounce 2s infinite'
-        }}>
-          <div style={{ 
-            fontSize: '0.9rem', 
-            color: 'rgba(255, 255, 255, 0.7)',
-            letterSpacing: '2px'
-          }}>
-            EXPLORE
-          </div>
-          <div style={{
-            width: '30px',
-            height: '50px',
-            border: '2px solid rgba(255, 255, 255, 0.3)',
-            borderRadius: '20px',
-            position: 'relative'
-          }}>
-            <div style={{
-              position: 'absolute',
-              width: '4px',
-              height: '12px',
-              background: 'white',
-              borderRadius: '2px',
-              top: '10px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              animation: 'scrollDown 2s infinite'
-            }}></div>
-          </div>
+          </motion.p>
         </div>
       </section>
 
       {/* Strategic Pillars */}
       <section style={{ ...styles.section, background: '#F8FAFC' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <div style={{ textAlign: 'center', marginBottom: isMobile ? '40px' : '60px' }}>
             <h2 style={styles.sectionTitle}>
-              <span style={{
-                position: 'relative',
-                display: 'inline-block'
-              }}>
-                Strategic Pillars
-                <span style={{
-                  position: 'absolute',
-                  bottom: '-10px',
-                  left: '0',
-                  right: '0',
-                  height: '4px',
-                  background: 'linear-gradient(90deg, #667EEA, #764BA2)',
-                  borderRadius: '2px'
-                }}></span>
-              </span>
+              Strategic Pillars
             </h2>
             <p style={styles.sectionSubtitle}>
               Four foundational pillars guiding our mission to create lasting impact 
@@ -638,59 +506,49 @@ const Projects = () => {
           
           <div style={styles.pillarsGrid}>
             {pillars.map((pillar, index) => (
-              <div 
+              <motion.div
                 key={index}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 style={{
-                  ...styles.pillarCard,
                   background: 'white',
-                  borderRadius: '25px',
-                  padding: '60px 40px',
+                  borderRadius: isMobile ? '20px' : '25px',
+                  padding: isMobile ? '40px 24px' : '48px 32px',
                   textAlign: 'center',
-                  transition: 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                   border: '1px solid rgba(0,0,0,0.05)',
-                  boxShadow: '0 20px 60px rgba(0,0,0,0.05)',
+                  boxShadow: '0 15px 40px rgba(0,0,0,0.05)',
                   position: 'relative',
-                  overflow: 'hidden',
-                  animation: `fadeInUp 0.8s ease-out ${index * 0.1}s both`
+                  overflow: 'hidden'
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-20px) scale(1.02)';
-                  e.currentTarget.style.boxShadow = `0 40px 80px ${pillar.color}20`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.05)';
+                whileHover={{ 
+                  y: isMobile ? -5 : -10,
+                  scale: isMobile ? 1.02 : 1.03,
+                  boxShadow: `0 25px 60px ${pillar.color}20`
                 }}
               >
                 {/* Pillar Icon */}
                 <div style={{
-                  width: '100px',
-                  height: '100px',
+                  width: isMobile ? '80px' : '100px',
+                  height: isMobile ? '80px' : '100px',
                   background: pillar.gradient,
-                  borderRadius: '25px',
+                  borderRadius: isMobile ? '20px' : '25px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '3.5rem',
-                  margin: '0 auto 35px',
-                  transform: 'rotate(45deg)',
-                  transition: 'transform 0.5s ease',
-                  boxShadow: `0 20px 40px ${pillar.color}40`
+                  fontSize: isMobile ? '2.5rem' : '3rem',
+                  margin: '0 auto 28px',
+                  boxShadow: `0 15px 35px ${pillar.color}40`
                 }}>
-                  <span style={{ 
-                    transform: 'rotate(-45deg)', 
-                    display: 'block',
-                    filter: 'drop-shadow(0 5px 15px rgba(0,0,0,0.2))'
-                  }}>
-                    {pillar.icon}
-                  </span>
+                  {pillar.icon}
                 </div>
                 
                 <h3 style={{ 
                   color: colors.dark, 
-                  marginBottom: '25px', 
-                  fontSize: '1.8rem',
-                  fontWeight: '800',
+                  marginBottom: isMobile ? '16px' : '20px', 
+                  fontSize: isMobile ? '1.3rem' : '1.5rem',
+                  fontWeight: '700',
                   lineHeight: '1.3'
                 }}>
                   {pillar.title}
@@ -698,9 +556,9 @@ const Projects = () => {
                 
                 <p style={{ 
                   color: '#666', 
-                  lineHeight: '1.7', 
-                  marginBottom: '35px',
-                  fontSize: '1.1rem'
+                  lineHeight: '1.6', 
+                  marginBottom: isMobile ? '24px' : '32px',
+                  fontSize: isMobile ? '0.95rem' : '1.05rem'
                 }}>
                   {pillar.description}
                 </p>
@@ -709,11 +567,11 @@ const Projects = () => {
                 <div style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '12px',
+                  gap: '10px',
                   color: pillar.color,
-                  fontWeight: '700',
-                  fontSize: '1.2rem',
-                  padding: '15px 30px',
+                  fontWeight: '600',
+                  fontSize: isMobile ? '1.05rem' : '1.1rem',
+                  padding: isMobile ? '12px 24px' : '14px 28px',
                   background: `${pillar.color}10`,
                   borderRadius: '50px',
                   border: `2px solid ${pillar.color}30`
@@ -721,20 +579,7 @@ const Projects = () => {
                   <span>{pillar.projects}</span>
                   <span style={{ fontSize: '0.9rem', opacity: 0.8 }}>Active Projects</span>
                 </div>
-                
-                {/* Hover Effect Line */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '0',
-                  left: '0',
-                  right: '0',
-                  height: '4px',
-                  background: pillar.gradient,
-                  transform: 'scaleX(0)',
-                  transition: 'transform 0.4s ease',
-                  transformOrigin: 'left'
-                }}></div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -743,23 +588,9 @@ const Projects = () => {
       {/* Projects Grid */}
       <section style={{ ...styles.section, background: 'white' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <div style={{ textAlign: 'center', marginBottom: isMobile ? '40px' : '60px' }}>
             <h2 style={styles.sectionTitle}>
-              <span style={{
-                position: 'relative',
-                display: 'inline-block'
-              }}>
-                Featured Projects
-                <span style={{
-                  position: 'absolute',
-                  bottom: '-10px',
-                  left: '0',
-                  right: '0',
-                  height: '4px',
-                  background: 'linear-gradient(90deg, #FF6B6B, #FF8E53)',
-                  borderRadius: '2px'
-                }}></span>
-              </span>
+              Featured Projects
             </h2>
             <p style={styles.sectionSubtitle}>
               Explore our diverse portfolio of initiatives driving innovation, 
@@ -769,7 +600,7 @@ const Projects = () => {
             {/* Modern Filter Tabs */}
             <div style={styles.filterContainer}>
               {categories.map((category) => (
-                <button
+                <motion.button
                   key={category}
                   onClick={() => setActiveFilter(category)}
                   style={{
@@ -782,88 +613,52 @@ const Projects = () => {
                       ? 'transparent' 
                       : 'rgba(102, 126, 234, 0.2)',
                     boxShadow: activeFilter === category 
-                      ? '0 20px 40px rgba(102, 126, 234, 0.3)' 
-                      : '0 10px 30px rgba(0,0,0,0.05)',
-                    transform: activeFilter === category ? 'scale(1.05)' : 'scale(1)'
+                      ? '0 15px 35px rgba(102, 126, 234, 0.25)' 
+                      : '0 8px 25px rgba(0,0,0,0.05)'
                   }}
-                  onMouseEnter={(e) => {
-                    if (activeFilter !== category) {
-                      e.currentTarget.style.transform = 'translateY(-5px) scale(1.05)';
-                      e.currentTarget.style.boxShadow = '0 15px 35px rgba(102, 126, 234, 0.2)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (activeFilter !== category) {
-                      e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                      e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.05)';
-                    }
-                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {category}
-                </button>
+                </motion.button>
               ))}
             </div>
           </div>
           
           <div style={styles.projectsGrid}>
             {filteredProjects.map((project) => (
-              <div 
+              <motion.div
                 key={project.id}
                 style={styles.projectCard}
-                onMouseEnter={() => setHoveredCard(project.id)}
-                onMouseLeave={() => setHoveredCard(null)}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                whileHover={{ 
+                  y: isMobile ? -5 : -15,
+                  boxShadow: '0 30px 70px rgba(0,0,0,0.15)'
+                }}
               >
                 {/* Project Header */}
                 <div style={{ 
                   ...styles.projectHeader, 
-                  background: project.color,
-                  transform: hoveredCard === project.id ? 'translateY(-10px)' : 'translateY(0)'
+                  background: project.color
                 }}>
-                  {/* Animated Background */}
-                  <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: `linear-gradient(45deg, ${project.gradient[0]}, ${project.gradient[1]})`,
-                    opacity: hoveredCard === project.id ? 1 : 0.9,
-                    transition: 'opacity 0.4s ease'
-                  }}></div>
-                  
-                  {/* Animated Gradient Overlay */}
-                  <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: 'linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent)',
-                    transform: hoveredCard === project.id ? 'translateX(100%)' : 'translateX(-100%)',
-                    transition: 'transform 0.6s ease'
-                  }}></div>
-                  
                   <span style={styles.statusTag}>
                     {project.status}
                   </span>
                   
-                  <div style={{ 
-                    position: 'relative', 
-                    zIndex: 2,
-                    width: '100%'
-                  }}>
+                  <div style={{ position: 'relative', zIndex: 2, width: '100%' }}>
                     <span style={styles.categoryTag}>
-                      <span style={{ fontSize: '1.4rem' }}>{project.icon}</span>
+                      <span style={{ fontSize: '1.2rem' }}>{project.icon}</span>
                       {project.category}
                     </span>
                     
                     <h3 style={{ 
                       color: 'white', 
-                      fontSize: '1.9rem',
-                      fontWeight: '800',
-                      marginTop: '25px',
-                      lineHeight: '1.3',
-                      textShadow: '0 2px 10px rgba(0,0,0,0.2)'
+                      fontSize: isMobile ? '1.5rem' : '1.7rem',
+                      fontWeight: '700',
+                      marginTop: isMobile ? '16px' : '20px',
+                      lineHeight: '1.3'
                     }}>
                       {project.title}
                     </h3>
@@ -874,33 +669,32 @@ const Projects = () => {
                 <div style={styles.projectContent}>
                   <p style={{ 
                     color: '#555', 
-                    lineHeight: '1.7', 
-                    marginBottom: '35px', 
+                    lineHeight: '1.6', 
+                    marginBottom: isMobile ? '24px' : '32px', 
                     flex: '1',
-                    fontSize: '1.1rem'
+                    fontSize: isMobile ? '0.95rem' : '1.05rem'
                   }}>
                     {project.description}
                   </p>
                   
                   {/* Progress Section */}
-                  <div style={{ marginBottom: '35px' }}>
+                  <div style={{ marginBottom: isMobile ? '24px' : '32px' }}>
                     <div style={{ 
                       display: 'flex', 
                       justifyContent: 'space-between', 
-                      marginBottom: '15px',
+                      marginBottom: '12px',
                       alignItems: 'center'
                     }}>
                       <span style={{ 
-                        fontSize: '1rem', 
+                        fontSize: '0.95rem', 
                         color: colors.dark, 
-                        fontWeight: '700',
-                        letterSpacing: '0.5px'
+                        fontWeight: '600'
                       }}>
                         PROJECT PROGRESS
                       </span>
                       <span style={{ 
-                        fontSize: '1.3rem', 
-                        fontWeight: '800',
+                        fontSize: '1.1rem', 
+                        fontWeight: '700',
                         background: project.color,
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent'
@@ -913,52 +707,40 @@ const Projects = () => {
                         ...styles.progressFill, 
                         width: `${project.progress}%`,
                         background: project.color
-                      }}>
-                        <div style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
-                          transform: 'translateX(-100%)',
-                          animation: hoveredCard === project.id ? 'shimmer 1.5s infinite' : 'none'
-                        }}></div>
-                      </div>
+                      }}></div>
                     </div>
                   </div>
                   
                   {/* Impact Stats */}
                   <div style={{ 
                     background: 'rgba(248, 250, 252, 0.8)',
-                    padding: '25px',
-                    borderRadius: '20px',
+                    padding: isMobile ? '20px' : '24px',
+                    borderRadius: isMobile ? '16px' : '20px',
                     border: '2px solid rgba(102, 126, 234, 0.1)',
-                    marginBottom: '30px'
+                    marginBottom: isMobile ? '24px' : '28px'
                   }}>
                     <div style={{ 
                       display: 'grid', 
                       gridTemplateColumns: 'repeat(2, 1fr)',
-                      gap: '20px'
+                      gap: '16px'
                     }}>
                       {Object.entries(project.stats).map(([key, value], index) => (
                         <div key={index} style={{ textAlign: 'center' }}>
                           <div style={{ 
-                            fontSize: '2rem', 
-                            fontWeight: '800',
+                            fontSize: isMobile ? '1.5rem' : '1.7rem', 
+                            fontWeight: '700',
                             background: project.color,
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
-                            marginBottom: '5px'
+                            marginBottom: '4px'
                           }}>
                             {value}
                           </div>
                           <div style={{ 
-                            fontSize: '0.85rem', 
+                            fontSize: isMobile ? '0.8rem' : '0.85rem', 
                             color: '#666',
                             fontWeight: '600',
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.5px'
+                            textTransform: 'uppercase'
                           }}>
                             {key.replace(/([A-Z])/g, ' $1').trim()}
                           </div>
@@ -968,41 +750,35 @@ const Projects = () => {
                   </div>
                   
                   {/* Action Button */}
-                  <button style={{
-                    padding: '18px',
-                    background: 'white',
-                    color: colors.primary,
-                    border: `2px solid ${colors.primary}`,
-                    borderRadius: '15px',
-                    fontWeight: '700',
-                    fontSize: '1rem',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '12px',
-                    letterSpacing: '0.5px'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.background = colors.primary;
-                    e.target.style.color = 'white';
-                    e.target.style.transform = 'translateY(-3px)';
-                    e.target.style.boxShadow = '0 15px 30px rgba(102, 126, 234, 0.3)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.background = 'white';
-                    e.target.style.color = colors.primary;
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = 'none';
-                  }}>
-                    <span>Explore Project Details</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <motion.button
+                    style={{
+                      padding: isMobile ? '16px' : '18px',
+                      background: 'white',
+                      color: colors.primary,
+                      border: `2px solid ${colors.primary}`,
+                      borderRadius: '12px',
+                      fontWeight: '600',
+                      fontSize: isMobile ? '0.95rem' : '1rem',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '10px',
+                      transition: 'all 0.3s ease'
+                    }}
+                    whileHover={{ 
+                      background: colors.primary,
+                      color: 'white'
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span>Explore Project</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
-                  </button>
+                  </motion.button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -1010,52 +786,28 @@ const Projects = () => {
 
       {/* Impact Statistics */}
       <section style={styles.impactSection}>
-        {/* Animated Background Elements */}
-        <div style={{
-          position: 'absolute',
-          top: '10%',
-          right: '10%',
-          width: '300px',
-          height: '300px',
-          border: '1px solid rgba(255, 255, 255, 0.05)',
-          borderRadius: '50%',
-          animation: 'float 30s infinite ease-in-out'
-        }}></div>
-        
-        <div style={{
-          position: 'absolute',
-          bottom: '20%',
-          left: '5%',
-          width: '200px',
-          height: '200px',
-          border: '1px solid rgba(255, 255, 255, 0.03)',
-          borderRadius: '50%',
-          animation: 'float 25s infinite ease-in-out reverse'
-        }}></div>
-        
         <div className="container">
           <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
             <h2 style={{ 
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
+              fontSize: isMobile ? '2rem' : 'clamp(2rem, 4vw, 3.5rem)', 
               textAlign: 'center',
-              marginBottom: '30px',
-              fontWeight: '800',
+              marginBottom: '24px',
+              fontWeight: '700',
               background: 'linear-gradient(45deg, #FFFFFF, #667EEA, #FF6B6B)',
               WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundSize: '200% auto',
-              animation: 'gradientShift 3s ease infinite'
+              WebkitTextFillColor: 'transparent'
             }}>
               Our Impact Journey
             </h2>
             
             <p style={{ 
-              fontSize: '1.3rem', 
+              fontSize: isMobile ? '1rem' : '1.2rem', 
               textAlign: 'center', 
               maxWidth: '800px', 
-              margin: '0 auto 80px', 
+              margin: '0 auto 60px', 
               opacity: 0.9,
-              lineHeight: '1.7'
+              lineHeight: '1.6',
+              padding: isMobile ? '0 16px' : '0'
             }}>
               Transforming lives and communities through dedicated efforts and 
               sustainable partnerships since 2022
@@ -1066,25 +818,25 @@ const Projects = () => {
                 { 
                   value: '1000', 
                   suffix: '+', 
-                  label: 'Youth Directly Impacted', 
+                  label: 'Youth Impacted', 
                   icon: '👥',
                   color: '#4ECDC4',
-                  description: 'Through comprehensive training and empowerment programs'
+                  description: 'Through comprehensive training and empowerment'
                 },
                 { 
                   value: '25', 
                   suffix: '+', 
-                  label: 'Community Partnerships', 
+                  label: 'Partnerships', 
                   icon: '🤝',
                   color: '#FFD166',
-                  description: 'Collaborating with local and international organizations'
+                  description: 'Collaborating with organizations'
                 },
                 { 
                   value: '12', 
-                  label: 'Counties Reached', 
+                  label: 'Counties', 
                   icon: '📍',
                   color: '#FF6B6B',
-                  description: 'Expanding our footprint across multiple regions'
+                  description: 'Expanding across regions'
                 },
                 { 
                   value: '95', 
@@ -1092,27 +844,21 @@ const Projects = () => {
                   label: 'Success Rate', 
                   icon: '📈',
                   color: '#667EEA',
-                  description: 'Projects meeting or exceeding objectives'
+                  description: 'Projects meeting objectives'
                 }
               ].map((stat, index) => (
-                <div 
+                <motion.div
                   key={index}
                   style={styles.impactStat}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-15px)';
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                  }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -10 }}
                 >
                   <div style={{ 
-                    fontSize: '4.5rem',
-                    marginBottom: '25px',
-                    fontWeight: '900',
+                    fontSize: isMobile ? '3rem' : '4rem',
+                    marginBottom: isMobile ? '16px' : '20px',
+                    fontWeight: '800',
                     background: `linear-gradient(45deg, ${stat.color}, ${stat.color}dd)`,
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
@@ -1122,23 +868,22 @@ const Projects = () => {
                   </div>
                   
                   <div style={{ 
-                    fontSize: '1.8rem',
-                    marginBottom: '15px',
-                    fontWeight: '700',
+                    fontSize: isMobile ? '1.3rem' : '1.5rem',
+                    marginBottom: isMobile ? '12px' : '16px',
+                    fontWeight: '600',
                     color: 'white'
                   }}>
                     {stat.icon} {stat.label}
                   </div>
                   
                   <p style={{ 
-                    fontSize: '1rem', 
+                    fontSize: isMobile ? '0.9rem' : '1rem', 
                     opacity: 0.8, 
-                    lineHeight: '1.6',
-                    marginTop: '15px'
+                    lineHeight: '1.6'
                   }}>
                     {stat.description}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -1146,7 +891,7 @@ const Projects = () => {
       </section>
 
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
         .projects-page {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
@@ -1158,25 +903,16 @@ const Projects = () => {
         .container {
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 16px;
           position: relative;
-          zIndex: 2;
+          z-index: 2;
         }
         
         /* Modern Animations */
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-        
         @keyframes fadeInUp {
           from {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(30px);
           }
           to {
             opacity: 1;
@@ -1189,19 +925,10 @@ const Projects = () => {
             transform: translateY(0) rotate(0deg);
           }
           33% {
-            transform: translateY(-30px) rotate(10deg);
+            transform: translateY(-20px) rotate(3deg);
           }
           66% {
-            transform: translateY(30px) rotate(-10deg);
-          }
-        }
-        
-        @keyframes bounce {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-20px);
+            transform: translateY(20px) rotate(-3deg);
           }
         }
         
@@ -1214,66 +941,20 @@ const Projects = () => {
           }
         }
         
-        @keyframes scrollDown {
-          0% {
-            transform: translateX(-50%) translateY(0);
-            opacity: 0;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateX(-50%) translateY(20px);
-            opacity: 0;
-          }
-        }
-        
-        @keyframes particleFloat {
-          0% {
-            transform: translateY(0) translateX(0);
-          }
-          25% {
-            transform: translateY(-100px) translateX(100px);
-          }
-          50% {
-            transform: translateY(-200px) translateX(-100px);
-          }
-          75% {
-            transform: translateY(-300px) translateX(100px);
-          }
-          100% {
-            transform: translateY(-400px) translateX(0);
-          }
-        }
-        
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-        
         /* Custom scrollbar */
         ::-webkit-scrollbar {
-          width: 10px;
-          height: 10px;
+          width: 8px;
+          height: 8px;
         }
         
         ::-webkit-scrollbar-track {
           background: rgba(248, 250, 252, 0.8);
-          backdrop-filter: blur(10px);
+          border-radius: 4px;
         }
         
         ::-webkit-scrollbar-thumb {
           background: linear-gradient(45deg, #667EEA, #764BA2);
-          border-radius: 5px;
-          border: 2px solid rgba(255, 255, 255, 0.8);
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(45deg, #5a6fd8, #6a3f9e);
+          border-radius: 4px;
         }
         
         /* Selection styles */
@@ -1282,154 +963,51 @@ const Projects = () => {
           color: #1A1A2E;
         }
         
-        /* Smooth transitions */
-        * {
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Responsive Design */
+        @media (min-width: 640px) {
+          .projects-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          
+          .pillars-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          
+          .impact-stats {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
         }
         
-        /* Responsive Design */
-        @media (max-width: 1200px) {
+        @media (min-width: 768px) {
+          .container {
+            padding: 0 24px;
+          }
+          
           .projects-grid {
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)) !important;
-            gap: 40px !important;
-          }
-          
-          .hero-title {
-            font-size: 4rem !important;
-          }
-        }
-        
-        @media (max-width: 992px) {
-          .projects-grid {
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
-            gap: 30px !important;
           }
           
           .pillars-grid {
             grid-template-columns: repeat(2, 1fr) !important;
-            gap: 30px !important;
           }
           
           .impact-stats {
             grid-template-columns: repeat(2, 1fr) !important;
-            gap: 40px !important;
-          }
-          
-          .hero-title {
-            font-size: 3.5rem !important;
           }
         }
         
-        @media (max-width: 768px) {
-          .projects-hero {
-            padding: 150px 0 80px !important;
-            min-height: 90vh !important;
-          }
-          
-          .hero-title {
-            font-size: 3rem !important;
-          }
-          
-          .hero-subtitle {
-            font-size: 1.2rem !important;
-          }
-          
-          .projects-grid {
-            grid-template-columns: 1fr !important;
+        @media (min-width: 1024px) {
+          .container {
+            padding: 0 32px;
           }
           
           .pillars-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: repeat(4, 1fr) !important;
           }
           
           .impact-stats {
-            grid-template-columns: 1fr !important;
-            gap: 30px !important;
+            grid-template-columns: repeat(4, 1fr) !important;
           }
-          
-          .filter-container {
-            padding: 20px !important;
-            border-radius: 25px !important;
-          }
-          
-          .filter-btn {
-            padding: 14px 28px !important;
-            font-size: 0.9rem !important;
-          }
-          
-          .section {
-            padding: 80px 0 !important;
-          }
-          
-          .section-title {
-            font-size: 2.5rem !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          .hero-title {
-            font-size: 2.5rem !important;
-          }
-          
-          .hero-subtitle {
-            font-size: 1.1rem !important;
-          }
-          
-          .section-title {
-            font-size: 2rem !important;
-          }
-          
-          .project-card, .pillar-card {
-            border-radius: 20px !important;
-          }
-          
-          .project-content {
-            padding: 30px 20px !important;
-          }
-          
-          .filter-container {
-            padding: 15px !important;
-          }
-        }
-        
-        /* Loading animations */
-        .project-card {
-          animation: fadeInUp 0.8s ease-out;
-          animation-fill-mode: both;
-        }
-        
-        .pillar-card {
-          animation: fadeInUp 0.8s ease-out;
-          animation-fill-mode: both;
-        }
-        
-        /* Enhanced hover effects */
-        .pillar-card:hover {
-          transform: translateY(-20px) scale(1.02) !important;
-          box-shadow: 0 40px 80px rgba(102, 126, 234, 0.15) !important;
-        }
-        
-        .pillar-card:hover div:first-child {
-          transform: rotate(0deg) !important;
-        }
-        
-        .pillar-card:hover > div:last-child {
-          transform: scaleX(1) !important;
-        }
-        
-        .project-card:hover {
-          transform: translateY(-25px) scale(1.03) !important;
-          box-shadow: 0 50px 100px rgba(102, 126, 234, 0.2) !important;
-        }
-        
-        .filter-btn:hover {
-          transform: translateY(-5px) scale(1.08) !important;
-          box-shadow: 0 25px 50px rgba(102, 126, 234, 0.25) !important;
-        }
-        
-        /* Performance optimization */
-        .will-change {
-          will-change: transform, opacity;
         }
         
         /* Print styles */
@@ -1438,7 +1016,7 @@ const Projects = () => {
             background: #1A1A2E !important;
             color: white !important;
             min-height: auto !important;
-            padding: 50px 0 !important;
+            padding: 40px 0 !important;
           }
           
           .project-card {
@@ -1447,7 +1025,6 @@ const Projects = () => {
             border: 1px solid #ddd !important;
           }
           
-          .filter-container,
           button {
             display: none !important;
           }

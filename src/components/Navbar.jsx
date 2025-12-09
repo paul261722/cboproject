@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   // Profile image path - updated with .jpg extension
-  const profileImagePath = '/static/profile.jpg';
+  const profileImagePath = '/Static/profile.jpg';
 
   const styles = {
     navbar: {

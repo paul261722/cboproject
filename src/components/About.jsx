@@ -7,10 +7,10 @@ const About = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // ✅ CORRECT: Using /static/ folder for ALL images
-  const imagePaths = Array.from({length: 6}, (_, i) => `/static/image${i + 1}.jpg`);
+  const imagePaths = Array.from({length: 6}, (_, i) => `/Static/image${i + 1}.jpg`);
   
   // ✅ CORRECT: Fixed typo and added proper paths
-  const additionalImages = ['/static/image19.jpg', '/static/image20.jpg'];
+  const additionalImages = ['/Static/image19.jpg', '/Static/image20.jpg'];
 
   useEffect(() => {
     setIsVisible(true);

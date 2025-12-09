@@ -1,19 +1,23 @@
- import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeValue, setActiveValue] = useState(null);
-  const [animatedStats, setAnimatedStats] = useState({});
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
-  // ✅ FIXED: Added leading slashes to image paths
-  const imagePaths = Array.from({length: 6}, (_, i) => `/Static/image${i + 1}.jpg`);
-  
-  // ✅ FIXED: Added leading slashes to additional images
-  const additionalImages = ['/Static/image19.jpg', '/Static/image20.jpg'];
-
+  // Check screen size
   useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 768);
+      setIsTablet(width >= 768 && width < 1024);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
     setIsVisible(true);
     const observer = new IntersectionObserver(
       (entries) => {
@@ -36,84 +40,99 @@ const About = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    
-    // Auto-rotate gallery images
-    const galleryInterval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % 3); // Rotate first 3 images
-    }, 5000);
 
     return () => {
       observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
-      clearInterval(galleryInterval);
+      window.removeEventListener('resize', checkScreenSize);
     };
   }, []);
 
+  // Responsive styles based on screen size
+  const getResponsiveValue = (mobileValue, tabletValue, desktopValue) => {
+    if (isMobile) return mobileValue;
+    if (isTablet) return tabletValue;
+    return desktopValue;
+  };
+
   const styles = {
+    // Hero Section - Responsive
     aboutHero: {
-      // ✅ FIXED: Added leading slash to background URL
       background: 'linear-gradient(135deg, rgba(44, 62, 80, 0.85) 0%, rgba(26, 37, 47, 0.85) 100%), url("/static/image1.jpg")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      backgroundAttachment: 'fixed',
+      backgroundAttachment: isMobile ? 'scroll' : 'fixed',
       color: 'white',
       textAlign: 'center',
-      padding: '140px 0 100px',
+      padding: getResponsiveValue('100px 0 60px', '120px 0 80px', '140px 0 100px'),
       position: 'relative',
       overflow: 'hidden',
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      minHeight: isMobile ? 'auto' : '100vh'
     },
+    
     heroTitle: {
-      fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-      marginBottom: '25px',
+      fontSize: getResponsiveValue('2rem', '2.5rem', 'clamp(2.5rem, 5vw, 4rem)'),
+      marginBottom: getResponsiveValue('20px', '25px', '25px'),
       fontWeight: '800',
       background: 'linear-gradient(135deg, #ffffff 0%, #3498db 100%)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
+      lineHeight: '1.2'
     },
+    
     heroSubtitle: {
-      fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
-      maxWidth: '800px',
-      margin: '0 auto 40px',
+      fontSize: getResponsiveValue('1rem', '1.2rem', 'clamp(1.1rem, 2vw, 1.5rem)'),
+      maxWidth: getResponsiveValue('100%', '90%', '800px'),
+      margin: `0 auto ${getResponsiveValue('30px', '35px', '40px')}`,
       opacity: 0.9,
-      lineHeight: '1.6',
-      fontWeight: '300'
+      lineHeight: getResponsiveValue('1.5', '1.6', '1.6'),
+      fontWeight: '300',
+      padding: getResponsiveValue('0 10px', '0', '0')
     },
+    
     section: {
-      padding: '80px 0'
+      padding: getResponsiveValue('60px 0', '80px 0', '80px 0')
     },
+    
+    // Story Content - Responsive Grid
     storyContent: {
       display: 'grid',
-      gridTemplateColumns: '1fr',
-      gap: '40px',
+      gridTemplateColumns: getResponsiveValue('1fr', '1fr', '1fr 1fr'),
+      gap: getResponsiveValue('30px', '40px', '60px'),
       alignItems: 'center'
     },
+    
     storyImage: {
       width: '100%',
-      height: '300px',
-      borderRadius: '20px',
+      height: getResponsiveValue('200px', '250px', '300px'),
+      borderRadius: getResponsiveValue('15px', '18px', '20px'),
       objectFit: 'cover',
-      boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+      boxShadow: '0 15px 40px rgba(0,0,0,0.1)',
       transition: 'transform 0.5s ease',
-      marginBottom: '20px'
+      marginBottom: getResponsiveValue('15px', '18px', '20px')
     },
+    
     timeline: {
       position: 'relative',
-      padding: '30px 0'
+      padding: getResponsiveValue('20px 0 20px 30px', '30px 0 30px 40px', '30px 0')
     },
+    
     timelineItem: {
       position: 'relative',
-      padding: '25px',
-      margin: '20px 0',
+      padding: getResponsiveValue('20px', '22px', '25px'),
+      margin: getResponsiveValue('15px 0', '18px 0', '20px 0'),
       background: 'rgba(255,255,255,0.05)',
       backdropFilter: 'blur(10px)',
-      borderRadius: '15px',
+      borderRadius: getResponsiveValue('12px', '14px', '15px'),
       borderLeft: '4px solid #3498db'
     },
+    
+    // Cards - Responsive
     vmCard: {
-      padding: '50px 30px',
-      borderRadius: '20px',
+      padding: getResponsiveValue('30px 20px', '40px 25px', '50px 30px'),
+      borderRadius: getResponsiveValue('15px', '18px', '20px'),
       textAlign: 'center',
       position: 'relative',
       overflow: 'hidden',
@@ -124,74 +143,64 @@ const About = () => {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      minHeight: '350px',
-      marginBottom: '20px'
+      minHeight: getResponsiveValue('250px', '300px', '350px'),
+      marginBottom: getResponsiveValue('15px', '18px', '20px')
     },
-    philosophyCard: {
-      padding: '40px 25px',
-      borderRadius: '20px',
-      textAlign: 'center',
-      background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-      border: '1px solid #e8eef5',
-      position: 'relative',
-      overflow: 'hidden',
-      minHeight: '300px',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginBottom: '20px'
-    },
+    
     valueCard: {
       background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-      padding: '35px 20px',
-      borderRadius: '20px',
+      padding: getResponsiveValue('25px 15px', '30px 20px', '35px 20px'),
+      borderRadius: getResponsiveValue('15px', '18px', '20px'),
       textAlign: 'center',
-      boxShadow: '0 15px 40px rgba(52, 152, 219, 0.08)',
+      boxShadow: '0 10px 30px rgba(52, 152, 219, 0.08)',
       transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
       border: '2px solid transparent',
       position: 'relative',
-      minHeight: '250px',
+      minHeight: getResponsiveValue('200px', '220px', '250px'),
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: '15px'
+      marginBottom: getResponsiveValue('12px', '15px', '15px')
     },
+    
     valueIcon: {
-      width: '60px',
-      height: '60px',
+      width: getResponsiveValue('50px', '55px', '60px'),
+      height: getResponsiveValue('50px', '55px', '60px'),
       background: 'linear-gradient(135deg, #3498db, #2ecc71)',
       color: 'white',
       borderRadius: '50%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontSize: '1.5rem',
-      margin: '0 auto 20px',
+      fontSize: getResponsiveValue('1.2rem', '1.4rem', '1.5rem'),
+      margin: '0 auto 15px',
       transition: 'all 0.3s ease',
-      boxShadow: '0 8px 20px rgba(52, 152, 219, 0.3)',
+      boxShadow: '0 6px 15px rgba(52, 152, 219, 0.3)',
       overflow: 'hidden'
     },
+    
+    // Stats Container - Responsive Grid
     statsContainer: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(2, 1fr)',
-      gap: '20px',
-      margin: '50px auto 0',
-      padding: '30px',
+      gridTemplateColumns: getResponsiveValue('repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(4, 1fr)'),
+      gap: getResponsiveValue('15px', '20px', '30px'),
+      margin: getResponsiveValue('30px auto 0', '40px auto 0', '50px auto 0'),
+      padding: getResponsiveValue('20px', '30px', '50px'),
       background: 'rgba(255,255,255,0.1)',
-      borderRadius: '20px',
+      borderRadius: getResponsiveValue('15px', '18px', '20px'),
       backdropFilter: 'blur(20px)',
       border: '1px solid rgba(255,255,255,0.2)'
     },
+    
     statItem: {
       textAlign: 'center',
-      padding: '15px'
+      padding: getResponsiveValue('10px', '15px', '15px')
     },
+    
     scrollProgress: {
       position: 'fixed',
-      top: '70px',
+      top: getResponsiveValue('60px', '65px', '70px'),
       left: 0,
       height: '3px',
       background: 'linear-gradient(90deg, #3498db, #2ecc71)',
@@ -199,56 +208,64 @@ const About = () => {
       zIndex: 9999,
       transition: 'width 0.1s ease'
     },
+    
+    // Gallery Container - Responsive Grid
     galleryContainer: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-      gap: '20px',
-      marginTop: '40px'
+      gridTemplateColumns: getResponsiveValue(
+        'repeat(2, 1fr)', 
+        'repeat(3, 1fr)', 
+        'repeat(auto-fill, minmax(250px, 1fr))'
+      ),
+      gap: getResponsiveValue('12px', '16px', '20px'),
+      marginTop: getResponsiveValue('30px', '35px', '40px')
     },
+    
     galleryImage: {
       width: '100%',
-      height: '200px',
+      height: getResponsiveValue('150px', '180px', '200px'),
       objectFit: 'cover',
-      borderRadius: '15px',
+      borderRadius: getResponsiveValue('12px', '14px', '15px'),
       transition: 'all 0.3s ease',
       cursor: 'pointer'
     },
+    
     programCard: {
       background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-      padding: '30px',
-      borderRadius: '20px',
+      padding: getResponsiveValue('25px 20px', '30px 25px', '30px'),
+      borderRadius: getResponsiveValue('15px', '18px', '20px'),
       textAlign: 'center',
-      boxShadow: '0 15px 40px rgba(52, 152, 219, 0.08)',
+      boxShadow: '0 10px 30px rgba(52, 152, 219, 0.08)',
       transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
       border: '2px solid transparent',
       position: 'relative',
-      minHeight: '280px',
+      minHeight: getResponsiveValue('220px', '250px', '280px'),
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: '15px',
+      marginBottom: getResponsiveValue('12px', '15px', '15px'),
       overflow: 'hidden'
     },
+    
     impactCard: {
-      padding: '40px 30px',
-      borderRadius: '20px',
+      padding: getResponsiveValue('30px 20px', '35px 25px', '40px 30px'),
+      borderRadius: getResponsiveValue('15px', '18px', '20px'),
       textAlign: 'center',
       background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
       transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-      boxShadow: '0 15px 40px rgba(0,0,0,0.08)',
+      boxShadow: '0 10px 30px rgba(0,0,0,0.08)',
       border: '2px solid transparent',
       position: 'relative',
-      minHeight: '300px',
+      minHeight: getResponsiveValue('220px', '260px', '300px'),
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: '20px'
+      marginBottom: getResponsiveValue('15px', '18px', '20px')
     }
   };
 
-  // ✅ FIXED: Added leading slashes to all icon paths
   const coreValues = [
     { title: 'Transparency', description: 'Openness in all our operations and decision-making processes', icon: '/Static/image1.jpg', color: '#3498db' },
     { title: 'Accountability', description: 'Responsible stewardship of resources and commitments', icon: '/Static/image2.jpg', color: '#2ecc71' },
@@ -265,7 +282,6 @@ const About = () => {
     { year: '2025', title: 'National Recognition', description: 'Awarded National Youth Empowerment Excellence Award by Ministry of Youth' }
   ];
 
-  // ✅ FIXED: Added leading slashes to all program image paths
   const programs = [
     { title: 'Digital Literacy Program', description: 'Training youth in essential digital skills for the 21st century', image: '/Static/image2.jpg' },
     { title: 'Entrepreneurship Bootcamp', description: 'Developing young entrepreneurs through mentorship and seed funding', image: '/Static/image3.jpg' },
@@ -282,9 +298,16 @@ const About = () => {
 
   // Gallery includes first 6 images + images 19 and 20
   const galleryImages = [
-    ...imagePaths.slice(0, 6), // First 6 images
-    ...additionalImages // Images 19 and 20
+    ...Array.from({length: 6}, (_, i) => `/Static/image${i + 1}.jpg`),
+    '/Static/image19.jpg', '/Static/image20.jpg'
   ];
+
+  // Responsive grid columns calculator
+  const getGridColumns = (items) => {
+    if (isMobile) return 2;
+    if (isTablet) return 3;
+    return 4;
+  };
 
   return (
     <div className="about-page">
@@ -294,11 +317,11 @@ const About = () => {
         <div className="container">
           <div style={{ position: 'relative', zIndex: 2 }}>
             <div style={{
-              fontSize: '0.9rem',
+              fontSize: getResponsiveValue('0.8rem', '0.85rem', '0.9rem'),
               fontWeight: '600',
               color: '#3498db',
               marginBottom: '15px',
-              letterSpacing: '2px',
+              letterSpacing: getResponsiveValue('1px', '1.5px', '2px'),
               textTransform: 'uppercase'
             }}>
               OUR STORY • OUR MISSION • OUR IMPACT
@@ -326,9 +349,9 @@ const About = () => {
               ].map((stat, index) => (
                 <div key={index} style={styles.statItem}>
                   <div style={{ 
-                    fontSize: '2.2rem', 
+                    fontSize: getResponsiveValue('1.8rem', '2rem', '2.2rem'), 
                     fontWeight: '800', 
-                    marginBottom: '10px',
+                    marginBottom: getResponsiveValue('8px', '10px', '10px'),
                     background: 'linear-gradient(135deg, #3498db, #2ecc71)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent'
@@ -336,7 +359,7 @@ const About = () => {
                     {stat.value}
                   </div>
                   <div style={{ 
-                    fontSize: '0.9rem', 
+                    fontSize: getResponsiveValue('0.85rem', '0.9rem', '0.9rem'), 
                     opacity: 0.9,
                     letterSpacing: '1px'
                   }}>
@@ -351,19 +374,19 @@ const About = () => {
 
       <section style={{ ...styles.section, background: '#ffffff' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <div style={{ textAlign: 'center', marginBottom: getResponsiveValue('40px', '45px', '50px') }}>
             <div style={{
-              fontSize: '0.9rem',
+              fontSize: getResponsiveValue('0.8rem', '0.85rem', '0.9rem'),
               fontWeight: '600',
               color: '#3498db',
               marginBottom: '15px',
-              letterSpacing: '2px',
+              letterSpacing: getResponsiveValue('1px', '1.5px', '2px'),
               textTransform: 'uppercase'
             }}>
               OUR JOURNEY
             </div>
             <h2 style={{ 
-              fontSize: '2.2rem', 
+              fontSize: getResponsiveValue('1.8rem', '2rem', '2.2rem'), 
               color: '#2c3e50', 
               marginBottom: '25px',
               fontWeight: '800'
@@ -375,25 +398,25 @@ const About = () => {
           <div style={styles.storyContent}>
             <div className="animate-on-scroll">
               <div style={{
-                padding: '30px',
+                padding: getResponsiveValue('25px', '28px', '30px'),
                 background: 'linear-gradient(135deg, #f8fafc, #ffffff)',
-                borderRadius: '20px',
-                boxShadow: '0 20px 60px rgba(52, 152, 219, 0.1)',
+                borderRadius: getResponsiveValue('15px', '18px', '20px'),
+                boxShadow: '0 15px 40px rgba(52, 152, 219, 0.1)',
                 border: '1px solid #e8eef5',
-                marginBottom: '30px'
+                marginBottom: getResponsiveValue('25px', '28px', '30px')
               }}>
                 <h3 style={{ 
-                  fontSize: '1.5rem', 
+                  fontSize: getResponsiveValue('1.3rem', '1.4rem', '1.5rem'), 
                   color: '#2c3e50', 
-                  marginBottom: '20px',
+                  marginBottom: '15px',
                   fontWeight: '700'
                 }}>
                   Our Foundation Story
                 </h3>
                 <p style={{ 
-                  fontSize: '1rem', 
-                  lineHeight: '1.7', 
-                  marginBottom: '20px', 
+                  fontSize: getResponsiveValue('0.95rem', '1rem', '1rem'), 
+                  lineHeight: '1.6', 
+                  marginBottom: '15px', 
                   color: '#555' 
                 }}>
                   Founded in 2022 by a group of passionate young visionaries from Nairobi's informal settlements, 
@@ -401,8 +424,8 @@ const About = () => {
                   poverty, and limited access to quality education in marginalized communities.
                 </p>
                 <p style={{ 
-                  fontSize: '1rem', 
-                  lineHeight: '1.7', 
+                  fontSize: getResponsiveValue('0.95rem', '1rem', '1rem'), 
+                  lineHeight: '1.6', 
                   color: '#555' 
                 }}>
                   We champion a youth-led development model that positions young people as active agents of change 
@@ -411,7 +434,6 @@ const About = () => {
                 </p>
               </div>
               
-              {/* ✅ FIXED: Added leading slash to image path */}
               <img 
                 src="/Static/image2.jpg" 
                 alt="Youth Empowerment Workshop"
@@ -429,10 +451,10 @@ const About = () => {
                 >
                   <div style={{
                     position: 'absolute',
-                    left: '-20px',
-                    top: '25px',
-                    width: '35px',
-                    height: '35px',
+                    left: getResponsiveValue('-25px', '-25px', '-20px'),
+                    top: getResponsiveValue('20px', '22px', '25px'),
+                    width: getResponsiveValue('30px', '32px', '35px'),
+                    height: getResponsiveValue('30px', '32px', '35px'),
                     background: 'linear-gradient(135deg, #3498db, #2ecc71)',
                     borderRadius: '50%',
                     display: 'flex',
@@ -440,14 +462,14 @@ const About = () => {
                     justifyContent: 'center',
                     color: 'white',
                     fontWeight: 'bold',
-                    fontSize: '0.9rem'
+                    fontSize: getResponsiveValue('0.85rem', '0.9rem', '0.9rem')
                   }}>
                     {item.year}
                   </div>
                   <h4 style={{ 
                     color: '#2c3e50', 
-                    marginBottom: '10px', 
-                    fontSize: '1.2rem',
+                    marginBottom: '8px', 
+                    fontSize: getResponsiveValue('1.1rem', '1.15rem', '1.2rem'),
                     fontWeight: '700'
                   }}>
                     {item.title}
@@ -455,7 +477,7 @@ const About = () => {
                   <p style={{ 
                     color: '#666', 
                     lineHeight: '1.5',
-                    fontSize: '0.95rem'
+                    fontSize: getResponsiveValue('0.9rem', '0.95rem', '0.95rem')
                   }}>
                     {item.description}
                   </p>
@@ -474,51 +496,56 @@ const About = () => {
         color: 'white'
       }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <div style={{ textAlign: 'center', marginBottom: getResponsiveValue('40px', '45px', '50px') }}>
             <h2 style={{ 
-              fontSize: '2.2rem', 
+              fontSize: getResponsiveValue('1.8rem', '2rem', '2.2rem'), 
               marginBottom: '25px',
               fontWeight: '800'
             }}>
               Our Core Programs
             </h2>
             <p style={{ 
-              fontSize: '1.1rem', 
+              fontSize: getResponsiveValue('1rem', '1.1rem', '1.1rem'), 
               margin: '0 auto 40px',
               opacity: 0.9,
               lineHeight: '1.6',
               fontWeight: '300',
-              maxWidth: '800px'
+              maxWidth: getResponsiveValue('100%', '90%', '800px'),
+              padding: getResponsiveValue('0 10px', '0', '0')
             }}>
               We implement transformative programs that address critical needs while building sustainable futures
             </p>
           </div>
 
-          <div className="programs-grid">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: getResponsiveValue('1fr', 'repeat(2, 1fr)', 'repeat(4, 1fr)'),
+            gap: getResponsiveValue('20px', '25px', '25px'),
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}>
             {programs.map((program, index) => (
               <div 
                 key={index}
                 style={{
                   ...styles.programCard,
-                  // ✅ FIXED: Added leading slash to image URL
                   background: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("${program.image}")`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
-                  color: 'white',
-                  minHeight: '250px'
+                  color: 'white'
                 }}
                 className="animate-on-scroll"
               >
                 <h3 style={{ 
-                  fontSize: '1.5rem', 
-                  marginBottom: '15px', 
+                  fontSize: getResponsiveValue('1.2rem', '1.3rem', '1.5rem'), 
+                  marginBottom: '12px', 
                   fontWeight: '700'
                 }}>
                   {program.title}
                 </h3>
                 <p style={{ 
-                  fontSize: '0.95rem', 
-                  lineHeight: '1.6', 
+                  fontSize: getResponsiveValue('0.9rem', '0.95rem', '0.95rem'), 
+                  lineHeight: '1.5', 
                   opacity: 0.9
                 }}>
                   {program.description}
@@ -531,19 +558,19 @@ const About = () => {
 
       <section style={{ ...styles.section, background: '#f8fafc' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <div style={{ textAlign: 'center', marginBottom: getResponsiveValue('40px', '45px', '50px') }}>
             <div style={{
-              fontSize: '0.9rem',
+              fontSize: getResponsiveValue('0.8rem', '0.85rem', '0.9rem'),
               fontWeight: '600',
               color: '#3498db',
               marginBottom: '15px',
-              letterSpacing: '2px',
+              letterSpacing: getResponsiveValue('1px', '1.5px', '2px'),
               textTransform: 'uppercase'
             }}>
               OUR FOUNDATION
             </div>
             <h2 style={{ 
-              fontSize: '2.2rem', 
+              fontSize: getResponsiveValue('1.8rem', '2rem', '2.2rem'), 
               color: '#2c3e50',
               marginBottom: '25px',
               fontWeight: '800'
@@ -552,7 +579,13 @@ const About = () => {
             </h2>
           </div>
 
-          <div className="values-grid">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: getResponsiveValue('1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)'),
+            gap: getResponsiveValue('15px', '20px', '25px'),
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}>
             {coreValues.map((value, index) => (
               <div 
                 key={index}
@@ -567,16 +600,13 @@ const About = () => {
                 <div 
                   style={{
                     ...styles.valueIcon,
-                    // ✅ FIXED: Added leading slash to image URL
                     background: `url("${value.icon}") center/cover`,
                   }}
-                >
-                  {/* Image background only */}
-                </div>
+                />
                 <h4 style={{ 
                   color: '#2c3e50', 
-                  marginBottom: '15px', 
-                  fontSize: '1.2rem',
+                  marginBottom: '12px', 
+                  fontSize: getResponsiveValue('1.1rem', '1.15rem', '1.2rem'),
                   fontWeight: '700'
                 }}>
                   {value.title}
@@ -584,7 +614,7 @@ const About = () => {
                 <p style={{ 
                   color: '#666', 
                   lineHeight: '1.5',
-                  fontSize: '0.95rem'
+                  fontSize: getResponsiveValue('0.9rem', '0.95rem', '0.95rem')
                 }}>
                   {value.description}
                 </p>
@@ -599,19 +629,19 @@ const About = () => {
         background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)'
       }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <div style={{ textAlign: 'center', marginBottom: getResponsiveValue('40px', '45px', '50px') }}>
             <div style={{
-              fontSize: '0.9rem',
+              fontSize: getResponsiveValue('0.8rem', '0.85rem', '0.9rem'),
               fontWeight: '600',
               color: '#3498db',
               marginBottom: '15px',
-              letterSpacing: '2px',
+              letterSpacing: getResponsiveValue('1px', '1.5px', '2px'),
               textTransform: 'uppercase'
             }}>
               OUR IMPACT
             </div>
             <h2 style={{ 
-              fontSize: '2.2rem', 
+              fontSize: getResponsiveValue('1.8rem', '2rem', '2.2rem'), 
               color: '#2c3e50',
               marginBottom: '25px',
               fontWeight: '800'
@@ -619,18 +649,25 @@ const About = () => {
               Transforming Lives & Communities
             </h2>
             <p style={{ 
-              fontSize: '1.1rem', 
+              fontSize: getResponsiveValue('1rem', '1.1rem', '1.1rem'), 
               margin: '0 auto 40px',
               opacity: 0.8,
               lineHeight: '1.6',
               fontWeight: '300',
-              maxWidth: '800px'
+              maxWidth: getResponsiveValue('100%', '90%', '800px'),
+              padding: getResponsiveValue('0 10px', '0', '0')
             }}>
               Through dedication and strategic initiatives, we've created lasting impact across Kenya
             </p>
           </div>
 
-          <div className="impact-grid">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: getResponsiveValue('1fr', 'repeat(2, 1fr)', 'repeat(4, 1fr)'),
+            gap: getResponsiveValue('15px', '20px', '25px'),
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}>
             {impactStories.map((impact, index) => (
               <div 
                 key={index}
@@ -639,30 +676,27 @@ const About = () => {
               >
                 <div 
                   style={{
-                    width: '80px',
-                    height: '80px',
-                    // ✅ FIXED: Added leading slash to image URL
+                    width: getResponsiveValue('60px', '70px', '80px'),
+                    height: getResponsiveValue('60px', '70px', '80px'),
                     background: `url("${impact.image}") center/cover`,
                     borderRadius: '50%',
-                    margin: '0 auto 25px',
+                    margin: '0 auto 20px',
                     border: '3px solid #3498db',
-                    boxShadow: '0 10px 20px rgba(52, 152, 219, 0.2)',
+                    boxShadow: '0 8px 20px rgba(52, 152, 219, 0.2)',
                   }}
-                >
-                  {/* Image background only */}
-                </div>
+                />
                 <h3 style={{ 
                   color: '#2c3e50', 
-                  marginBottom: '15px', 
-                  fontSize: '1.5rem',
-                  fontWeight: '800'
+                  marginBottom: '12px', 
+                  fontSize: getResponsiveValue('1.2rem', '1.3rem', '1.5rem'),
+                  fontWeight: '700'
                 }}>
                   {impact.title}
                 </h3>
                 <p style={{ 
                   color: '#666', 
-                  lineHeight: '1.6',
-                  fontSize: '0.95rem'
+                  lineHeight: '1.5',
+                  fontSize: getResponsiveValue('0.9rem', '0.95rem', '0.95rem')
                 }}>
                   {impact.description}
                 </p>
@@ -675,61 +709,47 @@ const About = () => {
       <section style={{ 
         background: 'linear-gradient(135deg, #2c3e50 0%, #1a252f 100%)', 
         color: 'white',
-        padding: '100px 0',
+        padding: getResponsiveValue('60px 0', '80px 0', '100px 0'),
         textAlign: 'center'
       }}>
         <div className="container">
           <h2 style={{ 
-            fontSize: '2.2rem', 
-            marginBottom: '30px',
+            fontSize: getResponsiveValue('1.8rem', '2rem', '2.2rem'), 
+            marginBottom: '25px',
             fontWeight: '800'
           }}>
             Our Impact Gallery
           </h2>
           <p style={{ 
-            fontSize: '1.1rem', 
+            fontSize: getResponsiveValue('1rem', '1.1rem', '1.1rem'), 
             margin: '0 auto 40px',
             opacity: 0.9,
             lineHeight: '1.6',
             fontWeight: '300',
-            maxWidth: '800px'
+            maxWidth: getResponsiveValue('100%', '90%', '800px'),
+            padding: getResponsiveValue('0 10px', '0', '0')
           }}>
             Witness the transformative journey of youth empowerment through our community projects, 
             workshops, and success stories across Kenya. Featuring our latest initiatives captured in images 19 & 20.
           </p>
           
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-            gap: '20px',
-            marginTop: '40px'
-          }}>
+          <div style={styles.galleryContainer}>
             {galleryImages.map((image, index) => (
               <div 
                 key={index}
-                className="gallery-item animate-on-scroll"
+                className="animate-on-scroll"
                 style={{
                   position: 'relative',
                   overflow: 'hidden',
-                  borderRadius: '15px',
+                  borderRadius: getResponsiveValue('12px', '14px', '15px'),
                   transition: 'all 0.3s ease'
                 }}
               >
                 <img 
                   src={image} 
                   alt={`Youth Lead CBO activity ${index + 1}`}
-                  style={{
-                    width: '100%',
-                    height: '200px',
-                    objectFit: 'cover',
-                    borderRadius: '15px',
-                    transition: 'all 0.3s ease',
-                    cursor: 'pointer'
-                  }}
-                  onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
-                  onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                  style={styles.galleryImage}
                 />
-                {/* Special label for images 19 & 20 */}
                 {(index === 6 || index === 7) && (
                   <div style={{
                     position: 'absolute',
@@ -772,25 +792,32 @@ const About = () => {
       }}>
         <div className="container">
           <h2 style={{ 
-            fontSize: '2.2rem', 
-            marginBottom: '30px',
+            fontSize: getResponsiveValue('1.8rem', '2rem', '2.2rem'), 
+            marginBottom: '25px',
             fontWeight: '800'
           }}>
             Join Our Movement
           </h2>
           <p style={{ 
-            fontSize: '1.1rem', 
+            fontSize: getResponsiveValue('1rem', '1.1rem', '1.1rem'), 
             margin: '0 auto 40px',
             opacity: 0.95,
             lineHeight: '1.6',
             fontWeight: '300',
-            maxWidth: '800px'
+            maxWidth: getResponsiveValue('100%', '90%', '800px'),
+            padding: getResponsiveValue('0 10px', '0', '0')
           }}>
             Together, we can create lasting change. Whether you're a youth looking for opportunities, 
             a partner organization, or a donor wanting to make an impact - your journey with us starts here.
           </p>
           
-          <div className="social-proof-grid">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: getResponsiveValue('1fr', 'repeat(2, 1fr)', 'repeat(4, 1fr)'),
+            gap: getResponsiveValue('15px', '20px', '25px'),
+            maxWidth: '1000px',
+            margin: '0 auto'
+          }}>
             {[
               { label: 'Award Winning', icon: '🏆', desc: 'National Youth Empowerment Award 2024' },
               { label: 'Youth Focused', icon: '👥', desc: '100% youth-led and managed' },
@@ -804,7 +831,7 @@ const About = () => {
                   flexDirection: 'column',
                   alignItems: 'center',
                   gap: '10px',
-                  padding: '25px',
+                  padding: getResponsiveValue('20px 15px', '22px 18px', '25px'),
                   background: 'rgba(255,255,255,0.15)',
                   borderRadius: '15px',
                   backdropFilter: 'blur(10px)',
@@ -812,15 +839,15 @@ const About = () => {
                 }}
                 className="animate-on-scroll"
               >
-                <div style={{ fontSize: '2.5rem' }}>{item.icon}</div>
+                <div style={{ fontSize: getResponsiveValue('2rem', '2.2rem', '2.5rem') }}>{item.icon}</div>
                 <div style={{ 
-                  fontSize: '1.1rem', 
+                  fontSize: getResponsiveValue('1rem', '1.05rem', '1.1rem'), 
                   fontWeight: '700'
                 }}>
                   {item.label}
                 </div>
                 <div style={{ 
-                  fontSize: '0.85rem', 
+                  fontSize: getResponsiveValue('0.85rem', '0.9rem', '0.85rem'), 
                   opacity: 0.9
                 }}>
                   {item.desc}
@@ -875,253 +902,80 @@ const About = () => {
           transform: translateY(0);
         }
         
-        /* Grid Layouts */
-        .vision-mission-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 30px;
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        
-        .values-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        
-        .impact-grid {
-          display: grid;
-          grid-templateColumns: repeat(2, 1fr);
-          gap: 20px;
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        
-        .programs-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        
-        .social-proof-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
-          max-width: 1000px;
-          margin: 0 auto;
-        }
-        
         /* Hover Effects */
         .value-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 25px 50px rgba(52, 152, 219, 0.15);
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px rgba(52, 152, 219, 0.15);
           border-color: #3498db !important;
         }
         
         .impact-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.15);
           border-color: #3498db !important;
         }
         
         .program-card:hover {
           transform: translateY(-5px);
-          box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
         
-        .gallery-item:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+          width: 8px;
         }
         
-        /* Mobile Responsive */
-        @media (min-width: 768px) {
-          .about-page {
-            margin-top: 0;
-          }
-          
+        ::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+          background: linear-gradient(135deg, #3498db, #2ecc71);
+          border-radius: 4px;
+        }
+        
+        /* Responsive Design */
+        @media (min-width: 640px) {
           .container {
-            padding: 0 40px;
+            padding: 0 24px;
           }
-          
-          .story-content {
-            grid-template-columns: 1fr 1fr !important;
-            gap: 60px !important;
-          }
-          
-          .vision-mission-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 40px !important;
-          }
-          
-          .values-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
-            gap: 25px !important;
-          }
-          
-          .impact-grid {
-            grid-template-columns: repeat(4, 1fr) !important;
-            gap: 30px !important;
-          }
-          
-          .programs-grid {
-            grid-template-columns: repeat(4, 1fr) !important;
-            gap: 25px !important;
-          }
-          
-          .social-proof-grid {
-            grid-template-columns: repeat(4, 1fr) !important;
-            gap: 30px !important;
-          }
-          
-          .gallery-container {
-            grid-template-columns: repeat(4, 1fr) !important;
-          }
-          
-          .stats-container {
-            grid-template-columns: repeat(4, 1fr) !important;
-            gap: 30px !important;
-            padding: 50px !important;
-          }
-          
-          .hero-title {
-            font-size: clamp(3rem, 5vw, 4.5rem) !important;
-          }
-          
-          .hero-subtitle {
-            font-size: clamp(1.2rem, 2vw, 1.6rem) !important;
-          }
-          
-          .timeline {
-            padding-left: 40px !important;
-          }
-          
-          .timeline-item::before {
-            left: -25px !important;
-          }
-          
-          .section {
-            padding: 100px 0 !important;
+        }
+        
+        @media (min-width: 768px) {
+          .container {
+            padding: 0 32px;
           }
         }
         
         @media (min-width: 1024px) {
           .container {
-            padding: 0 60px;
-          }
-          
-          .values-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
-          }
-          
-          .impact-grid {
-            grid-template-columns: repeat(4, 1fr) !important;
-          }
-          
-          .programs-grid {
-            grid-template-columns: repeat(4, 1fr) !important;
-          }
-          
-          .gallery-container {
-            grid-template-columns: repeat(4, 2fr) !important;
+            padding: 0 40px;
           }
         }
         
         @media (max-width: 480px) {
           .container {
-            padding: 0 15px;
+            padding: 0 16px;
           }
           
-          .stats-container {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 15px !important;
-            padding: 20px !important;
-            margin-top: 30px !important;
-          }
-          
-          .stat-item {
-            padding: 10px !important;
-          }
-          
-          .stat-item div:first-child {
-            font-size: 1.8rem !important;
-          }
-          
-          .hero-title {
-            font-size: 2rem !important;
-            line-height: 1.2 !important;
-          }
-          
-          .hero-subtitle {
-            font-size: 1rem !important;
-            line-height: 1.5 !important;
-          }
-          
-          .values-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .impact-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .programs-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .social-proof-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 15px !important;
-          }
-          
-          .gallery-container {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 15px !important;
-          }
-          
-          .vm-card,
-          .philosophy-card,
-          .value-card,
-          .impact-card,
-          .program-card {
-            min-height: auto !important;
-            padding: 25px 20px !important;
-          }
-          
-          .gallery-image {
-            height: 150px !important;
+          .about-page {
+            margin-top: 60px;
           }
         }
         
-        @media (max-width: 350px) {
-          .values-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .impact-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .programs-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .stats-container {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .social-proof-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .gallery-container {
-            grid-template-columns: 1fr !important;
-          }
+        /* Gallery image hover effect */
+        .gallery-item:hover img {
+          transform: scale(1.1);
+        }
+        
+        .gallery-item {
+          transition: transform 0.3s ease;
+        }
+        
+        /* Selection styles */
+        ::selection {
+          background: rgba(52, 152, 219, 0.3);
+          color: #2c3e50;
         }
         
         /* Ensure images and containers don't overflow */
@@ -1140,48 +994,22 @@ const About = () => {
           scroll-behavior: smooth;
         }
         
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-          width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-          background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-          background: linear-gradient(135deg, #3498db, #2ecc71);
-          border-radius: 4px;
-        }
-        
-        /* Card hover effects */
-        .vm-card:hover,
-        .philosophy-card:hover,
-        .value-card:hover,
-        .impact-card:hover,
-        .program-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 25px 60px rgba(52, 152, 219, 0.15);
-        }
-        
-        /* Timeline adjustments for mobile */
-        @media (max-width: 767px) {
-          .timeline {
-            padding-left: 30px;
+        /* Print styles */
+        @media print {
+          .about-hero {
+            background: #2c3e50 !important;
+            color: white !important;
+            min-height: auto !important;
+            padding: 40px 0 !important;
           }
           
-          .timeline-item::before {
-            left: -20px;
+          .program-card,
+          .value-card,
+          .impact-card {
+            break-inside: avoid;
+            box-shadow: none !important;
+            border: 1px solid #ddd !important;
           }
-        }
-        
-        /* Gallery image hover effect */
-        .gallery-item:hover img {
-          transform: scale(1.1);
-        }
-        
-        .gallery-item {
-          transition: transform 0.3s ease;
         }
       `}</style>
     </div>

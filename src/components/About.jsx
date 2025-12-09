@@ -7,10 +7,8 @@ const About = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Use images 1-6 for main content - FIXED: Removed leading slashes
+  // FIXED: Image paths without leading slash
   const imagePaths = Array.from({length: 6}, (_, i) => `static/image${i + 1}.jpg`);
-  
-  // Add images 19 and 20 specifically for the gallery - FIXED: Removed leading slashes
   const additionalImages = ['static/image19.jpg', 'static/image20.jpg'];
 
   useEffect(() => {
@@ -39,7 +37,7 @@ const About = () => {
     
     // Auto-rotate gallery images
     const galleryInterval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % 3); // Rotate first 3 images
+      setCurrentImageIndex((prev) => (prev + 1) % 3);
     }, 5000);
 
     return () => {
@@ -50,8 +48,8 @@ const About = () => {
   }, []);
 
   const styles = {
+    // FIXED: Removed leading slash from background URL
     aboutHero: {
-      // FIXED: Removed leading slash from background URL
       background: 'linear-gradient(135deg, rgba(44, 62, 80, 0.85) 0%, rgba(26, 37, 47, 0.85) 100%), url("static/image1.jpg")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -111,38 +109,6 @@ const About = () => {
       borderRadius: '15px',
       borderLeft: '4px solid #3498db'
     },
-    vmCard: {
-      padding: '50px 30px',
-      borderRadius: '20px',
-      textAlign: 'center',
-      position: 'relative',
-      overflow: 'hidden',
-      background: 'linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))',
-      backdropFilter: 'blur(15px)',
-      border: '1px solid rgba(255,255,255,0.1)',
-      transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      minHeight: '350px',
-      marginBottom: '20px'
-    },
-    philosophyCard: {
-      padding: '40px 25px',
-      borderRadius: '20px',
-      textAlign: 'center',
-      background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-      border: '1px solid #e8eef5',
-      position: 'relative',
-      overflow: 'hidden',
-      minHeight: '300px',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginBottom: '20px'
-    },
     valueCard: {
       background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
       padding: '35px 20px',
@@ -199,20 +165,6 @@ const About = () => {
       zIndex: 9999,
       transition: 'width 0.1s ease'
     },
-    galleryContainer: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-      gap: '20px',
-      marginTop: '40px'
-    },
-    galleryImage: {
-      width: '100%',
-      height: '200px',
-      objectFit: 'cover',
-      borderRadius: '15px',
-      transition: 'all 0.3s ease',
-      cursor: 'pointer'
-    },
     programCard: {
       background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
       padding: '30px',
@@ -248,7 +200,7 @@ const About = () => {
     }
   };
 
-  // Only use first 6 images for core values - FIXED: Removed leading slashes
+  // FIXED: Removed leading slashes from all image paths
   const coreValues = [
     { title: 'Transparency', description: 'Openness in all our operations and decision-making processes', icon: 'static/image1.jpg', color: '#3498db' },
     { title: 'Accountability', description: 'Responsible stewardship of resources and commitments', icon: 'static/image2.jpg', color: '#2ecc71' },
@@ -265,7 +217,7 @@ const About = () => {
     { year: '2025', title: 'National Recognition', description: 'Awarded National Youth Empowerment Excellence Award by Ministry of Youth' }
   ];
 
-  // Programs using only images 2-5 (4 images total from the first 6) - FIXED: Removed leading slashes
+  // FIXED: Removed leading slashes from all image paths
   const programs = [
     { title: 'Digital Literacy Program', description: 'Training youth in essential digital skills for the 21st century', image: 'static/image2.jpg' },
     { title: 'Entrepreneurship Bootcamp', description: 'Developing young entrepreneurs through mentorship and seed funding', image: 'static/image3.jpg' },
@@ -273,6 +225,7 @@ const About = () => {
     { title: 'Leadership Development', description: 'Cultivating next-generation leaders through workshops and mentorship', image: 'static/image5.jpg' }
   ];
 
+  // FIXED: Removed leading slashes from all image paths
   const impactStories = [
     { title: 'Community Impact', description: 'Transformed 45+ communities through sustainable development projects', image: 'static/image1.jpg' },
     { title: 'Youth Empowerment', description: 'Empowered 2,500+ youth with skills, education, and opportunities', image: 'static/image2.jpg' },
@@ -282,8 +235,8 @@ const About = () => {
 
   // Gallery includes first 6 images + images 19 and 20
   const galleryImages = [
-    ...imagePaths.slice(0, 6), // First 6 images
-    ...additionalImages // Images 19 and 20
+    ...imagePaths.slice(0, 6),
+    ...additionalImages
   ];
 
   return (
@@ -411,7 +364,7 @@ const About = () => {
                 </p>
               </div>
               
-              {/* FIXED: Removed leading slash from image path */}
+              {/* FIXED: Removed leading slash from image source */}
               <img 
                 src="static/image2.jpg" 
                 alt="Youth Empowerment Workshop"
@@ -500,7 +453,7 @@ const About = () => {
                 key={index}
                 style={{
                   ...styles.programCard,
-                  // FIXED: Removed leading slash from image URL
+                  // FIXED: Removed leading slash from background URL
                   background: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("${program.image}")`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
@@ -567,7 +520,7 @@ const About = () => {
                 <div 
                   style={{
                     ...styles.valueIcon,
-                    // FIXED: Removed leading slash from image URL
+                    // FIXED: Removed leading slash from background URL
                     background: `url("${value.icon}") center/cover`,
                   }}
                 >
@@ -641,7 +594,7 @@ const About = () => {
                   style={{
                     width: '80px',
                     height: '80px',
-                    // FIXED: Removed leading slash from image URL
+                    // FIXED: Removed leading slash from background URL
                     background: `url("${impact.image}") center/cover`,
                     borderRadius: '50%',
                     margin: '0 auto 25px',
@@ -876,14 +829,6 @@ const About = () => {
         }
         
         /* Grid Layouts */
-        .vision-mission-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 30px;
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        
         .values-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
@@ -925,7 +870,7 @@ const About = () => {
         
         .impact-card:hover {
           transform: translateY(-10px);
-          box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+          boxShadow: 0 25px 50px rgba(0,0,0,0.15);
           border-color: #3498db !important;
         }
         
@@ -954,11 +899,6 @@ const About = () => {
             gap: 60px !important;
           }
           
-          .vision-mission-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 40px !important;
-          }
-          
           .values-grid {
             grid-template-columns: repeat(3, 1fr) !important;
             gap: 25px !important;
@@ -979,10 +919,6 @@ const About = () => {
             gap: 30px !important;
           }
           
-          .gallery-container {
-            grid-template-columns: repeat(4, 1fr) !important;
-          }
-          
           .stats-container {
             grid-template-columns: repeat(4, 1fr) !important;
             gap: 30px !important;
@@ -1001,34 +937,8 @@ const About = () => {
             padding-left: 40px !important;
           }
           
-          .timeline-item::before {
-            left: -25px !important;
-          }
-          
           .section {
             padding: 100px 0 !important;
-          }
-        }
-        
-        @media (min-width: 1024px) {
-          .container {
-            padding: 0 60px;
-          }
-          
-          .values-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
-          }
-          
-          .impact-grid {
-            grid-template-columns: repeat(4, 1fr) !important;
-          }
-          
-          .programs-grid {
-            grid-template-columns: repeat(4, 1fr) !important;
-          }
-          
-          .gallery-container {
-            grid-template-columns: repeat(4, 2fr) !important;
           }
         }
         
@@ -1083,61 +993,6 @@ const About = () => {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 15px !important;
           }
-          
-          .vm-card,
-          .philosophy-card,
-          .value-card,
-          .impact-card,
-          .program-card {
-            min-height: auto !important;
-            padding: 25px 20px !important;
-          }
-          
-          .gallery-image {
-            height: 150px !important;
-          }
-        }
-        
-        @media (max-width: 350px) {
-          .values-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .impact-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .programs-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .stats-container {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .social-proof-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .gallery-container {
-            grid-template-columns: 1fr !important;
-          }
-        }
-        
-        /* Ensure images and containers don't overflow */
-        img {
-          max-width: 100%;
-          height: auto;
-        }
-        
-        /* Prevent horizontal scroll */
-        body {
-          overflow-x: hidden;
-        }
-        
-        /* Smooth scrolling */
-        html {
-          scroll-behavior: smooth;
         }
         
         /* Custom scrollbar */
@@ -1152,27 +1007,6 @@ const About = () => {
         ::-webkit-scrollbar-thumb {
           background: linear-gradient(135deg, #3498db, #2ecc71);
           border-radius: 4px;
-        }
-        
-        /* Card hover effects */
-        .vm-card:hover,
-        .philosophy-card:hover,
-        .value-card:hover,
-        .impact-card:hover,
-        .program-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 25px 60px rgba(52, 152, 219, 0.15);
-        }
-        
-        /* Timeline adjustments for mobile */
-        @media (max-width: 767px) {
-          .timeline {
-            padding-left: 30px;
-          }
-          
-          .timeline-item::before {
-            left: -20px;
-          }
         }
         
         /* Gallery image hover effect */

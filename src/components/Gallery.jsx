@@ -34,7 +34,7 @@ const Gallery = () => {
   // Updated categories based on strategic pillars
   const categories = ['All', 'Governance', 'Gender & SRHR', 'Economic', 'Climate', 'Community', 'Policy'];
 
-  // ✅ UPDATED: Gallery images reflecting actual activities and pillars
+  // ✅ UPDATED: Gallery images reflecting actual activities and pillars - ADDED IMAGE20
   const galleryImages = [
     { 
       id: 1, 
@@ -235,6 +235,17 @@ const Gallery = () => {
       date: 'June 2024',
       pillar: 'Climate Action',
       impact: 'Climate justice network formed'
+    },
+    // ✅ ADDED NEW IMAGE - Image20
+    { 
+      id: 21, 
+      src: '/Static/image21.jpg', 
+      title: 'Youth Policy Dialogue Forum', 
+      category: 'Policy', 
+      description: 'High-level youth policy dialogue bringing together policymakers, youth leaders, and community stakeholders to discuss youth-inclusive governance reforms and policy implementation strategies',
+      date: 'July 2024',
+      pillar: 'Policy Advocacy & Reform',
+      impact: '15+ policy recommendations developed'
     }
   ];
 
@@ -574,7 +585,7 @@ const Gallery = () => {
             capturing leadership development, entrepreneurship, and community-driven impact across four strategic pillars
           </motion.p>
           
-          {/* Animated Stats */}
+          {/* Animated Stats - Updated to reflect 21 images */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -590,7 +601,7 @@ const Gallery = () => {
             }}
           >
             {[
-              { value: '20', label: 'Key Initiatives', color: '#3498db' },
+              { value: '21', label: 'Key Initiatives', color: '#3498db' },
               { value: '4', label: 'Strategic Pillars', color: '#e74c3c' },
               { value: '300+', label: 'Youth Engaged', color: '#2ecc71' },
               { value: '30+', label: 'Policy Engagements', color: '#1abc9c' }

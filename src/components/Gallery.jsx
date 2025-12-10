@@ -20,41 +20,222 @@ const Gallery = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Modern color palette
+  // Modern color palette based on strategic pillars
   const colors = {
-    primary: '#667EEA',
-    secondary: '#764BA2',
-    accent: '#FF6B6B',
-    dark: '#1A1A2E',
+    leadership: '#3498db',
+    gender: '#e74c3c',
+    economic: '#2ecc71',
+    climate: '#1abc9c',
+    dark: '#2c3e50',
     light: '#F8FAFC',
-    success: '#4ECDC4',
-    warning: '#FFD166',
-    info: '#06D6A0'
+    accent: '#f39c12'
   };
 
-  // Image categories
-  const categories = ['All', 'Events', 'Community', 'Training', 'Environment', 'Innovation'];
+  // Updated categories based on strategic pillars
+  const categories = ['All', 'Governance', 'Gender & SRHR', 'Economic', 'Climate', 'Community', 'Policy'];
 
-  // ✅ CORRECT: Using /static/ folder for ALL images
+  // ✅ UPDATED: Gallery images reflecting actual activities and pillars
   const galleryImages = [
-    { id: 1, src: '/Static/image1.jpg', title: 'Youth Leadership Conference', category: 'Events', description: 'Annual youth leadership gathering with 300+ participants discussing governance and innovation', date: 'March 2024' },
-    { id: 2, src: '/Static/image2.jpg', title: 'Community Empowerment Workshop', category: 'Community', description: 'Interactive workshops with local communities to build capacity and foster sustainable development', date: 'February 2024' },
-    { id: 3, src: '/Static/image3.jpg', title: 'Tree Planting Initiative 2023', category: 'Environment', description: 'Green initiative planting 5,000+ trees across 10 communities for environmental conservation', date: 'November 2023' },
-    { id: 4, src: '/Static/image4.jpg', title: 'Women Empowerment Program Launch', category: 'Training', description: 'Launch of our flagship program empowering women through skills training and mentorship', date: 'January 2024' },
-    { id: 5, src: '/Static/image5.jpg', title: 'Digital Skills Training Session', category: 'Training', description: 'Digital literacy training for youth preparing them for the future workforce', date: 'December 2023' },
-    { id: 6, src: '/Static/image6.jpg', title: 'Youth Mentorship Program', category: 'Training', description: 'One-on-one mentorship sessions connecting experienced professionals with youth', date: 'October 2023' },
-    { id: 7, src: '/Static/image7.jpg', title: 'Team Building Activity Day', category: 'Events', description: 'Team-building exercises to foster collaboration and teamwork among youth', date: 'September 2023' },
-    { id: 8, src: '/Static/image8.jpg', title: 'Community Health Outreach', category: 'Community', description: 'Health awareness campaign reaching 500+ community members in rural areas', date: 'August 2023' },
-    { id: 9, src: '/Static/image9.jpg', title: 'Entrepreneurship Training', category: 'Training', description: 'Business skills workshop for aspiring young entrepreneurs', date: 'July 2023' },
-    { id: 10, src: '/Static/image10.jpg', title: 'Clean Water Project', category: 'Community', description: 'Initiative providing clean water access to underserved communities', date: 'June 2023' },
-    { id: 11, src: '/Static/image11.jpg', title: 'Youth Sports Tournament', category: 'Events', description: 'Annual sports tournament promoting physical health and team spirit', date: 'May 2023' },
-    { id: 12, src: '/Static/image12.jpg', title: 'Art and Culture Festival', category: 'Innovation', description: 'Celebrating youth creativity through art, music, and cultural performances', date: 'April 2023' },
-    { id: 13, src: '/Static/image13.jpg', title: 'Computer Literacy Class', category: 'Training', description: 'Basic computer skills training for first-time technology users', date: 'March 2023' },
-    { id: 14, src: '/Static/image14.jpg', title: 'Agricultural Training Program', category: 'Training', description: 'Modern agricultural techniques training for sustainable farming', date: 'February 2023' },
-    { id: 15, src: '/Static/image15.jpg', title: 'Youth Parliament Session', category: 'Events', description: 'Simulated parliamentary sessions to educate youth on governance', date: 'January 2023' },
-    { id: 16, src: '/Static/image16.jpg', title: 'Disaster Response Training', category: 'Training', description: 'Emergency response training for community resilience', date: 'December 2022' },
-    { id: 17, src: '/Static/image17.jpg', title: 'Music and Talent Show', category: 'Innovation', description: 'Platform for youth to showcase their musical and artistic talents', date: 'November 2022' },
-    { id: 18, src: '/Static/image18.jpg', title: 'Annual Youth Summit 2024', category: 'Events', description: 'Flagship event gathering 1,000+ youth for networking and learning', date: 'October 2022' }
+    { 
+      id: 1, 
+      src: '/Static/image1.jpg', 
+      title: 'Anti-Corruption Training Workshop', 
+      category: 'Governance', 
+      description: 'Youth anti-corruption training conducted in partnership with Transparency International Kenya, empowering young leaders with accountability skills',
+      date: 'March 2024',
+      pillar: 'Youth Leadership & Governance',
+      impact: '50+ youth trained'
+    },
+    { 
+      id: 2, 
+      src: '/Static/image2.jpg', 
+      title: 'Youth Public Participation Forum', 
+      category: 'Governance', 
+      description: 'Youth actively participating in Kisumu County fiscal planning process, advocating for youth-friendly budgets and transparent governance',
+      date: 'February 2024',
+      pillar: 'Youth Leadership & Governance',
+      impact: '200+ youth voices heard'
+    },
+    { 
+      id: 3, 
+      src: '/Static/image3.jpg', 
+      title: 'SRHR Bill Review Meeting', 
+      category: 'Policy', 
+      description: 'Technical Working Group meeting for Kisumu County SRHR Bill 2024 review, ensuring youth perspectives in sexual reproductive health policies',
+      date: 'January 2024',
+      pillar: 'Gender & SRHR',
+      impact: 'Policy input submitted'
+    },
+    { 
+      id: 4, 
+      src: '/Static/image4.jpg', 
+      title: 'International Women\'s Day Celebration', 
+      category: 'Gender & SRHR', 
+      description: 'Celebrating women empowerment and advocating for gender equality through community dialogues and awareness campaigns',
+      date: 'March 2024',
+      pillar: 'Gender & SRHR',
+      impact: '150+ participants engaged'
+    },
+    { 
+      id: 5, 
+      src: '/Static/image5.jpg', 
+      title: 'Environmental Cleanup Campaign', 
+      category: 'Climate', 
+      description: 'Youth-led environmental cleanup initiative promoting sustainable waste management and community environmental responsibility',
+      date: 'December 2023',
+      pillar: 'Climate Action',
+      impact: '2 tons of waste collected'
+    },
+    { 
+      id: 6, 
+      src: '/Static/image6.jpg', 
+      title: 'Accountability Sensitization Forum', 
+      category: 'Governance', 
+      description: 'Community forum on accountability and service delivery, empowering citizens to demand better services from local government',
+      date: 'November 2023',
+      pillar: 'Youth Leadership & Governance',
+      impact: '300+ community members'
+    },
+    { 
+      id: 7, 
+      src: '/Static/image7.jpg', 
+      title: 'Menstrual Hygiene Management Day', 
+      category: 'Gender & SRHR', 
+      description: 'Commemorating Menstrual Hygiene Management Day with youth-friendly activities, breaking taboos and promoting SRHR education',
+      date: 'May 2024',
+      pillar: 'Gender & SRHR',
+      impact: '100+ youth educated'
+    },
+    { 
+      id: 8, 
+      src: '/Static/image8.jpg', 
+      title: 'Social Movement Building Training', 
+      category: 'Economic', 
+      description: 'Empowered for Change training program building youth capacity in social movement building and civic engagement strategies',
+      date: 'October 2023',
+      pillar: 'Economic Empowerment',
+      impact: '75+ youth leaders trained'
+    },
+    { 
+      id: 9, 
+      src: '/Static/image9.jpg', 
+      title: 'GBV Policy Validation Workshop', 
+      category: 'Policy', 
+      description: 'Community validation meeting for the Sexual & Gender-Based Violence Policy, ensuring inclusive stakeholder input',
+      date: 'September 2023',
+      pillar: 'Gender & SRHR',
+      impact: 'Policy recommendations made'
+    },
+    { 
+      id: 10, 
+      src: '/Static/image10.jpg', 
+      title: 'Climate Action Youth Forum', 
+      category: 'Climate', 
+      description: 'Youth forum on climate justice and environmental conservation, discussing sustainable solutions for community resilience',
+      date: 'August 2023',
+      pillar: 'Climate Action',
+      impact: 'Environmental action plans developed'
+    },
+    { 
+      id: 11, 
+      src: '/Static/image11.jpg', 
+      title: 'Youth Leadership Training', 
+      category: 'Governance', 
+      description: 'Intensive leadership development program for young leaders, focusing on governance, accountability, and community mobilization',
+      date: 'July 2023',
+      pillar: 'Youth Leadership & Governance',
+      impact: '40+ youth leaders certified'
+    },
+    { 
+      id: 12, 
+      src: '/Static/image12.jpg', 
+      title: 'Economic Empowerment Workshop', 
+      category: 'Economic', 
+      description: 'Skills development workshop for youth economic empowerment, focusing on entrepreneurship and financial literacy',
+      date: 'June 2023',
+      pillar: 'Economic Empowerment',
+      impact: '60+ youth trained'
+    },
+    { 
+      id: 13, 
+      src: '/Static/image13.jpg', 
+      title: 'Community Anti-Corruption Sensitization', 
+      category: 'Community', 
+      description: 'Grassroots community sensitization on anti-corruption measures, promoting transparency in local governance',
+      date: 'May 2023',
+      pillar: 'Youth Leadership & Governance',
+      impact: '500+ community members reached'
+    },
+    { 
+      id: 14, 
+      src: '/Static/image14.jpg', 
+      title: 'Health Services Advocacy Meeting', 
+      category: 'Community', 
+      description: 'Community voice meeting to strengthen health services through participatory monitoring and feedback mechanisms',
+      date: 'April 2023',
+      pillar: 'Gender & SRHR',
+      impact: 'Service improvements initiated'
+    },
+    { 
+      id: 15, 
+      src: '/Static/image15.jpg', 
+      title: 'Youth Civic Education Session', 
+      category: 'Governance', 
+      description: 'Interactive civic education session empowering youth with knowledge of their rights and responsibilities in governance',
+      date: 'March 2023',
+      pillar: 'Youth Leadership & Governance',
+      impact: '200+ youth educated'
+    },
+    { 
+      id: 16, 
+      src: '/Static/image16.jpg', 
+      title: 'Environmental Conservation Activity', 
+      category: 'Climate', 
+      description: 'Local environmental conservation activity promoting sustainable practices and climate resilience in the community',
+      date: 'February 2023',
+      pillar: 'Climate Action',
+      impact: 'Conservation area established'
+    },
+    { 
+      id: 17, 
+      src: '/Static/image17.jpg', 
+      title: 'SRHR Youth Advocacy', 
+      category: 'Gender & SRHR', 
+      description: 'Youth-led advocacy activities for sexual reproductive health rights, breaking barriers and promoting access to services',
+      date: 'January 2023',
+      pillar: 'Gender & SRHR',
+      impact: 'Advocacy campaign launched'
+    },
+    { 
+      id: 18, 
+      src: '/Static/image18.jpg', 
+      title: 'International Youth Day Celebration', 
+      category: 'Community', 
+      description: 'Celebrating International Youth Day with climate-focused sessions, highlighting youth contributions to environmental sustainability',
+      date: 'August 2023',
+      pillar: 'Climate Action',
+      impact: 'Youth climate commitments made'
+    },
+    { 
+      id: 19, 
+      src: '/Static/image19.jpg', 
+      title: 'Accountability Strengthening Initiative', 
+      category: 'Governance', 
+      description: 'Strengthening accountability mechanisms in Kisumu County through youth monitoring and evaluation systems',
+      date: 'April 2024',
+      pillar: 'Youth Leadership & Governance',
+      impact: 'Accountability framework developed'
+    },
+    { 
+      id: 20, 
+      src: '/Static/image20.jpg', 
+      title: 'Youth for Climate Justice Program', 
+      category: 'Climate', 
+      description: 'Launch of Youth for Climate Justice Program, positioning youth at the forefront of climate action and collaboration',
+      date: 'June 2024',
+      pillar: 'Climate Action',
+      impact: 'Climate justice network formed'
+    }
   ];
 
   const filteredImages = activeFilter === 'All' 
@@ -91,9 +272,9 @@ const Gallery = () => {
   };
 
   const styles = {
-    // ✅ FIXED: Changed from '/gallery/image5.jpg' to '/static/image5.jpg'
+    // Hero Section
     hero: {
-      background: `linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.95) 100%), url('/static/image5.jpg')`,
+      background: `linear-gradient(135deg, rgba(44, 62, 80, 0.9) 0%, rgba(26, 37, 47, 0.95) 100%), url('/Static/image1.jpg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -121,7 +302,7 @@ const Gallery = () => {
       fontWeight: '900',
       letterSpacing: '-2px',
       lineHeight: '1',
-      background: 'linear-gradient(45deg, #FFFFFF, #667EEA, #FF6B6B)',
+      background: 'linear-gradient(45deg, #FFFFFF, #3498db, #2ecc71)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       backgroundSize: '200% auto',
@@ -167,7 +348,7 @@ const Gallery = () => {
       top: 0,
       left: 0,
       height: '4px',
-      background: 'linear-gradient(90deg, #667EEA, #764BA2)',
+      background: 'linear-gradient(90deg, #3498db, #2ecc71)',
       width: `${scrollProgress}%`,
       zIndex: 1000,
       transition: 'width 0.1s ease'
@@ -184,7 +365,7 @@ const Gallery = () => {
       background: 'rgba(255, 255, 255, 0.9)',
       borderRadius: '30px',
       backdropFilter: 'blur(20px)',
-      border: '1px solid rgba(102, 126, 234, 0.1)',
+      border: '1px solid rgba(52, 152, 219, 0.1)',
       maxWidth: 'fit-content',
       margin: '0 auto',
       boxShadow: '0 20px 60px rgba(0,0,0,0.08)'
@@ -309,6 +490,19 @@ const Gallery = () => {
     }
   };
 
+  // Function to get category color
+  const getCategoryColor = (category) => {
+    switch(category) {
+      case 'Governance': return colors.leadership;
+      case 'Gender & SRHR': return colors.gender;
+      case 'Economic': return colors.economic;
+      case 'Climate': return colors.climate;
+      case 'Policy': return colors.accent;
+      case 'Community': return '#9b59b6';
+      default: return colors.dark;
+    }
+  };
+
   return (
     <div className="gallery-page">
       {/* Scroll Progress Bar */}
@@ -327,7 +521,7 @@ const Gallery = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(45deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15))',
+          background: 'linear-gradient(45deg, rgba(52, 152, 219, 0.15), rgba(46, 204, 113, 0.15))',
           pointerEvents: 'none'
         }}></div>
         
@@ -353,7 +547,7 @@ const Gallery = () => {
               letterSpacing: '3px',
               color: 'white'
             }}>
-              VISUAL JOURNEY
+              VISUAL IMPACT JOURNEY
             </span>
           </motion.div>
           
@@ -363,10 +557,10 @@ const Gallery = () => {
             transition={{ duration: 0.8, delay: 0.1 }}
             style={styles.heroTitle}
           >
-            Moments That
+            Youth-Led
             <br />
             <span style={{ fontSize: '0.85em', display: 'block', marginTop: '15px' }}>
-              Define Our Impact
+              Transformation in Action
             </span>
           </motion.h1>
           
@@ -376,8 +570,8 @@ const Gallery = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             style={styles.heroSubtitle}
           >
-            A visual narrative of our journey, capturing the spirit of innovation, 
-            empowerment, and sustainable change across communities
+            A visual narrative of Africa's most innovative youth-led platform for social transformation, 
+            capturing leadership development, entrepreneurship, and community-driven impact across four strategic pillars
           </motion.p>
           
           {/* Animated Stats */}
@@ -396,10 +590,10 @@ const Gallery = () => {
             }}
           >
             {[
-              { value: '18', label: 'Captured Moments', color: '#667EEA' },
-              { value: '6', label: 'Categories', color: '#FF6B6B' },
-              { value: '2', label: 'Years', color: '#4ECDC4', suffix: '+' },
-              { value: '5000+', label: 'Memories Created', color: '#FFD166' }
+              { value: '20', label: 'Key Initiatives', color: '#3498db' },
+              { value: '4', label: 'Strategic Pillars', color: '#e74c3c' },
+              { value: '300+', label: 'Youth Engaged', color: '#2ecc71' },
+              { value: '30+', label: 'Policy Engagements', color: '#1abc9c' }
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -430,7 +624,7 @@ const Gallery = () => {
                   WebkitTextFillColor: 'transparent',
                   lineHeight: '1'
                 }}>
-                  {stat.value}{stat.suffix || ''}
+                  {stat.value}
                 </div>
                 <div style={{ 
                   fontSize: '1rem', 
@@ -467,7 +661,7 @@ const Gallery = () => {
             letterSpacing: '3px',
             fontWeight: '500'
           }}>
-            EXPLORE GALLERY
+            EXPLORE OUR IMPACT
           </div>
           <div style={{
             width: '2px',
@@ -494,20 +688,20 @@ const Gallery = () => {
                 style={{
                   ...styles.filterButton,
                   background: activeFilter === category 
-                    ? `linear-gradient(45deg, ${colors.primary}, ${colors.secondary})`
+                    ? `linear-gradient(45deg, ${getCategoryColor(category)}, ${getCategoryColor(category)}cc)`
                     : 'white',
                   color: activeFilter === category ? 'white' : colors.dark,
                   borderColor: activeFilter === category 
                     ? 'transparent' 
-                    : 'rgba(102, 126, 234, 0.2)',
+                    : `${getCategoryColor(category)}20`,
                   boxShadow: activeFilter === category 
-                    ? '0 20px 40px rgba(102, 126, 234, 0.3)' 
+                    ? `0 20px 40px ${getCategoryColor(category)}30` 
                     : '0 10px 30px rgba(0,0,0,0.05)',
                   transform: activeFilter === category ? 'scale(1.05)' : 'scale(1)'
                 }}
                 whileHover={{ 
                   scale: activeFilter === category ? 1.05 : 1.1,
-                  boxShadow: '0 15px 35px rgba(102, 126, 234, 0.3)'
+                  boxShadow: `0 15px 35px ${getCategoryColor(category)}30`
                 }}
               >
                 {category}
@@ -538,7 +732,7 @@ const Gallery = () => {
                     ? 'translateY(-20px) scale(1.05) rotateX(2deg)' 
                     : 'translateY(0) scale(1) rotateX(0deg)',
                   boxShadow: hoveredImage === image.id 
-                    ? '0 40px 80px rgba(0,0,0,0.2)' 
+                    ? `0 40px 80px ${getCategoryColor(image.category)}20` 
                     : '0 20px 60px rgba(0,0,0,0.1)'
                 }}
                 onClick={() => openModal(image)}
@@ -547,7 +741,7 @@ const Gallery = () => {
                 className="gallery-item"
                 whileHover={{ 
                   scale: 1.05,
-                  boxShadow: '0 40px 80px rgba(0,0,0,0.2)'
+                  boxShadow: `0 40px 80px ${getCategoryColor(image.category)}30`
                 }}
               >
                 {/* Image */}
@@ -601,7 +795,7 @@ const Gallery = () => {
                       marginBottom: '15px'
                     }}>
                       <span style={{
-                        background: colors.primary,
+                        background: getCategoryColor(image.category),
                         padding: '6px 16px',
                         borderRadius: '20px',
                         fontSize: '0.8rem',
@@ -616,9 +810,9 @@ const Gallery = () => {
                       color: 'rgba(255,255,255,0.8)', 
                       fontSize: '0.95rem',
                       lineHeight: '1.5',
-                      marginBottom: '20px'
+                      marginBottom: '15px'
                     }}>
-                      {image.description}
+                      {image.pillar}
                     </p>
                     <div style={{
                       display: 'flex',
@@ -631,7 +825,7 @@ const Gallery = () => {
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                         <circle cx="12" cy="12" r="3"/>
                       </svg>
-                      <span>Click to view full image</span>
+                      <span>Click to view details</span>
                     </div>
                   </div>
                 </div>
@@ -643,7 +837,7 @@ const Gallery = () => {
                   right: '25px',
                   background: 'rgba(255, 255, 255, 0.95)',
                   backdropFilter: 'blur(10px)',
-                  color: colors.dark,
+                  color: getCategoryColor(image.category),
                   padding: '8px 20px',
                   borderRadius: '20px',
                   fontSize: '0.8rem',
@@ -655,25 +849,21 @@ const Gallery = () => {
                   {image.category}
                 </div>
                 
-                {/* Number Badge */}
+                {/* Pillar Badge */}
                 <div style={{
                   position: 'absolute',
-                  top: '25px',
+                  bottom: '25px',
                   left: '25px',
-                  background: 'rgba(26, 26, 46, 0.9)',
+                  background: 'rgba(44, 62, 80, 0.9)',
                   color: 'white',
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '1rem',
-                  fontWeight: '700',
-                  boxShadow: '0 5px 20px rgba(0,0,0,0.2)',
+                  padding: '6px 15px',
+                  borderRadius: '20px',
+                  fontSize: '0.8rem',
+                  fontWeight: '600',
+                  boxShadow: '0 5px 15px rgba(0,0,0,0.2)',
                   zIndex: 2
                 }}>
-                  {image.id}
+                  {image.pillar.split(' & ')[0]}
                 </div>
               </motion.div>
             ))}
@@ -771,7 +961,7 @@ const Gallery = () => {
                   alignItems: 'flex-start',
                   marginBottom: '20px'
                 }}>
-                  <div>
+                  <div style={{ flex: 1 }}>
                     <h3 style={{ 
                       color: colors.dark, 
                       margin: '0 0 15px 0', 
@@ -785,17 +975,29 @@ const Gallery = () => {
                       display: 'flex', 
                       alignItems: 'center', 
                       gap: '15px',
-                      marginBottom: '15px'
+                      marginBottom: '15px',
+                      flexWrap: 'wrap'
                     }}>
                       <span style={{ 
-                        background: colors.primary + '20',
-                        color: colors.primary,
+                        background: getCategoryColor(selectedImage.category) + '20',
+                        color: getCategoryColor(selectedImage.category),
                         padding: '8px 20px',
                         borderRadius: '20px',
                         fontSize: '0.9rem',
                         fontWeight: '600'
                       }}>
                         {selectedImage.category}
+                      </span>
+                      <span style={{ 
+                        background: '#f8fafc',
+                        color: '#666',
+                        padding: '8px 20px',
+                        borderRadius: '20px',
+                        fontSize: '0.9rem',
+                        fontWeight: '600',
+                        border: '1px solid #e8eef5'
+                      }}>
+                        {selectedImage.pillar}
                       </span>
                       <span style={{ 
                         color: '#666',
@@ -816,11 +1018,56 @@ const Gallery = () => {
                       color: '#555', 
                       fontSize: '1.1rem',
                       lineHeight: '1.6',
-                      marginBottom: '25px',
+                      marginBottom: '20px',
                       maxWidth: '800px'
                     }}>
                       {selectedImage.description}
                     </p>
+                    
+                    {/* Impact Highlight */}
+                    <div style={{ 
+                      background: '#f8fafc',
+                      padding: '20px',
+                      borderRadius: '15px',
+                      marginBottom: '25px',
+                      borderLeft: `4px solid ${getCategoryColor(selectedImage.category)}`
+                    }}>
+                      <div style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '10px',
+                        marginBottom: '10px'
+                      }}>
+                        <div style={{
+                          width: '30px',
+                          height: '30px',
+                          background: getCategoryColor(selectedImage.category),
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'white',
+                          fontWeight: 'bold'
+                        }}>
+                          ✓
+                        </div>
+                        <span style={{ 
+                          fontSize: '1rem', 
+                          fontWeight: '600',
+                          color: colors.dark
+                        }}>
+                          Immediate Impact:
+                        </span>
+                      </div>
+                      <p style={{ 
+                        color: '#666', 
+                        fontSize: '1rem',
+                        lineHeight: '1.5',
+                        margin: 0
+                      }}>
+                        {selectedImage.impact}
+                      </p>
+                    </div>
                   </div>
                   
                   <div style={{ 
@@ -828,12 +1075,13 @@ const Gallery = () => {
                     padding: '15px 25px',
                     borderRadius: '20px',
                     textAlign: 'center',
-                    minWidth: '100px'
+                    minWidth: '100px',
+                    marginLeft: '20px'
                   }}>
                     <div style={{ 
                       fontSize: '3rem', 
                       fontWeight: '900',
-                      color: colors.primary,
+                      color: getCategoryColor(selectedImage.category),
                       lineHeight: '1'
                     }}>
                       {selectedImage.id}
@@ -863,9 +1111,9 @@ const Gallery = () => {
                     color: '#666',
                     fontSize: '0.95rem'
                   }}>
-                    <span>#{selectedImage.id.toString().padStart(2, '0')}</span>
+                    <span>Initiative #{selectedImage.id.toString().padStart(2, '0')}</span>
                     <span>•</span>
-                    <span>Gallery Image</span>
+                    <span>Strategic Pillar: {selectedImage.pillar}</span>
                   </div>
                   
                   <div style={{ 
@@ -900,17 +1148,17 @@ const Gallery = () => {
                       whileTap={{ scale: 0.95 }}
                       style={{
                         padding: '14px 28px',
-                        background: `linear-gradient(45deg, ${colors.primary}, ${colors.secondary})`,
+                        background: `linear-gradient(45deg, ${getCategoryColor(selectedImage.category)}, ${getCategoryColor(selectedImage.category)}cc)`,
                         color: 'white',
                         border: 'none',
                         borderRadius: '15px',
                         fontSize: '1rem',
                         fontWeight: '600',
                         cursor: 'pointer',
-                        boxShadow: '0 10px 30px rgba(102, 126, 234, 0.3)'
+                        boxShadow: `0 10px 30px ${getCategoryColor(selectedImage.category)}30`
                       }}
                     >
-                      Share Image
+                      Share Initiative
                     </motion.button>
                   </div>
                 </div>
@@ -936,7 +1184,7 @@ const Gallery = () => {
           margin: 0 auto;
           padding: 0 20px;
           position: relative;
-          z-index: 2;
+          zIndex: 2;
         }
         
         /* Modern Animations */
@@ -983,19 +1231,19 @@ const Gallery = () => {
         }
         
         ::-webkit-scrollbar-thumb {
-          background: linear-gradient(45deg, #667EEA, #764BA2);
+          background: linear-gradient(45deg, #3498db, #2ecc71);
           border-radius: 10px;
           border: 3px solid rgba(255, 255, 255, 0.8);
         }
         
         ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(45deg, #5a6fd8, #6a3f9e);
+          background: linear-gradient(45deg, #2980b9, #27ae60);
         }
         
         /* Selection styles */
         ::selection {
-          background: rgba(102, 126, 234, 0.3);
-          color: #1A1A2E;
+          background: rgba(52, 152, 219, 0.3);
+          color: #2c3e50;
         }
         
         /* Smooth transitions */
@@ -1121,7 +1369,7 @@ const Gallery = () => {
         /* Print styles */
         @media print {
           .gallery-hero {
-            background: #1A1A2E !important;
+            background: #2c3e50 !important;
             color: white !important;
             min-height: auto !important;
             padding: 50px 0 !important;

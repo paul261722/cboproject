@@ -26,14 +26,18 @@ const Projects = () => {
     light: '#F8FAFC',
     success: '#4ECDC4',
     warning: '#FFD166',
-    info: '#06D6A0'
+    info: '#06D6A0',
+    leadership: '#3498db',
+    gender: '#e74c3c',
+    economic: '#2ecc71',
+    climate: '#1abc9c'
   };
 
   // Responsive styles
   const styles = {
     // Modern Hero Section - Mobile Optimized
     projectsHero: {
-      background: `linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.98) 100%), url('/image5.jpg')`,
+      background: `linear-gradient(135deg, rgba(44, 62, 80, 0.95) 0%, rgba(26, 37, 47, 0.98) 100%), url('/image1.jpg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: isMobile ? 'scroll' : 'fixed',
@@ -62,7 +66,7 @@ const Projects = () => {
       fontWeight: '800',
       letterSpacing: isMobile ? '-1px' : '-1.5px',
       lineHeight: '1.1',
-      background: 'linear-gradient(45deg, #FFFFFF, #667EEA, #FF6B6B)',
+      background: 'linear-gradient(45deg, #FFFFFF, #3498db, #2ecc71)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       backgroundSize: '200% auto'
@@ -117,7 +121,7 @@ const Projects = () => {
       background: 'rgba(248, 250, 252, 0.7)',
       borderRadius: isMobile ? '20px' : '30px',
       backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(102, 126, 234, 0.1)',
+      border: '1px solid rgba(52, 152, 219, 0.1)',
       maxWidth: 'fit-content',
       margin: '0 auto',
       boxShadow: '0 15px 40px rgba(0,0,0,0.05)',
@@ -156,7 +160,7 @@ const Projects = () => {
       overflow: 'hidden',
       boxShadow: '0 20px 50px rgba(0,0,0,0.08)',
       transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-      border: '1px solid rgba(102, 126, 234, 0.1)',
+      border: '1px solid rgba(52, 152, 219, 0.1)',
       position: 'relative',
       height: '100%',
       display: 'flex',
@@ -272,153 +276,220 @@ const Projects = () => {
       margin: '0 auto'
     },
 
-    // Floating shapes - Hidden on Mobile
-    heroGeometric: {
-      position: 'absolute',
-      width: isMobile ? '200px' : '400px',
-      height: isMobile ? '200px' : '400px',
-      border: '2px solid rgba(255, 255, 255, 0.1)',
-      transform: 'rotate(45deg)',
-      top: '15%',
-      right: isMobile ? '-100px' : '10%',
-      animation: 'float 20s infinite ease-in-out',
-      display: isMobile ? 'none' : 'block'
+    // Activity List Styles
+    activityList: {
+      listStyle: 'none',
+      padding: 0,
+      marginTop: '15px',
+      marginBottom: '20px'
     },
 
-    heroGeometric2: {
-      position: 'absolute',
-      width: isMobile ? '150px' : '300px',
-      height: isMobile ? '150px' : '300px',
-      border: '2px solid rgba(255, 255, 255, 0.08)',
-      transform: 'rotate(30deg)',
-      bottom: '20%',
-      left: isMobile ? '-75px' : '5%',
-      animation: 'float 25s infinite ease-in-out reverse',
-      display: isMobile ? 'none' : 'block'
+    activityItem: {
+      fontSize: isMobile ? '0.85rem' : '0.9rem',
+      marginBottom: '8px',
+      color: '#555',
+      display: 'flex',
+      alignItems: 'flex-start',
+      lineHeight: '1.5'
+    },
+
+    activityBullet: {
+      color: '#3498db',
+      marginRight: '10px',
+      flexShrink: 0,
+      fontSize: '0.8rem',
+      marginTop: '3px'
     }
   };
 
-  const projects = [
+  // Updated Strategic Pillars with your activities
+  const strategicPillars = [
     {
       id: 1,
-      title: 'Youth & Good Governance',
+      title: 'Youth Leadership & Governance',
       category: 'Governance',
-      description: 'Promoting youth active participation in governance processes to enhance transparency, accountability, and inclusive decision-making at all levels.',
-      impact: 'Trained 200+ youth on governance processes, facilitated 15+ community dialogues',
+      description: 'Building accountable youth leaders who actively participate in governance and anti-corruption initiatives.',
+      impact: '300+ youth engaged in governance forums, 30+ policy engagement spaces',
       status: 'Active',
-      color: 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)',
-      gradient: ['#667EEA', '#764BA2'],
+      color: 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)',
+      gradient: ['#3498db', '#2980b9'],
       progress: 85,
       icon: '🏛️',
-      stats: { beneficiaries: '200+', partnerships: '15+' }
+      stats: { youth: '300+', policies: '30+' },
+      activities: [
+        'Anti-corruption training by Transparency International Kenya',
+        'Community anti-corruption sensitization',
+        'Youth public participation in Kisumu fiscal planning',
+        'Youth sensitization forums on accountability & service delivery',
+        'Kisumu County Health Department Technical Working Group'
+      ]
     },
     {
       id: 2,
-      title: 'Gender Equality & Women Empowerment',
+      title: 'Gender Equality & SRHR',
       category: 'Gender',
-      description: 'Creating a society where all individuals have equal rights, opportunities, and access to resources through advocacy, capacity building, and mentorship programs.',
-      impact: 'Empowered 150+ women through skills training, 40+ leadership workshops conducted',
+      description: 'Advocating for gender justice, sexual reproductive health rights, and ending gender-based violence.',
+      impact: '20+ gender and SRHR advocacy events, multiple policy reviews conducted',
       status: 'Active',
-      color: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
-      gradient: ['#FF6B6B', '#FF8E53'],
+      color: 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)',
+      gradient: ['#e74c3c', '#c0392b'],
       progress: 90,
       icon: '⚖️',
-      stats: { beneficiaries: '150+', partnerships: '40+' }
+      stats: { events: '20+', policies: '5+' },
+      activities: [
+        'International Women\'s Day participation',
+        'Kisumu County SRHR Bill Review (Technical Working Group)',
+        'Sexual & GBV Policy Validation',
+        'Menstrual Hygiene Management Day',
+        'SRHR youth-led advocacy activities'
+      ]
     },
     {
       id: 3,
-      title: 'Livelihoods Resilience',
-      category: 'Economic Empowerment',
-      description: 'Equipping young people with market-relevant skills, resources, and entrepreneurial support to build resilient livelihoods and sustainable income streams.',
-      impact: '300+ youth trained in vocational skills, 50+ business startups supported',
+      title: 'Economic Empowerment',
+      category: 'Economic',
+      description: 'Strengthening economic decision-making, financial accountability, and entrepreneurship among youth.',
+      impact: 'Multiple training programs on leadership, governance, and economic empowerment',
       status: 'Active',
-      color: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)',
-      gradient: ['#4ECDC4', '#44A08D'],
+      color: 'linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)',
+      gradient: ['#2ecc71', '#27ae60'],
       progress: 75,
       icon: '💼',
-      stats: { beneficiaries: '300+', partnerships: '50+' }
+      stats: { trainings: '15+', forums: '10+' },
+      activities: [
+        'Youth Leadership & Governance trainings',
+        'Social movement and civic education',
+        'Accountability forums',
+        'Entrepreneurship skill-building',
+        'Financial literacy programs'
+      ]
     },
     {
       id: 4,
-      title: 'Climate & Environmental Action',
+      title: 'Climate Action & Environment',
       category: 'Environment',
-      description: 'Supporting innovative approaches to sustainable climate adaptation, environmental conservation, and green entrepreneurship among youth.',
-      impact: 'Planted 5000+ trees, trained 100+ youth in sustainable agriculture',
+      description: 'Leading youth-driven climate justice initiatives and environmental conservation activities.',
+      impact: '15+ climate action and environmental activities, active participation in climate forums',
       status: 'Active',
-      color: 'linear-gradient(135deg, #06D6A0 0%, #1B9AAA 100%)',
-      gradient: ['#06D6A0', '#1B9AAA'],
+      color: 'linear-gradient(135deg, #1abc9c 0%, #16a085 100%)',
+      gradient: ['#1abc9c', '#16a085'],
       progress: 80,
       icon: '🌱',
-      stats: { beneficiaries: '100+', trees: '5000+' }
+      stats: { activities: '15+', cleanups: '10+' },
+      activities: [
+        'Environmental cleanups',
+        'Climate action collaboration',
+        'International Youth Day participation',
+        'Local environmental conservation',
+        'Climate justice advocacy'
+      ]
     },
     {
       id: 5,
-      title: 'Digital Skills Training',
-      category: 'Technology',
-      description: 'Providing digital literacy and advanced tech skills training to bridge the digital divide and prepare youth for the digital economy.',
-      impact: '100+ youth certified in digital skills, 30+ tech workshops conducted',
+      title: 'Community Capacity Building',
+      category: 'Capacity',
+      description: 'Empowering communities through training, sensitization, and participatory development.',
+      impact: 'Multiple community sensitization programs, capacity building workshops',
       status: 'Ongoing',
-      color: 'linear-gradient(135deg, #9B5DE5 0%, #F15BB5 100%)',
-      gradient: ['#9B5DE5', '#F15BB5'],
+      color: 'linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%)',
+      gradient: ['#9b59b6', '#8e44ad'],
       progress: 70,
-      icon: '💻',
-      stats: { beneficiaries: '100+', workshops: '30+' }
+      icon: '👥',
+      stats: { communities: '25+', workshops: '30+' },
+      activities: [
+        'Community anti-corruption sensitization',
+        'Youth sensitization forums',
+        'Social movement building training',
+        'Public participation programs',
+        'Capacity building workshops'
+      ]
     },
     {
       id: 6,
-      title: 'Youth Entrepreneurship',
-      category: 'Business',
-      description: 'Supporting young entrepreneurs with mentorship, seed funding, business development services, and market access opportunities.',
-      impact: '50+ youth-led startups supported, KES 5M+ in funding facilitated',
+      title: 'Policy Advocacy & Reform',
+      category: 'Policy',
+      description: 'Engaging in policy development, review, and advocacy at county and national levels.',
+      impact: '10+ county-level policy consultations, multiple bill reviews and policy validations',
       status: 'Active',
-      color: 'linear-gradient(135deg, #FFD166 0%, #FF9A00 100%)',
-      gradient: ['#FFD166', '#FF9A00'],
+      color: 'linear-gradient(135deg, #f39c12 0%, #d35400 100%)',
+      gradient: ['#f39c12', '#d35400'],
       progress: 88,
-      icon: '🚀',
-      stats: { startups: '50+', funding: 'KES 5M+' }
+      icon: '📜',
+      stats: { consultations: '10+', policies: '5+' },
+      activities: [
+        'Kisumu County SRHR Bill Review',
+        'Sexual & GBV Policy Validation',
+        'County fiscal planning participation',
+        'Technical Working Group participation',
+        'Policy advocacy forums'
+      ]
     }
   ];
 
   const pillars = [
     {
-      title: 'Youth & Good Governance',
+      title: 'Youth Leadership & Governance',
       description: 'Promoting transparent, accountable, and youth-inclusive governance systems',
       icon: '🏛️',
-      gradient: 'linear-gradient(135deg, #667EEA, #764BA2)',
+      gradient: 'linear-gradient(135deg, #3498db, #2980b9)',
       projects: 8,
-      color: '#667EEA'
+      color: '#3498db',
+      activities: [
+        'Anti-corruption training',
+        'Public participation',
+        'Accountability forums',
+        'Technical working groups'
+      ]
     },
     {
-      title: 'Gender Equality',
-      description: 'Advancing equal rights, opportunities, and access to resources for all genders',
+      title: 'Gender Equality & SRHR',
+      description: 'Advancing equal rights and sexual reproductive health for all genders',
       icon: '⚖️',
-      gradient: 'linear-gradient(135deg, #FF6B6B, #FF8E53)',
+      gradient: 'linear-gradient(135deg, #e74c3c, #c0392b)',
       projects: 6,
-      color: '#FF6B6B'
+      color: '#e74c3c',
+      activities: [
+        'SRHR advocacy',
+        'Policy review',
+        'GBV prevention',
+        'Women empowerment'
+      ]
     },
     {
-      title: 'Livelihoods Resilience',
+      title: 'Economic Empowerment',
       description: 'Building economic resilience through skills development and entrepreneurship',
       icon: '💼',
-      gradient: 'linear-gradient(135deg, #4ECDC4, #44A08D)',
+      gradient: 'linear-gradient(135deg, #2ecc71, #27ae60)',
       projects: 10,
-      color: '#4ECDC4'
+      color: '#2ecc71',
+      activities: [
+        'Leadership training',
+        'Civic education',
+        'Financial literacy',
+        'Entrepreneurship'
+      ]
     },
     {
       title: 'Climate Action',
-      description: 'Championing sustainable environmental practices and climate-smart innovations',
+      description: 'Championing sustainable environmental practices and climate justice',
       icon: '🌱',
-      gradient: 'linear-gradient(135deg, #06D6A0, #1B9AAA)',
+      gradient: 'linear-gradient(135deg, #1abc9c, #16a085)',
       projects: 7,
-      color: '#06D6A0'
+      color: '#1abc9c',
+      activities: [
+        'Environmental cleanups',
+        'Climate advocacy',
+        'Conservation activities',
+        'Youth climate action'
+      ]
     }
   ];
 
   const filteredProjects = activeFilter === 'All' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+    ? strategicPillars 
+    : strategicPillars.filter(project => project.category === activeFilter);
 
-  const categories = ['All', ...new Set(projects.map(p => p.category))];
+  const categories = ['All', ...new Set(strategicPillars.map(p => p.category))];
 
   return (
     <div className="projects-page">
@@ -433,7 +504,7 @@ const Projects = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))'
+          background: 'linear-gradient(45deg, rgba(52, 152, 219, 0.1), rgba(46, 204, 113, 0.1))'
         }}></div>
         
         <div style={styles.heroContent}>
@@ -457,7 +528,7 @@ const Projects = () => {
               letterSpacing: '2px',
               color: 'white'
             }}>
-              IMPACT PORTFOLIO
+              BUILDING AFRICA'S FUTURE
             </span>
           </motion.div>
           
@@ -467,14 +538,14 @@ const Projects = () => {
             transition={{ duration: 0.8, delay: 0.1 }}
             style={styles.heroTitle}
           >
-            Transforming
+            Youth-Led
             <br />
             <span style={{ 
               fontSize: isMobile ? '0.8em' : '0.85em',
               display: 'block',
               marginTop: isMobile ? '5px' : '10px'
             }}>
-              Communities Through Innovation
+              Social Transformation Platform
             </span>
           </motion.h1>
           
@@ -484,10 +555,36 @@ const Projects = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             style={styles.heroSubtitle}
           >
-            Discover our portfolio of strategic initiatives that are empowering youth 
-            and driving sustainable change across Kenya through innovative solutions 
-            and impactful partnerships.
+            We are one of Africa's most innovative youth-led platforms for social transformation, 
+            merging leadership development, entrepreneurship, and community-driven impact 
+            across four strategic pillars.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            style={{
+              display: 'inline-block',
+              padding: '20px 30px',
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '15px',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              maxWidth: '600px',
+              margin: '0 auto'
+            }}
+          >
+            <p style={{ 
+              fontSize: isMobile ? '1rem' : '1.1rem', 
+              fontStyle: 'italic', 
+              margin: 0,
+              opacity: 0.95
+            }}>
+              "Cultivating a new generation of African leaders who don't just imagine change 
+              but actively build it."
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -495,12 +592,21 @@ const Projects = () => {
       <section style={{ ...styles.section, background: '#F8FAFC' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: isMobile ? '40px' : '60px' }}>
+            <div style={{
+              fontSize: isMobile ? '0.85rem' : '0.9rem',
+              fontWeight: '600',
+              color: '#3498db',
+              marginBottom: '15px',
+              letterSpacing: '2px',
+              textTransform: 'uppercase'
+            }}>
+              OUR STRATEGIC PILLARS
+            </div>
             <h2 style={styles.sectionTitle}>
-              Strategic Pillars
+              Four Interconnected Pillars
             </h2>
             <p style={styles.sectionSubtitle}>
-              Four foundational pillars guiding our mission to create lasting impact 
-              and empower the next generation of leaders
+              Powering our holistic approach to youth empowerment and social transformation
             </p>
           </div>
           
@@ -563,6 +669,26 @@ const Projects = () => {
                   {pillar.description}
                 </p>
                 
+                {/* Key Activities */}
+                <div style={{ textAlign: 'left', marginBottom: '20px' }}>
+                  <div style={{ 
+                    fontSize: '0.9rem', 
+                    fontWeight: '600', 
+                    color: pillar.color,
+                    marginBottom: '10px'
+                  }}>
+                    Key Activities:
+                  </div>
+                  <ul style={styles.activityList}>
+                    {pillar.activities.map((activity, i) => (
+                      <li key={i} style={styles.activityItem}>
+                        <span style={{...styles.activityBullet, color: pillar.color}}>•</span>
+                        <span>{activity}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
                 {/* Project Count */}
                 <div style={{
                   display: 'inline-flex',
@@ -577,7 +703,7 @@ const Projects = () => {
                   border: `2px solid ${pillar.color}30`
                 }}>
                   <span>{pillar.projects}</span>
-                  <span style={{ fontSize: '0.9rem', opacity: 0.8 }}>Active Projects</span>
+                  <span style={{ fontSize: '0.9rem', opacity: 0.8 }}>Active Initiatives</span>
                 </div>
               </motion.div>
             ))}
@@ -589,12 +715,22 @@ const Projects = () => {
       <section style={{ ...styles.section, background: 'white' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: isMobile ? '40px' : '60px' }}>
+            <div style={{
+              fontSize: isMobile ? '0.85rem' : '0.9rem',
+              fontWeight: '600',
+              color: '#3498db',
+              marginBottom: '15px',
+              letterSpacing: '2px',
+              textTransform: 'uppercase'
+            }}>
+              FEATURED INITIATIVES
+            </div>
             <h2 style={styles.sectionTitle}>
-              Featured Projects
+              Our Impact Programs
             </h2>
             <p style={styles.sectionSubtitle}>
-              Explore our diverse portfolio of initiatives driving innovation, 
-              empowerment, and sustainable development
+              Explore our diverse portfolio of youth-led initiatives driving innovation, 
+              empowerment, and sustainable development across Kenya
             </p>
             
             {/* Modern Filter Tabs */}
@@ -606,14 +742,14 @@ const Projects = () => {
                   style={{
                     ...styles.filterButton,
                     background: activeFilter === category 
-                      ? `linear-gradient(45deg, ${colors.primary}, ${colors.secondary})`
+                      ? `linear-gradient(45deg, ${colors.leadership}, ${colors.economic})`
                       : 'white',
                     color: activeFilter === category ? 'white' : colors.dark,
                     borderColor: activeFilter === category 
                       ? 'transparent' 
-                      : 'rgba(102, 126, 234, 0.2)',
+                      : 'rgba(52, 152, 219, 0.2)',
                     boxShadow: activeFilter === category 
-                      ? '0 15px 35px rgba(102, 126, 234, 0.25)' 
+                      ? '0 15px 35px rgba(52, 152, 219, 0.25)' 
                       : '0 8px 25px rgba(0,0,0,0.05)'
                   }}
                   whileHover={{ scale: 1.05 }}
@@ -677,6 +813,32 @@ const Projects = () => {
                     {project.description}
                   </p>
                   
+                  {/* Key Activities */}
+                  <div style={{ marginBottom: isMobile ? '20px' : '28px' }}>
+                    <div style={{ 
+                      fontSize: '0.9rem', 
+                      fontWeight: '600', 
+                      color: '#3498db',
+                      marginBottom: '12px'
+                    }}>
+                      Featured Activities:
+                    </div>
+                    <ul style={styles.activityList}>
+                      {project.activities.slice(0, 3).map((activity, i) => (
+                        <li key={i} style={styles.activityItem}>
+                          <span style={styles.activityBullet}>✓</span>
+                          <span>{activity}</span>
+                        </li>
+                      ))}
+                      {project.activities.length > 3 && (
+                        <li style={{...styles.activityItem, color: '#666', fontSize: '0.85rem'}}>
+                          <span style={styles.activityBullet}>+</span>
+                          <span>And {project.activities.length - 3} more activities</span>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                  
                   {/* Progress Section */}
                   <div style={{ marginBottom: isMobile ? '24px' : '32px' }}>
                     <div style={{ 
@@ -690,7 +852,7 @@ const Projects = () => {
                         color: colors.dark, 
                         fontWeight: '600'
                       }}>
-                        PROJECT PROGRESS
+                        PROGRAM PROGRESS
                       </span>
                       <span style={{ 
                         fontSize: '1.1rem', 
@@ -716,7 +878,7 @@ const Projects = () => {
                     background: 'rgba(248, 250, 252, 0.8)',
                     padding: isMobile ? '20px' : '24px',
                     borderRadius: isMobile ? '16px' : '20px',
-                    border: '2px solid rgba(102, 126, 234, 0.1)',
+                    border: '2px solid rgba(52, 152, 219, 0.1)',
                     marginBottom: isMobile ? '24px' : '28px'
                   }}>
                     <div style={{ 
@@ -754,8 +916,8 @@ const Projects = () => {
                     style={{
                       padding: isMobile ? '16px' : '18px',
                       background: 'white',
-                      color: colors.primary,
-                      border: `2px solid ${colors.primary}`,
+                      color: colors.leadership,
+                      border: `2px solid ${colors.leadership}`,
                       borderRadius: '12px',
                       fontWeight: '600',
                       fontSize: isMobile ? '0.95rem' : '1rem',
@@ -767,12 +929,12 @@ const Projects = () => {
                       transition: 'all 0.3s ease'
                     }}
                     whileHover={{ 
-                      background: colors.primary,
+                      background: colors.leadership,
                       color: 'white'
                     }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span>Explore Project</span>
+                    <span>Explore Program</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
@@ -788,63 +950,84 @@ const Projects = () => {
       <section style={styles.impactSection}>
         <div className="container">
           <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
-            <h2 style={{ 
-              fontSize: isMobile ? '2rem' : 'clamp(2rem, 4vw, 3.5rem)', 
-              textAlign: 'center',
-              marginBottom: '24px',
-              fontWeight: '700',
-              background: 'linear-gradient(45deg, #FFFFFF, #667EEA, #FF6B6B)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>
-              Our Impact Journey
-            </h2>
-            
-            <p style={{ 
-              fontSize: isMobile ? '1rem' : '1.2rem', 
-              textAlign: 'center', 
-              maxWidth: '800px', 
-              margin: '0 auto 60px', 
-              opacity: 0.9,
-              lineHeight: '1.6',
-              padding: isMobile ? '0 16px' : '0'
-            }}>
-              Transforming lives and communities through dedicated efforts and 
-              sustainable partnerships since 2022
-            </p>
+            <div style={{ textAlign: 'center', marginBottom: isMobile ? '40px' : '60px' }}>
+              <div style={{
+                fontSize: isMobile ? '0.85rem' : '0.9rem',
+                fontWeight: '600',
+                color: '#3498db',
+                marginBottom: '15px',
+                letterSpacing: '2px',
+                textTransform: 'uppercase'
+              }}>
+                MEASURABLE IMPACT
+              </div>
+              <h2 style={{ 
+                fontSize: isMobile ? '2rem' : 'clamp(2rem, 4vw, 3.5rem)', 
+                textAlign: 'center',
+                marginBottom: '24px',
+                fontWeight: '700',
+                background: 'linear-gradient(45deg, #FFFFFF, #3498db, #2ecc71)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>
+                Our Impact Journey
+              </h2>
+              
+              <p style={{ 
+                fontSize: isMobile ? '1rem' : '1.2rem', 
+                textAlign: 'center', 
+                maxWidth: '800px', 
+                margin: '0 auto 60px', 
+                opacity: 0.9,
+                lineHeight: '1.6',
+                padding: isMobile ? '0 16px' : '0'
+              }}>
+                Transforming lives and communities through dedicated efforts and 
+                sustainable partnerships across Kenya
+              </p>
+            </div>
             
             <div style={styles.impactStats}>
               {[
                 { 
-                  value: '1000', 
+                  value: '300', 
                   suffix: '+', 
-                  label: 'Youth Impacted', 
+                  label: 'Youth Engaged in Governance', 
                   icon: '👥',
-                  color: '#4ECDC4',
-                  description: 'Through comprehensive training and empowerment'
+                  color: '#3498db',
+                  description: 'Youth in governance and accountability forums'
                 },
                 { 
-                  value: '25', 
+                  value: '30', 
                   suffix: '+', 
-                  label: 'Partnerships', 
-                  icon: '🤝',
-                  color: '#FFD166',
-                  description: 'Collaborating with organizations'
+                  label: 'Policy Engagement Spaces', 
+                  icon: '🏛️',
+                  color: '#2ecc71',
+                  description: 'Active participation in policy spaces'
                 },
                 { 
-                  value: '12', 
-                  label: 'Counties', 
-                  icon: '📍',
-                  color: '#FF6B6B',
-                  description: 'Expanding across regions'
+                  value: '20', 
+                  suffix: '+', 
+                  label: 'Gender Advocacy Events', 
+                  icon: '⚖️',
+                  color: '#e74c3c',
+                  description: 'Gender and SRHR advocacy initiatives'
                 },
                 { 
-                  value: '95', 
-                  suffix: '%', 
-                  label: 'Success Rate', 
-                  icon: '📈',
-                  color: '#667EEA',
-                  description: 'Projects meeting objectives'
+                  value: '15', 
+                  suffix: '+', 
+                  label: 'Climate Action Activities', 
+                  icon: '🌱',
+                  color: '#1abc9c',
+                  description: 'Environmental and climate initiatives'
+                },
+                { 
+                  value: '10', 
+                  suffix: '+', 
+                  label: 'County Consultations', 
+                  icon: '📋',
+                  color: '#9b59b6',
+                  description: 'County-level policy consultations'
                 }
               ].map((stat, index) => (
                 <motion.div
@@ -953,13 +1136,13 @@ const Projects = () => {
         }
         
         ::-webkit-scrollbar-thumb {
-          background: linear-gradient(45deg, #667EEA, #764BA2);
+          background: linear-gradient(45deg, #3498db, #2ecc71);
           border-radius: 4px;
         }
         
         /* Selection styles */
         ::selection {
-          background: rgba(102, 126, 234, 0.3);
+          background: rgba(52, 152, 219, 0.3);
           color: #1A1A2E;
         }
         
@@ -992,7 +1175,7 @@ const Projects = () => {
           }
           
           .impact-stats {
-            grid-template-columns: repeat(2, 1fr) !important;
+            grid-template-columns: repeat(3, 1fr) !important;
           }
         }
         
@@ -1006,7 +1189,7 @@ const Projects = () => {
           }
           
           .impact-stats {
-            grid-template-columns: repeat(4, 1fr) !important;
+            grid-template-columns: repeat(5, 1fr) !important;
           }
         }
         

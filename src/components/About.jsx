@@ -263,37 +263,109 @@ const About = () => {
       justifyContent: 'center',
       alignItems: 'center',
       marginBottom: getResponsiveValue('15px', '18px', '20px')
+    },
+    
+    // New styles for activity list
+    activityList: {
+      listStyle: 'none',
+      padding: 0,
+      marginTop: '15px'
+    },
+    
+    activityItem: {
+      fontSize: getResponsiveValue('0.85rem', '0.9rem', '0.9rem'),
+      marginBottom: '8px',
+      color: '#555',
+      display: 'flex',
+      alignItems: 'flex-start'
+    },
+    
+    activityBullet: {
+      color: '#3498db',
+      marginRight: '10px',
+      flexShrink: 0,
+      fontSize: '0.8rem',
+      marginTop: '3px'
     }
   };
 
+  // Updated core values
   const coreValues = [
-    { title: 'Transparency', description: 'Openness in all our operations and decision-making processes', icon: '/Static/image1.jpg', color: '#3498db' },
-    { title: 'Accountability', description: 'Responsible stewardship of resources and commitments', icon: '/Static/image2.jpg', color: '#2ecc71' },
-    { title: 'Impact', description: 'Measurable positive change in communities', icon: '/Static/image3.jpg', color: '#e74c3c' },
-    { title: 'Solidarity', description: 'Unity in purpose and collective action', icon: '/Static/image4.jpg', color: '#9b59b6' },
-    { title: 'Inclusivity', description: 'Ensuring everyone has a voice and opportunity', icon: '/Static/image5.jpg', color: '#1abc9c' },
-    { title: 'Excellence', description: 'Striving for the highest standards in all endeavors', icon: '/Static/image6.jpg', color: '#f39c12' }
+    { title: 'Innovation', description: 'Constantly seeking new approaches to youth empowerment and social transformation', icon: '/Static/image1.jpg', color: '#3498db' },
+    { title: 'Leadership', description: 'Developing young leaders who can drive meaningful change in their communities', icon: '/Static/image2.jpg', color: '#2ecc71' },
+    { title: 'Inclusion', description: 'Ensuring all voices are heard, especially marginalized youth and women', icon: '/Static/image3.jpg', color: '#e74c3c' },
+    { title: 'Accountability', description: 'Transparent operations and responsible use of resources for maximum impact', icon: '/Static/image4.jpg', color: '#9b59b6' },
+    { title: 'Collaboration', description: 'Working with communities, partners, and stakeholders for collective impact', icon: '/Static/image5.jpg', color: '#1abc9c' },
+    { title: 'Sustainability', description: 'Creating lasting change through community-driven solutions', icon: '/Static/image6.jpg', color: '#f39c12' }
   ];
 
-  const timelineData = [
-    { year: '2022', title: 'Foundation', description: 'Youth Lead CBO was founded by visionary youth leaders passionate about community development' },
-    { year: '2023', title: 'First Major Project', description: 'Launched digital skills training for 200+ youth in Nairobi slums' },
-    { year: '2024', title: 'Expansion', description: 'Expanded to 5 counties across Kenya with 15 active community projects' },
-    { year: '2025', title: 'National Recognition', description: 'Awarded National Youth Empowerment Excellence Award by Ministry of Youth' }
+  // Strategic Pillars with activities
+  const strategicPillars = [
+    { 
+      title: 'Youth Leadership & Governance',
+      description: 'Building accountable youth leaders who actively participate in governance',
+      color: '#3498db',
+      activities: [
+        'Anti-corruption training by Transparency International Kenya',
+        'Community anti-corruption sensitization',
+        'Youth public participation in Kisumu fiscal planning',
+        'Empowered for Change - Social Movement Building training',
+        'Youth sensitization forums on accountability & service delivery',
+        'Strengthening accountability in Kisumu County',
+        'Kisumu County Health Department Technical Working Group – SRHR Bill 2024',
+        'Validation Meeting for the Sexual & GBV Policy'
+      ]
+    },
+    { 
+      title: 'Gender Equality & SRHR',
+      description: 'Advocating for gender justice and sexual reproductive health rights',
+      color: '#e74c3c',
+      activities: [
+        'International Women’s Day participation',
+        'Kisumu County SRHR Bill Review (Technical Working Group)',
+        'Sexual & GBV Policy Validation',
+        'Menstrual Hygiene Management Day',
+        'Strengthening health services through community voice',
+        'SRHR youth-led advocacy activities'
+      ]
+    },
+    { 
+      title: 'Economic Empowerment',
+      description: 'Strengthening economic decision-making and financial accountability',
+      color: '#2ecc71',
+      activities: [
+        'Youth Leadership & Governance trainings',
+        'Social movement and civic education',
+        'Accountability forums',
+        'Entrepreneurship skill-building workshops',
+        'Financial literacy programs'
+      ]
+    },
+    { 
+      title: 'Climate Action & Environment',
+      description: 'Leading youth-driven climate justice and environmental conservation',
+      color: '#1abc9c',
+      activities: [
+        'Forefront of climate action & collaboration',
+        'Environmental cleanups',
+        'Participation in climate-focused International Youth Day sessions',
+        'Local environmental conservation activities',
+        'Climate justice advocacy and awareness campaigns'
+      ]
+    }
   ];
 
-  const programs = [
-    { title: 'Digital Literacy Program', description: 'Training youth in essential digital skills for the 21st century', image: '/Static/image2.jpg' },
-    { title: 'Entrepreneurship Bootcamp', description: 'Developing young entrepreneurs through mentorship and seed funding', image: '/Static/image3.jpg' },
-    { title: 'Environmental Conservation', description: 'Youth-led environmental initiatives and climate action projects', image: '/Static/image4.jpg' },
-    { title: 'Leadership Development', description: 'Cultivating next-generation leaders through workshops and mentorship', image: '/Static/image5.jpg' }
-  ];
-
-  const impactStories = [
-    { title: 'Community Impact', description: 'Transformed 45+ communities through sustainable development projects', image: '/Static/image1.jpg' },
-    { title: 'Youth Empowerment', description: 'Empowered 2,500+ youth with skills, education, and opportunities', image: '/Static/image2.jpg' },
-    { title: 'Partnership Growth', description: 'Built 28+ strategic partnerships for greater community impact', image: '/Static/image3.jpg' },
-    { title: 'Program Success', description: 'Achieved 97% success rate across all our youth programs', image: '/Static/image4.jpg' }
+  // What We've Done So Far (Impact Highlights)
+  const impactHighlights = [
+    'Trained youth on anti-corruption through Transparency International Kenya',
+    'Participated in Kisumu fiscal planning public forums',
+    'Contributed to drafting and reviewing Kisumu County SRHR Bill 2024',
+    'Led youth forums on accountability, service delivery, and governance',
+    'Celebrated International Women\'s Day, International Youth Week & International Youth Day',
+    'Advocated for sexual and gender-based violence policy reforms',
+    'Organized and participated in climate action and environmental clean-ups',
+    'Commemorated Menstrual Hygiene Management Day with youth-friendly activities',
+    'Participated in the Kisumu County Health TWG to strengthen health services'
   ];
 
   // Gallery includes first 6 images + images 19 and 20
@@ -324,28 +396,43 @@ const About = () => {
               letterSpacing: getResponsiveValue('1px', '1.5px', '2px'),
               textTransform: 'uppercase'
             }}>
-              OUR STORY • OUR MISSION • OUR IMPACT
+              ONE OF AFRICA'S MOST INNOVATIVE YOUTH-LED PLATFORMS
             </div>
             
             <h1 style={styles.heroTitle} className="animate-on-scroll">
-              Empowering Youth,<br />Transforming Communities
+              Building Africa's Future Leaders
             </h1>
             
             <p style={styles.heroSubtitle} className="animate-on-scroll">
-              Youth Lead CBO is a grassroots movement dedicated to unlocking the potential of young people 
-              through innovative education, sustainable development projects, and community-led initiatives 
-              across Kenya and East Africa.
+              We are one of Africa's most innovative youth-led platforms for social transformation, 
+              merging leadership development, entrepreneurship, and community-driven impact to cultivate 
+              a new generation of African leaders who don't just imagine change but actively build it.
             </p>
+
+            <div style={{
+              fontSize: getResponsiveValue('1.1rem', '1.2rem', '1.3rem'),
+              fontStyle: 'italic',
+              maxWidth: getResponsiveValue('100%', '90%', '800px'),
+              margin: '0 auto 40px',
+              opacity: 0.95,
+              padding: '20px',
+              background: 'rgba(255,255,255,0.1)',
+              borderRadius: '15px',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,0.2)'
+            }}>
+              "Turning passion into action, ideas into enterprises, and potential into sustainable impact."
+            </div>
 
             <div 
               style={styles.statsContainer}
               className="animate-on-scroll"
             >
               {[
-                { value: '2,500+', label: 'Youth Empowered' },
-                { value: '45+', label: 'Community Projects' },
-                { value: '28+', label: 'Strategic Partners' },
-                { value: '97%', label: 'Program Success Rate' }
+                { value: '300+', label: 'Youth Engaged in Governance' },
+                { value: '30+', label: 'Policy Engagement Spaces' },
+                { value: '20+', label: 'Gender & SRHR Advocacy Events' },
+                { value: '15+', label: 'Climate Action Activities' }
               ].map((stat, index) => (
                 <div key={index} style={styles.statItem}>
                   <div style={{ 
@@ -383,7 +470,7 @@ const About = () => {
               letterSpacing: getResponsiveValue('1px', '1.5px', '2px'),
               textTransform: 'uppercase'
             }}>
-              OUR JOURNEY
+              OUR GUIDING MISSION
             </div>
             <h2 style={{ 
               fontSize: getResponsiveValue('1.8rem', '2rem', '2.2rem'), 
@@ -391,7 +478,7 @@ const About = () => {
               marginBottom: '25px',
               fontWeight: '800'
             }}>
-              From Vision to Impact
+              Cultivating Change-Makers
             </h2>
           </div>
 
@@ -411,7 +498,7 @@ const About = () => {
                   marginBottom: '15px',
                   fontWeight: '700'
                 }}>
-                  Our Foundation Story
+                  Our Vision for Africa
                 </h3>
                 <p style={{ 
                   fontSize: getResponsiveValue('0.95rem', '1rem', '1rem'), 
@@ -419,18 +506,17 @@ const About = () => {
                   marginBottom: '15px', 
                   color: '#555' 
                 }}>
-                  Founded in 2022 by a group of passionate young visionaries from Nairobi's informal settlements, 
-                  Youth Lead CBO emerged from a shared commitment to address systemic youth unemployment, 
-                  poverty, and limited access to quality education in marginalized communities.
+                  We are building a transformative youth-led movement that merges leadership development, 
+                  entrepreneurship, and community-driven impact. Our mission is to cultivate a new generation 
+                  of African leaders who actively build the change they imagine.
                 </p>
                 <p style={{ 
                   fontSize: getResponsiveValue('0.95rem', '1rem', '1rem'), 
                   lineHeight: '1.6', 
                   color: '#555' 
                 }}>
-                  We champion a youth-led development model that positions young people as active agents of change 
-                  - not just beneficiaries - empowering them to become architects of their own future and 
-                  catalysts for sustainable community transformation.
+                  We believe in the power of youth to drive social transformation, turning passion into 
+                  action, ideas into enterprises, and potential into sustainable impact across communities.
                 </p>
               </div>
               
@@ -442,47 +528,54 @@ const About = () => {
               />
             </div>
 
-            <div style={styles.timeline} className="animate-on-scroll">
-              {timelineData.map((item, index) => (
-                <div 
-                  key={index}
-                  style={styles.timelineItem}
-                  className="animate-on-scroll"
-                >
-                  <div style={{
-                    position: 'absolute',
-                    left: getResponsiveValue('-25px', '-25px', '-20px'),
-                    top: getResponsiveValue('20px', '22px', '25px'),
-                    width: getResponsiveValue('30px', '32px', '35px'),
-                    height: getResponsiveValue('30px', '32px', '35px'),
-                    background: 'linear-gradient(135deg, #3498db, #2ecc71)',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: getResponsiveValue('0.85rem', '0.9rem', '0.9rem')
-                  }}>
-                    {item.year}
-                  </div>
-                  <h4 style={{ 
-                    color: '#2c3e50', 
-                    marginBottom: '8px', 
-                    fontSize: getResponsiveValue('1.1rem', '1.15rem', '1.2rem'),
-                    fontWeight: '700'
-                  }}>
-                    {item.title}
-                  </h4>
-                  <p style={{ 
-                    color: '#666', 
-                    lineHeight: '1.5',
-                    fontSize: getResponsiveValue('0.9rem', '0.95rem', '0.95rem')
-                  }}>
-                    {item.description}
-                  </p>
-                </div>
-              ))}
+            <div className="animate-on-scroll">
+              <div style={{
+                padding: getResponsiveValue('25px', '28px', '30px'),
+                background: 'linear-gradient(135deg, #3498db, #2ecc71)',
+                color: 'white',
+                borderRadius: getResponsiveValue('15px', '18px', '20px'),
+                boxShadow: '0 15px 40px rgba(52, 152, 219, 0.2)',
+                marginBottom: getResponsiveValue('25px', '28px', '30px')
+              }}>
+                <h3 style={{ 
+                  fontSize: getResponsiveValue('1.3rem', '1.4rem', '1.5rem'), 
+                  marginBottom: '15px',
+                  fontWeight: '700'
+                }}>
+                  What We've Done So Far
+                </h3>
+                <ul style={styles.activityList}>
+                  {impactHighlights.slice(0, 4).map((highlight, index) => (
+                    <li key={index} style={styles.activityItem}>
+                      <span style={styles.activityBullet}>✓</span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div style={{
+                padding: getResponsiveValue('25px', '28px', '30px'),
+                background: '#f8fafc',
+                borderRadius: getResponsiveValue('15px', '18px', '20px'),
+                border: '2px solid #3498db'
+              }}>
+                <h4 style={{ 
+                  color: '#2c3e50', 
+                  marginBottom: '15px',
+                  fontSize: getResponsiveValue('1.1rem', '1.2rem', '1.2rem'),
+                  fontWeight: '700'
+                }}>
+                  Additional Impact
+                </h4>
+                <ul style={styles.activityList}>
+                  {impactHighlights.slice(4).map((highlight, index) => (
+                    <li key={index} style={styles.activityItem}>
+                      <span style={{...styles.activityBullet, color: '#2ecc71'}}>•</span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -502,7 +595,7 @@ const About = () => {
               marginBottom: '25px',
               fontWeight: '800'
             }}>
-              Our Core Programs
+              Our Strategic Pillars
             </h2>
             <p style={{ 
               fontSize: getResponsiveValue('1rem', '1.1rem', '1.1rem'), 
@@ -513,43 +606,77 @@ const About = () => {
               maxWidth: getResponsiveValue('100%', '90%', '800px'),
               padding: getResponsiveValue('0 10px', '0', '0')
             }}>
-              We implement transformative programs that address critical needs while building sustainable futures
+              Four interconnected pillars that power our holistic approach to youth empowerment
             </p>
           </div>
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: getResponsiveValue('1fr', 'repeat(2, 1fr)', 'repeat(4, 1fr)'),
-            gap: getResponsiveValue('20px', '25px', '25px'),
+            gridTemplateColumns: getResponsiveValue('1fr', 'repeat(2, 1fr)', 'repeat(2, 1fr)'),
+            gap: getResponsiveValue('20px', '25px', '30px'),
             maxWidth: '1200px',
             margin: '0 auto'
           }}>
-            {programs.map((program, index) => (
+            {strategicPillars.map((pillar, index) => (
               <div 
                 key={index}
                 style={{
                   ...styles.programCard,
-                  background: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("${program.image}")`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  color: 'white'
+                  borderLeft: `5px solid ${pillar.color}`,
+                  textAlign: 'left',
+                  padding: getResponsiveValue('20px', '25px', '30px')
                 }}
                 className="animate-on-scroll"
               >
-                <h3 style={{ 
-                  fontSize: getResponsiveValue('1.2rem', '1.3rem', '1.5rem'), 
-                  marginBottom: '12px', 
-                  fontWeight: '700'
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginBottom: '15px'
                 }}>
-                  {program.title}
-                </h3>
+                  <div style={{
+                    width: '15px',
+                    height: '15px',
+                    background: pillar.color,
+                    borderRadius: '50%',
+                    marginRight: '10px'
+                  }}></div>
+                  <h3 style={{ 
+                    fontSize: getResponsiveValue('1.2rem', '1.3rem', '1.5rem'), 
+                    margin: 0,
+                    color: pillar.color,
+                    fontWeight: '700'
+                  }}>
+                    {pillar.title}
+                  </h3>
+                </div>
                 <p style={{ 
-                  fontSize: getResponsiveValue('0.9rem', '0.95rem', '0.95rem'), 
+                  fontSize: getResponsiveValue('0.95rem', '1rem', '1rem'), 
                   lineHeight: '1.5', 
-                  opacity: 0.9
+                  color: '#555',
+                  marginBottom: '20px'
                 }}>
-                  {program.description}
+                  {pillar.description}
                 </p>
+                <div style={{
+                  fontSize: getResponsiveValue('0.85rem', '0.9rem', '0.9rem'),
+                  color: '#666'
+                }}>
+                  <strong>Key Activities:</strong>
+                  <ul style={styles.activityList}>
+                    {pillar.activities.slice(0, 4).map((activity, i) => (
+                      <li key={i} style={styles.activityItem}>
+                        <span style={{...styles.activityBullet, color: pillar.color}}>›</span>
+                        <span>{activity}</span>
+                      </li>
+                    ))}
+                    {pillar.activities.length > 4 && (
+                      <li style={styles.activityItem}>
+                        <span style={{...styles.activityBullet, color: pillar.color}}>+</span>
+                        <span>And {pillar.activities.length - 4} more activities</span>
+                      </li>
+                    )}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
@@ -600,9 +727,11 @@ const About = () => {
                 <div 
                   style={{
                     ...styles.valueIcon,
-                    background: `url("${value.icon}") center/cover`,
+                    background: `linear-gradient(135deg, ${value.color}, ${value.color}99)`,
                   }}
-                />
+                >
+                  {value.title.charAt(0)}
+                </div>
                 <h4 style={{ 
                   color: '#2c3e50', 
                   marginBottom: '12px', 
@@ -638,7 +767,7 @@ const About = () => {
               letterSpacing: getResponsiveValue('1px', '1.5px', '2px'),
               textTransform: 'uppercase'
             }}>
-              OUR IMPACT
+              OUR IMPACT IN NUMBERS
             </div>
             <h2 style={{ 
               fontSize: getResponsiveValue('1.8rem', '2rem', '2.2rem'), 
@@ -646,59 +775,77 @@ const About = () => {
               marginBottom: '25px',
               fontWeight: '800'
             }}>
-              Transforming Lives & Communities
+              Measurable Impact
             </h2>
-            <p style={{ 
-              fontSize: getResponsiveValue('1rem', '1.1rem', '1.1rem'), 
-              margin: '0 auto 40px',
-              opacity: 0.8,
-              lineHeight: '1.6',
-              fontWeight: '300',
-              maxWidth: getResponsiveValue('100%', '90%', '800px'),
-              padding: getResponsiveValue('0 10px', '0', '0')
-            }}>
-              Through dedication and strategic initiatives, we've created lasting impact across Kenya
-            </p>
           </div>
 
           <div style={{
             display: 'grid',
             gridTemplateColumns: getResponsiveValue('1fr', 'repeat(2, 1fr)', 'repeat(4, 1fr)'),
-            gap: getResponsiveValue('15px', '20px', '25px'),
+            gap: getResponsiveValue('20px', '25px', '30px'),
             maxWidth: '1200px',
             margin: '0 auto'
           }}>
-            {impactStories.map((impact, index) => (
+            {[
+              { 
+                value: '300+', 
+                label: 'Youth engaged in governance and accountability forums',
+                color: '#3498db',
+                icon: '👥'
+              },
+              { 
+                value: '30+', 
+                label: 'Policy engagement spaces participated in',
+                color: '#2ecc71',
+                icon: '🏛️'
+              },
+              { 
+                value: '20+', 
+                label: 'Gender and SRHR advocacy events',
+                color: '#e74c3c',
+                icon: '⚖️'
+              },
+              { 
+                value: '15+', 
+                label: 'Climate action and environmental activities',
+                color: '#1abc9c',
+                icon: '🌱'
+              },
+              { 
+                value: '10+', 
+                label: 'County-level policy consultations',
+                color: '#9b59b6',
+                icon: '📋'
+              }
+            ].map((stat, index) => (
               <div 
                 key={index}
-                style={styles.impactCard}
+                style={{
+                  ...styles.impactCard,
+                  borderTop: `5px solid ${stat.color}`
+                }}
                 className="animate-on-scroll"
               >
-                <div 
-                  style={{
-                    width: getResponsiveValue('60px', '70px', '80px'),
-                    height: getResponsiveValue('60px', '70px', '80px'),
-                    background: `url("${impact.image}") center/cover`,
-                    borderRadius: '50%',
-                    margin: '0 auto 20px',
-                    border: '3px solid #3498db',
-                    boxShadow: '0 8px 20px rgba(52, 152, 219, 0.2)',
-                  }}
-                />
-                <h3 style={{ 
-                  color: '#2c3e50', 
-                  marginBottom: '12px', 
-                  fontSize: getResponsiveValue('1.2rem', '1.3rem', '1.5rem'),
-                  fontWeight: '700'
+                <div style={{ 
+                  fontSize: getResponsiveValue('2.5rem', '3rem', '3.5rem'), 
+                  marginBottom: '15px'
                 }}>
-                  {impact.title}
-                </h3>
+                  {stat.icon}
+                </div>
+                <div style={{ 
+                  fontSize: getResponsiveValue('2.2rem', '2.5rem', '2.8rem'), 
+                  fontWeight: '800', 
+                  marginBottom: '10px',
+                  color: stat.color
+                }}>
+                  {stat.value}
+                </div>
                 <p style={{ 
                   color: '#666', 
                   lineHeight: '1.5',
-                  fontSize: getResponsiveValue('0.9rem', '0.95rem', '0.95rem')
+                  fontSize: getResponsiveValue('0.9rem', '0.95rem', '1rem')
                 }}>
-                  {impact.description}
+                  {stat.label}
                 </p>
               </div>
             ))}
@@ -718,7 +865,7 @@ const About = () => {
             marginBottom: '25px',
             fontWeight: '800'
           }}>
-            Our Impact Gallery
+            Our Journey in Pictures
           </h2>
           <p style={{ 
             fontSize: getResponsiveValue('1rem', '1.1rem', '1.1rem'), 
@@ -729,8 +876,7 @@ const About = () => {
             maxWidth: getResponsiveValue('100%', '90%', '800px'),
             padding: getResponsiveValue('0 10px', '0', '0')
           }}>
-            Witness the transformative journey of youth empowerment through our community projects, 
-            workshops, and success stories across Kenya. Featuring our latest initiatives captured in images 19 & 20.
+            From governance forums to climate action, witness our youth-led transformation across Kenya
           </p>
           
           <div style={styles.galleryContainer}>
@@ -763,7 +909,7 @@ const About = () => {
                     fontWeight: '600',
                     zIndex: 1
                   }}>
-                    {index === 6 ? 'New Initiative' : 'Latest Project'}
+                    {index === 6 ? 'Latest Project' : 'Recent Activity'}
                   </div>
                 )}
               </div>
@@ -778,7 +924,7 @@ const About = () => {
             display: 'inline-block'
           }}>
             <p style={{ margin: 0, fontSize: '0.9rem', opacity: 0.9 }}>
-              Showing {galleryImages.length} inspiring moments • Including 2 new initiatives
+              Documenting our journey across {strategicPillars.length} strategic pillars
             </p>
           </div>
         </div>
@@ -796,7 +942,7 @@ const About = () => {
             marginBottom: '25px',
             fontWeight: '800'
           }}>
-            Join Our Movement
+            Join Our Movement for Change
           </h2>
           <p style={{ 
             fontSize: getResponsiveValue('1rem', '1.1rem', '1.1rem'), 
@@ -807,8 +953,8 @@ const About = () => {
             maxWidth: getResponsiveValue('100%', '90%', '800px'),
             padding: getResponsiveValue('0 10px', '0', '0')
           }}>
-            Together, we can create lasting change. Whether you're a youth looking for opportunities, 
-            a partner organization, or a donor wanting to make an impact - your journey with us starts here.
+            Together, we're building Africa's most innovative youth-led platform for social transformation. 
+            Be part of the change we're creating across leadership, gender equality, economic empowerment, and climate action.
           </p>
           
           <div style={{
@@ -819,10 +965,10 @@ const About = () => {
             margin: '0 auto'
           }}>
             {[
-              { label: 'Award Winning', icon: '🏆', desc: 'National Youth Empowerment Award 2024' },
-              { label: 'Youth Focused', icon: '👥', desc: '100% youth-led and managed' },
-              { label: 'Sustainable', icon: '🌱', desc: 'Environmentally conscious programs' },
-              { label: 'Innovative', icon: '💡', desc: 'Cutting-edge solutions for youth development' }
+              { label: 'Youth-Led', icon: '🌟', desc: '100% youth-driven initiatives' },
+              { label: 'Policy Impact', icon: '📜', desc: 'Active in county & national policy' },
+              { label: 'Holistic Approach', icon: '🔄', desc: 'Four interconnected pillars' },
+              { label: 'Community Focus', icon: '🏘️', desc: 'Grassroots community impact' }
             ].map((item, index) => (
               <div 
                 key={index}

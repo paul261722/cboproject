@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   const styles = {
-    // Hero Section with Local Image - FIXED: Removed leading slash
+    // Hero Section with Local Image
     hero: {
-      background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                   url('/Static/image4.jpg')`,
+      background: `linear-gradient(rgba(44, 62, 80, 0.85), rgba(26, 37, 47, 0.9)), 
+                   url('/Static/image1.jpg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -38,7 +38,7 @@ const HomePage = () => {
       marginBottom: '20px',
       fontWeight: '800',
       lineHeight: 1.2,
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(135deg, #3498db 0%, #2ecc71 100%)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       backgroundClip: 'text',
@@ -60,10 +60,10 @@ const HomePage = () => {
       flexWrap: 'wrap'
     },
 
-    // Mission Section - Even Spacing
+    // Mission Section
     missionSection: {
       padding: '120px 0',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)',
       position: 'relative'
     },
     sectionTitle: {
@@ -104,10 +104,10 @@ const HomePage = () => {
       position: 'relative'
     },
 
-    // Pillars Section - Even Grid
+    // Pillars Section - Updated with specific colors
     pillarsSection: {
       padding: '120px 0',
-      background: '#0f172a',
+      background: '#2c3e50',
       position: 'relative'
     },
     pillarsGrid: {
@@ -138,10 +138,10 @@ const HomePage = () => {
       filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.3))'
     },
 
-    // Stats Section - Even Spacing
+    // Stats Section - Updated with your numbers
     statsSection: {
       padding: '120px 0',
-      background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+      background: 'linear-gradient(135deg, #1a252f 0%, #2c3e50 100%)',
       color: 'white',
       position: 'relative'
     },
@@ -165,17 +165,43 @@ const HomePage = () => {
     },
     statNumber: {
       fontSize: '3.5rem',
-      color: '#60a5fa',
+      color: '#3498db',
       marginBottom: '10px',
       fontWeight: '700',
       display: 'block',
-      textShadow: '0 4px 20px rgba(96, 165, 250, 0.3)'
+      textShadow: '0 4px 20px rgba(52, 152, 219, 0.3)'
     },
 
-    // CTA Section - Even Spacing
+    // Activities Highlight Section
+    activitiesSection: {
+      padding: '120px 0',
+      background: '#f8fafc',
+      position: 'relative'
+    },
+    activitiesList: {
+      maxWidth: '900px',
+      margin: '0 auto',
+      padding: '40px',
+      background: 'white',
+      borderRadius: '24px',
+      boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+      border: '1px solid #e8eef5'
+    },
+    activityItem: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '15px',
+      marginBottom: '20px',
+      padding: '15px 20px',
+      background: '#f8fafc',
+      borderRadius: '12px',
+      borderLeft: '4px solid #3498db'
+    },
+
+    // CTA Section
     ctaSection: {
       padding: '120px 0',
-      background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+      background: 'linear-gradient(135deg, #3498db 0%, #2ecc71 100%)',
       color: 'white',
       textAlign: 'center',
       position: 'relative'
@@ -184,7 +210,7 @@ const HomePage = () => {
       fontSize: '3rem',
       marginBottom: '20px',
       fontWeight: '800',
-      background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)',
+      background: 'linear-gradient(135deg, #ffffff 0%, #f1c40f 100%)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       backgroundClip: 'text'
@@ -205,9 +231,9 @@ const HomePage = () => {
       flexWrap: 'wrap'
     },
 
-    // Buttons - Consistent Styling
+    // Buttons - Updated colors
     buttonPrimary: {
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)',
       color: 'white',
       padding: '16px 40px',
       fontSize: '1.1rem',
@@ -223,11 +249,11 @@ const HomePage = () => {
       position: 'relative',
       overflow: 'hidden',
       zIndex: 1,
-      boxShadow: '0 10px 30px rgba(102, 126, 234, 0.4)',
+      boxShadow: '0 10px 30px rgba(52, 152, 219, 0.4)',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
     },
     buttonSecondary: {
-      background: 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)',
+      background: 'linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)',
       color: 'white',
       padding: '16px 40px',
       fontSize: '1.1rem',
@@ -243,7 +269,7 @@ const HomePage = () => {
       position: 'relative',
       overflow: 'hidden',
       zIndex: 1,
-      boxShadow: '0 10px 30px rgba(59, 130, 246, 0.4)',
+      boxShadow: '0 10px 30px rgba(46, 204, 113, 0.4)',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
     },
     buttonOutline: {
@@ -295,36 +321,53 @@ const HomePage = () => {
     }
   };
 
+  // Updated pillars with your strategic pillars
   const pillars = [
     { 
       icon: '🏛️', 
-      title: 'Youth Leadership', 
-      description: 'Empowering the next generation of African leaders through governance education and civic engagement',
-      color: '#60a5fa'
+      title: 'Youth Leadership & Governance', 
+      description: 'Building accountable youth leaders through anti-corruption training, public participation, and governance forums',
+      color: '#3498db',
+      activities: ['Anti-corruption training', 'Youth public participation', 'Accountability forums']
     },
     { 
       icon: '⚖️', 
-      title: 'Gender Equality', 
-      description: 'Creating inclusive spaces where all genders have equal opportunities to thrive and lead',
-      color: '#a78bfa'
+      title: 'Gender Equality & SRHR', 
+      description: 'Advocating for gender justice, sexual reproductive health rights, and ending gender-based violence',
+      color: '#e74c3c',
+      activities: ['SRHR Bill review', 'GBV policy validation', 'Menstrual hygiene management']
     },
     { 
       icon: '💼', 
       title: 'Economic Empowerment', 
-      description: 'Developing entrepreneurial skills and creating sustainable livelihood opportunities for youth',
-      color: '#34d399'
+      description: 'Strengthening economic decision-making, financial accountability, and entrepreneurship among youth',
+      color: '#2ecc71',
+      activities: ['Leadership training', 'Civic education', 'Entrepreneurship programs']
     },
     { 
       icon: '🌱', 
-      title: 'Climate Action', 
-      description: 'Mobilizing youth towards sustainable environmental practices and green innovation',
-      color: '#fbbf24'
+      title: 'Climate Action & Environment', 
+      description: 'Leading youth-driven climate justice initiatives and environmental conservation activities',
+      color: '#1abc9c',
+      activities: ['Environmental cleanups', 'Climate advocacy', 'Conservation activities']
     }
+  ];
+
+  // Recent activities
+  const recentActivities = [
+    'Trained youth on anti-corruption through Transparency International Kenya',
+    'Participated in Kisumu fiscal planning public forums',
+    'Contributed to drafting and reviewing Kisumu County SRHR Bill 2024',
+    'Led youth forums on accountability and service delivery',
+    'Celebrated International Women\'s Day and Youth Day events',
+    'Organized climate action and environmental clean-ups',
+    'Commemorated Menstrual Hygiene Management Day',
+    'Participated in Kisumu County Health Technical Working Group'
   ];
 
   return (
     <div className="home-page">
-      {/* Hero Section with Local Image - PATH FIXED */}
+      {/* Hero Section */}
       <section style={styles.hero}>
         <div style={styles.container}>
           <div style={styles.heroContent} className="fade-in">
@@ -338,17 +381,18 @@ const HomePage = () => {
                 border: '1px solid rgba(255, 255, 255, 0.2)',
                 fontSize: '0.9rem',
                 fontWeight: '600',
-                marginBottom: '20px'
+                marginBottom: '20px',
+                letterSpacing: '1px'
               }}>
-                🚀 Leading Youth Development Since 2022
+                🚀 ONE OF AFRICA'S MOST INNOVATIVE YOUTH-LED PLATFORMS
               </div>
             </div>
             
-            <h1 style={styles.heroTitle}>Redefining Youth Impact in Africa</h1>
+            <h1 style={styles.heroTitle}>Building Africa's Future Leaders</h1>
             <p style={styles.heroSubtitle}>
-              We're building the continent's most innovative youth-led platform for 
-              social transformation, combining leadership development, entrepreneurship, 
-              and community impact.
+              We are a transformative youth-led platform merging leadership development, 
+              entrepreneurship, and community-driven impact to cultivate a new generation 
+              of African leaders who don't just imagine change but actively build it.
             </p>
             <div style={styles.heroButtons}>
               <Link 
@@ -363,7 +407,7 @@ const HomePage = () => {
                 style={styles.buttonOutline}
                 className="btn-modern"
               >
-                <span>Explore Impact</span>
+                <span>Explore Our Impact</span>
               </Link>
             </div>
           </div>
@@ -373,17 +417,29 @@ const HomePage = () => {
       {/* Mission Section */}
       <section style={styles.missionSection}>
         <div style={styles.container}>
-          <h2 style={styles.sectionTitle}>
-            Our Guiding <span style={{color: '#fbbf24'}}>Mission</span>
-          </h2>
+          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+            <div style={{
+              fontSize: '0.9rem',
+              fontWeight: '600',
+              color: '#2ecc71',
+              marginBottom: '15px',
+              letterSpacing: '2px',
+              textTransform: 'uppercase'
+            }}>
+              OUR GUIDING MISSION
+            </div>
+            <h2 style={styles.sectionTitle}>
+              Cultivating Change-Makers
+            </h2>
+          </div>
           <div style={styles.missionCard}>
             <div style={{position: 'absolute', top: '20px', right: '20px', fontSize: '2rem'}}>✨</div>
             <div style={{position: 'absolute', bottom: '20px', left: '20px', fontSize: '2rem'}}>🌟</div>
             
             <div style={styles.missionIcon}>🌍</div>
             <p style={styles.missionText}>
-              "To architect a new generation of African leaders who don't just dream of change 
-              but actively build it—transforming passion into action, ideas into enterprises, 
+              "To cultivate a new generation of African leaders who don't just imagine change 
+              but actively build it, turning passion into action, ideas into enterprises, 
               and potential into sustainable impact."
             </p>
           </div>
@@ -393,19 +449,36 @@ const HomePage = () => {
       {/* Pillars Section */}
       <section style={styles.pillarsSection}>
         <div style={styles.container}>
-          <h2 style={{...styles.sectionTitle, background: 'linear-gradient(135deg, #60a5fa, #a78bfa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>
-            Our Strategic <span style={{color: 'white'}}>Pillars</span>
-          </h2>
-          <p style={{
-            textAlign: 'center',
-            color: 'rgba(255, 255, 255, 0.7)',
-            fontSize: '1.2rem',
-            maxWidth: '800px',
-            margin: '0 auto 60px',
-            lineHeight: 1.6
-          }}>
-            Four interconnected pillars that drive our holistic approach to youth empowerment
-          </p>
+          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <div style={{
+              fontSize: '0.9rem',
+              fontWeight: '600',
+              color: '#3498db',
+              marginBottom: '15px',
+              letterSpacing: '2px',
+              textTransform: 'uppercase'
+            }}>
+              OUR STRATEGIC PILLARS
+            </div>
+            <h2 style={{
+              ...styles.sectionTitle,
+              background: 'linear-gradient(135deg, #3498db, #2ecc71)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}>
+              Four Interconnected Pillars
+            </h2>
+            <p style={{
+              textAlign: 'center',
+              color: 'rgba(255, 255, 255, 0.7)',
+              fontSize: '1.2rem',
+              maxWidth: '800px',
+              margin: '0 auto 60px',
+              lineHeight: 1.6
+            }}>
+              Powering our holistic approach to youth empowerment and social transformation
+            </p>
+          </div>
           <div style={styles.pillarsGrid}>
             {pillars.map((pillar, index) => (
               <div key={index} style={styles.pillarCard} className="pillar-modern">
@@ -424,11 +497,47 @@ const HomePage = () => {
                   fontSize: '1rem',
                   marginBottom: '20px'
                 }}>{pillar.description}</p>
+                
+                {/* Activities list */}
+                <div style={{
+                  textAlign: 'left',
+                  marginTop: '20px',
+                  padding: '15px',
+                  background: 'rgba(255,255,255,0.05)',
+                  borderRadius: '12px'
+                }}>
+                  <div style={{ 
+                    fontSize: '0.85rem', 
+                    fontWeight: '600', 
+                    color: pillar.color,
+                    marginBottom: '10px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
+                  }}>
+                    Key Activities:
+                  </div>
+                  <div>
+                    {pillar.activities.map((activity, i) => (
+                      <div key={i} style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        marginBottom: '8px',
+                        fontSize: '0.9rem',
+                        color: 'rgba(255,255,255,0.8)'
+                      }}>
+                        <span style={{color: pillar.color}}>•</span>
+                        <span>{activity}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
                 <div style={{
                   width: '40px',
                   height: '2px',
                   background: `linear-gradient(90deg, ${pillar.color}, transparent)`,
-                  margin: '0 auto'
+                  margin: '20px auto 0'
                 }}></div>
               </div>
             ))}
@@ -439,20 +548,33 @@ const HomePage = () => {
       {/* Stats Section */}
       <section style={styles.statsSection}>
         <div style={styles.container}>
-          <h2 style={{
-            ...styles.sectionTitle,
-            background: 'linear-gradient(135deg, #60a5fa, #34d399)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>
-            Measurable <span style={{color: 'white'}}>Impact</span>
-          </h2>
+          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <div style={{
+              fontSize: '0.9rem',
+              fontWeight: '600',
+              color: '#2ecc71',
+              marginBottom: '15px',
+              letterSpacing: '2px',
+              textTransform: 'uppercase'
+            }}>
+              OUR MEASURABLE IMPACT
+            </div>
+            <h2 style={{
+              ...styles.sectionTitle,
+              background: 'linear-gradient(135deg, #3498db, #2ecc71)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}>
+              Impact in Numbers
+            </h2>
+          </div>
           <div style={styles.statsGrid}>
             {[
-              { number: '500+', label: 'Youth Leaders Trained', desc: 'Across 15 counties in Kenya' },
-              { number: '25+', label: 'Community Projects', desc: 'Direct community interventions' },
-              { number: '4', label: 'Impact Pillars', desc: 'Comprehensive approach' },
-              { number: '2022', label: 'Founded', desc: 'Year of establishment' }
+              { number: '300+', label: 'Youth Engaged in Governance', desc: 'Governance and accountability forums' },
+              { number: '30+', label: 'Policy Engagement Spaces', desc: 'Active participation in policy spaces' },
+              { number: '20+', label: 'Gender Advocacy Events', desc: 'Gender and SRHR advocacy initiatives' },
+              { number: '15+', label: 'Climate Action Activities', desc: 'Environmental and climate initiatives' },
+              { number: '10+', label: 'County Consultations', desc: 'County-level policy consultations' }
             ].map((stat, index) => (
               <div key={index} style={styles.statItem} className="stat-modern">
                 <span style={styles.statNumber}>{stat.number}</span>
@@ -460,6 +582,100 @@ const HomePage = () => {
                 <p style={{fontSize: '0.9rem', opacity: 0.7}}>{stat.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Activities Highlight Section */}
+      <section style={styles.activitiesSection}>
+        <div style={styles.container}>
+          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <div style={{
+              fontSize: '0.9rem',
+              fontWeight: '600',
+              color: '#3498db',
+              marginBottom: '15px',
+              letterSpacing: '2px',
+              textTransform: 'uppercase'
+            }}>
+              WHAT WE'VE DONE SO FAR
+            </div>
+            <h2 style={{
+              fontSize: '3rem',
+              color: '#2c3e50',
+              marginBottom: '30px',
+              position: 'relative',
+              fontWeight: '700',
+              letterSpacing: '-0.3px'
+            }}>
+              Recent Achievements
+            </h2>
+            <p style={{
+              textAlign: 'center',
+              color: '#666',
+              fontSize: '1.2rem',
+              maxWidth: '800px',
+              margin: '0 auto 60px',
+              lineHeight: 1.6
+            }}>
+              A snapshot of our recent contributions to youth empowerment and community development
+            </p>
+          </div>
+          
+          <div style={styles.activitiesList}>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+              gap: '20px'
+            }}>
+              {recentActivities.map((activity, index) => (
+                <div key={index} style={styles.activityItem}>
+                  <div style={{
+                    width: '30px',
+                    height: '30px',
+                    background: '#3498db',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    flexShrink: 0
+                  }}>
+                    ✓
+                  </div>
+                  <span style={{color: '#2c3e50', fontSize: '0.95rem'}}>{activity}</span>
+                </div>
+              ))}
+            </div>
+            
+            <div style={{
+              textAlign: 'center',
+              marginTop: '40px',
+              paddingTop: '30px',
+              borderTop: '1px solid #e8eef5'
+            }}>
+              <Link 
+                to="/about" 
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  color: '#3498db',
+                  fontWeight: '600',
+                  fontSize: '1rem',
+                  textDecoration: 'none',
+                  padding: '12px 30px',
+                  borderRadius: '12px',
+                  border: '2px solid #3498db',
+                  transition: 'all 0.3s ease'
+                }}
+                className="btn-modern"
+              >
+                <span>View Full Impact Report</span>
+                <span>→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -473,17 +689,17 @@ const HomePage = () => {
             position: 'relative',
             zIndex: 2,
             padding: '60px 40px',
-            background: 'rgba(255, 255, 255, 0.03)',
+            background: 'rgba(255, 255, 255, 0.08)',
             borderRadius: '24px',
             backdropFilter: 'blur(20px)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
             boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)'
           }}>
-            <h2 style={styles.ctaTitle}>Ready to Lead?</h2>
+            <h2 style={styles.ctaTitle}>Ready to Transform Africa with Us?</h2>
             <p style={styles.ctaSubtitle}>
-              Join a growing community of young Africans who are actively shaping their 
-              communities, building sustainable solutions, and creating lasting impact 
-              through our cutting-edge programs.
+              Join Africa's most innovative youth-led platform for social transformation. 
+              Whether you're a youth looking to lead, a partner organization, or a donor 
+              wanting to make sustainable impact - your journey starts here.
             </p>
             <div style={styles.ctaButtons}>
               <Link 
@@ -491,14 +707,14 @@ const HomePage = () => {
                 style={styles.buttonPrimary}
                 className="btn-modern"
               >
-                <span>Start Your Journey →</span>
+                <span>Get Involved →</span>
               </Link>
               <Link 
-                to="/programs" 
+                to="/projects" 
                 style={styles.buttonWhite}
                 className="btn-modern"
               >
-                <span>View Programs</span>
+                <span>View Our Programs</span>
               </Link>
             </div>
             
@@ -518,15 +734,15 @@ const HomePage = () => {
                 flexWrap: 'wrap'
               }}>
                 <span style={{display: 'inline-flex', alignItems: 'center', gap: '5px'}}>
-                  <span style={{color: '#34d399'}}>✓</span> Featured on CNN Africa
+                  <span style={{color: '#2ecc71'}}>✓</span> Partnered with Transparency International
                 </span>
                 <span>•</span>
                 <span style={{display: 'inline-flex', alignItems: 'center', gap: '5px'}}>
-                  <span style={{color: '#fbbf24'}}>★</span> 4.9/5 Rating
+                  <span style={{color: '#f1c40f'}}>★</span> Active in Kisumu County Governance
                 </span>
                 <span>•</span>
                 <span style={{display: 'inline-flex', alignItems: 'center', gap: '5px'}}>
-                  <span style={{color: '#60a5fa'}}>👥</span> 1000+ Active Members
+                  <span style={{color: '#3498db'}}>👥</span> 300+ Youth Leaders Engaged
                 </span>
               </p>
             </div>
@@ -535,6 +751,12 @@ const HomePage = () => {
       </section>
       
       <style jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        .home-page {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -596,7 +818,7 @@ const HomePage = () => {
           left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(167, 139, 250, 0.1));
+          background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(46, 204, 113, 0.1));
           opacity: 0;
           transition: opacity 0.3s ease;
           border-radius: 20px;
@@ -620,7 +842,7 @@ const HomePage = () => {
         .stat-modern:hover {
           transform: translateY(-5px);
           background: rgba(255, 255, 255, 0.05) !important;
-          border-color: rgba(96, 165, 250, 0.3) !important;
+          border-color: rgba(52, 152, 219, 0.3) !important;
         }
         
         /* Custom Scrollbar */
@@ -629,24 +851,24 @@ const HomePage = () => {
         }
         
         ::-webkit-scrollbar-track {
-          background: #0f172a;
+          background: #f1f1f1;
           border-radius: 8px;
         }
         
         ::-webkit-scrollbar-thumb {
-          background: linear-gradient(135deg, #667eea, #764ba2);
+          background: linear-gradient(135deg, #3498db, #2ecc71);
           border-radius: 8px;
-          border: 2px solid #0f172a;
+          border: 2px solid #f1f1f1;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(135deg, #60a5fa, #a78bfa);
+          background: linear-gradient(135deg, #2980b9, #27ae60);
         }
         
         /* Selection Color */
         ::selection {
-          background: rgba(96, 165, 250, 0.3);
-          color: white;
+          background: rgba(52, 152, 219, 0.3);
+          color: #2c3e50;
         }
         
         /* Smooth transitions */
@@ -676,6 +898,10 @@ const HomePage = () => {
           
           .hero-content {
             padding: 50px 30px !important;
+          }
+          
+          .activities-list {
+            padding: 30px 20px !important;
           }
         }
         
@@ -743,6 +969,10 @@ const HomePage = () => {
           
           .cta-subtitle {
             font-size: 1.2rem !important;
+          }
+          
+          .activities-list > div {
+            grid-template-columns: 1fr !important;
           }
         }
         

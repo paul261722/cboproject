@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const phoneNumber = '+254724109760';
@@ -12,8 +13,14 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+  const [submitError, setSubmitError] = useState('');
   const [activeField, setActiveField] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Initialize EmailJS with your public key
+  useEffect(() => {
+    emailjs.init("YOUR_PUBLIC_KEY_HERE"); // Get this from EmailJS dashboard
+  }, []);
 
   // Check mobile viewport
   useEffect(() => {
@@ -278,14 +285,43 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError('');
+    setSubmitMessage('');
+
+    try {
+      // Replace these with your actual EmailJS credentials
+      const serviceID = 'YOUR_SERVICE_ID'; // From EmailJS
+      const templateID = 'YOUR_TEMPLATE_ID'; // From EmailJS
+      const publicKey = 'YOUR_PUBLIC_KEY'; // From EmailJS
+
+      // Send email using EmailJS
+      await emailjs.send(
+        serviceID,
+        templateID,
+        {
+          to_email: 'africayouthlead@gmail.com', // Organization's email
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          reply_to: formData.email,
+          timestamp: new Date().toLocaleString()
+        },
+        publicKey
+      );
+
+      // Success message
       setSubmitMessage('✨ Your message has been sent successfully! We will get back to you within 24 hours.');
       setFormData({ name: '', email: '', subject: '', message: '' });
       
+      // Clear success message after 5 seconds
       setTimeout(() => setSubmitMessage(''), 5000);
-    }, 1500);
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      setSubmitError('❌ Failed to send message. Please try again or use alternative contact methods.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const whatsappMessage = encodeURIComponent(`Hello Youth Lead CBO,\n\nI came across your website and would like to learn more about your organization and initiatives.`);
@@ -295,8 +331,8 @@ const Contact = () => {
     { 
       icon: '📧', 
       title: 'Email Address', 
-      value: 'africayouthlead@gmail.comgigi', 
-      link: 'mailto:info@youthleadcbo.org',
+      value: 'africayouthlead@gmail.com', 
+      link: 'mailto:africayouthlead@gmail.com',
       description: 'Send us an email anytime',
       gradient: 'linear-gradient(135deg, #667EEA, #764BA2)'
     },
@@ -786,11 +822,11 @@ const Contact = () => {
                     padding: isMobile ? '18px' : '20px',
                     fontSize: isMobile ? '1.05rem' : '1.1rem',
                     fontWeight: '600',
-                    background: 'linear-gradient(45deg, #667EEA, #764BA2)',
+                    background: isSubmitting ? colors.warning : 'linear-gradient(45deg, #667EEA, #764BA2)',
                     color: 'white',
                     border: 'none',
                     borderRadius: '12px',
-                    cursor: 'pointer',
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
                     transition: 'all 0.3s ease',
                     boxShadow: '0 10px 30px rgba(102, 126, 234, 0.25)',
                     display: 'flex',
@@ -798,13 +834,12 @@ const Contact = () => {
                     justifyContent: 'center',
                     gap: '10px'
                   }}
-                  whileHover={{ 
+                  whileHover={!isSubmitting ? { 
                     scale: 1.02,
                     boxShadow: '0 15px 35px rgba(102, 126, 234, 0.35)',
                     y: -2
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                  disabledStyle={{ opacity: 0.6 }}
+                  } : {}}
+                  whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                 >
                   {isSubmitting ? (
                     <>
@@ -844,6 +879,26 @@ const Contact = () => {
                     }}
                   >
                     ✨ {submitMessage}
+                  </motion.div>
+                )}
+                
+                {submitError && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    style={{ 
+                      background: 'linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(255, 141, 83, 0.1))', 
+                      color: '#721c24', 
+                      padding: isMobile ? '16px' : '20px', 
+                      marginTop: isMobile ? '16px' : '20px', 
+                      borderRadius: '12px', 
+                      textAlign: 'center', 
+                      fontWeight: '500', 
+                      border: '1px solid rgba(255, 107, 107, 0.2)',
+                      fontSize: isMobile ? '0.95rem' : '1rem'
+                    }}
+                  >
+                    {submitError}
                   </motion.div>
                 )}
               </form>

@@ -295,7 +295,7 @@ const Contact = () => {
     { 
       icon: '📧', 
       title: 'Email Address', 
-      value: 'info@youthleadcbo.org', 
+      value: 'africayouthlead@gmail.comgigi', 
       link: 'mailto:info@youthleadcbo.org',
       description: 'Send us an email anytime',
       gradient: 'linear-gradient(135deg, #667EEA, #764BA2)'
@@ -303,7 +303,7 @@ const Contact = () => {
     { 
       icon: '📱', 
       title: 'Phone Number', 
-      value: '+254 724 109 760', 
+      value: '+254 718254776', 
       link: `tel:${phoneNumber}`,
       description: 'Call us during business hours',
       gradient: 'linear-gradient(135deg, #FF6B6B, #FF8E53)'

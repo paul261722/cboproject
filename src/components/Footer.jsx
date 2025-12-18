@@ -191,7 +191,7 @@ const Footer = () => {
                 alignItems: 'center',
                 gap: '8px'
               }}>
-                <span style={{ color: '#3498db' }}>📧</span> youthleadcbo@gmail.com
+                <span style={{ color: '#3498db' }}>📧</span> africayouthlead@gmail.com
               </p>
               <p style={{ 
                 marginBottom: '8px', 
@@ -200,7 +200,7 @@ const Footer = () => {
                 alignItems: 'center',
                 gap: '8px'
               }}>
-                <span style={{ color: '#3498db' }}>📱</span> +254 700 123 456
+                <span style={{ color: '#3498db' }}>📱</span> +254 718 254 776
               </p>
             </div>
           </div>

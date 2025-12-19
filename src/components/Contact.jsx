@@ -347,7 +347,7 @@ const Contact = () => {
     { 
       icon: '📍', 
       title: 'Our Location', 
-      value: 'Nairobi, Kenya', 
+      value: 'Kisumu, Kenya', 
       link: '#',
       description: 'Based in the heart of Kenya',
       gradient: 'linear-gradient(135deg, #4ECDC4, #44A08D)'

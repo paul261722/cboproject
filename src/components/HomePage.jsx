@@ -25,12 +25,12 @@ const HomePage = () => {
       zIndex: 3,
       maxWidth: '1200px',
       margin: '0 auto',
-      padding: '0 20px',
+      //padding: '0 20px',//
       backdropFilter: 'blur(20px)',
       background: 'rgba(255, 255, 255, 0.08)',
       borderRadius: '24px',
       border: '1px solid rgba(255, 255, 255, 0.2)',
-      padding: '60px',
+      padding: '60px 40px',
       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
     },
     heroTitle: {

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const About = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const [activeValue, setActiveValue] = useState(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -18,7 +17,6 @@ const About = () => {
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
     
-    setIsVisible(true);
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -373,13 +371,6 @@ const About = () => {
     ...Array.from({length: 6}, (_, i) => `/Static/image${i + 1}.jpg`),
     '/Static/image19.jpg', '/Static/image20.jpg'
   ];
-
-  // Responsive grid columns calculator
-  const getGridColumns = (items) => {
-    if (isMobile) return 2;
-    if (isTablet) return 3;
-    return 4;
-  };
 
   return (
     <div className="about-page">
